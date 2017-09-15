@@ -30,6 +30,7 @@
     "axios": "^0.16.2",
     "express": "^4.15.4",
     "moment": "^2.18.1",
+    "moment-timezone": "^0.5.13",
     "path": "^0.12.7",
     "prop-types": "^15.5.10",
     "react": "^15.6.1",

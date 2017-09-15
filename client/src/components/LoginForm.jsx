@@ -16,7 +16,7 @@ const LoginForm = ({
                     return;
                 onSubmit(ref_email.value.trim(), ref_password.value.trim());
             }}>
-            <input type="text" placeholder="Email" name="email" ref={node => ref_email = node} />
+            <input type="text" placeholder="User ID" name="email" ref={node => ref_email = node} />
             <input type="password" placeholder="Password" name="password" ref={node => ref_password = node} />
             <input type="submit" value="Login" />
         </form>

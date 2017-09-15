@@ -3,7 +3,8 @@
 import React from 'react';
 import { connect } from 'react-redux';
 
-import moment from 'moment';
+import moment from 'moment-timezone';
+const tz_str = 'Asia/Shanghai';
 import DatePicker from 'react-datepicker';
 import 'react-datepicker/dist/react-datepicker.css';
 
@@ -67,6 +68,7 @@ class AdminPage extends React.Component {
         this.deleteUser = this.deleteUser.bind(this);
         this.generateUserTable = this.generateUserTable.bind(this);
         this.saveNewUser = this.saveNewUser.bind(this);
+        this.convertTime = this.convertTime.bind(this);
         this.ref_email = this.ref_password = this.ref_password_c = this.ref_expire = null;
     }
 
@@ -85,7 +87,7 @@ class AdminPage extends React.Component {
     }
 
     handleDatePicker_onChange(time, user) {
-        var temp_user = {...user, expire: time.unix() * 1000};
+        var temp_user = {...user, expire: this.convertTime(time)};
         this.props.promise_update_user_ing();
         Axios.put('/api/user/' + user._id, temp_user, {headers: {"x-token": this.props.auth.data.token}})
             .then(response => {
@@ -93,6 +95,10 @@ class AdminPage extends React.Component {
             }).catch(err => {
                 this.props.promise_update_user_err(err);
             })
+    }
+
+    convertTime(time) {
+        return new Date(Math.floor(time.unix() / (24 * 60 * 60)) * (24 * 60 * 60 * 1000) + 13 * 60 * 60 * 1000).getTime();
     }
 
     deleteUser(id) {
@@ -108,7 +114,7 @@ class AdminPage extends React.Component {
     generateUserTable(arr) {
         return <table>
                     <thead>
-                        <tr><th>Account</th><th>validation</th><th>expire date</th><th>options</th></tr>
+                        <tr><th>Account</th><th>validation</th><th>expire date(GTM+8)</th><th>options</th></tr>
                     </thead>
                     <tbody>
                     {arr.map((user, index) => {
@@ -117,8 +123,10 @@ class AdminPage extends React.Component {
                                 <td><p>{user.email}</p></td>
                                     <td>{user.disable ? <p>Disabled</p> : <p>Abled</p>}</td>
                                     <td><DatePicker
-                                            selected={moment(user.expire)}
+                                            selected={moment(user.expire).tz(tz_str)}
                                             onChange={param => this.handleDatePicker_onChange(param, user)}
+                                            showTimeSelect
+                                            dateFormat="DD-MMM-YYYY HH:mm"
                                         /></td>
                                     <td><input type="button" value="delete" onClick={e => {
                                         e.preventDefault();
@@ -149,11 +157,9 @@ class AdminPage extends React.Component {
                     alert('uncomplete information');
                 }
             }}>
-            Email: <input type="text" placeholder="Email" ref={node => this.ref_email = node} /><br />
+            User ID: <input type="text" placeholder="User ID" ref={node => this.ref_email = node} /><br />
             Password: <input type="password" placeholder="Password" ref={node => this.ref_password = node} />
             <input type="password" placeholder="Password Confirm" ref={node => this.ref_password_c = node} /><br />
-            {/* <DatePicker selected={moment(new Date().getTime())}
-                onChange={param => {this.ref_expire = param.unix() * 1000;}}/> */}
             <input type="submit" value="Save" />
         </form>
     }
