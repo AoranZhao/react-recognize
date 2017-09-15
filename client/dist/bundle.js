@@ -18401,7 +18401,7 @@ var _axios2 = _interopRequireDefault(_axios);
 
 function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
 
-var API_ADDRESS = process.env.DEFAULT_AXIOS_ADDRESS || 'http://localhost:2978';
+var API_ADDRESS = process.env.DEFAULT_AXIOS_ADDRESS || 'http://www.zhaoaoran.ca:2978';
 
 _axios2.default.defaults.baseURL = API_ADDRESS;
 exports.Axios = _axios2.default;
