@@ -28,7 +28,7 @@ const mapDispatchToProps = dispatch => ({
     promise_get_users_err: (err) => {
         dispatch(get_users_err(err));
     },
-    promise_local_update_user: (email, user) => {   ///
+    sync_local_update_user: (email, user) => {   ///
         dispatch(local_update_user(email, user));
     },
     promise_update_user_ing: () => {

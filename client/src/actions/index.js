@@ -80,3 +80,23 @@ export const add_user_err = (err) => ({
     type: 'ADD_USER_ERR',
     err: err
 })
+
+// recognize
+export const drop_files = (files) => ({
+    type: 'DROP_FILES',
+    files: files
+})
+
+export const upload_files_ing = () => ({
+    type: 'UPLOAD_FILES_ING'
+})
+
+export const upload_files_done = (response) => ({
+    type: 'UPLOAD_FILES_DONE',
+    response: response
+})
+
+export const upload_files_err = (err) => ({
+    type: 'UPLOAD_FILES_ERR',
+    err: err
+})
