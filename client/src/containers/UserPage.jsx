@@ -41,14 +41,24 @@ class UserPage extends React.Component {
 
     preview_images() {
         if(this.props.recognize && Array.isArray(this.props.recognize.dropped_files)) {
-            return <div>
-                {this.props.recognize.dropped_files.map((file, index) => (
-                    <div key={index}>
-                        <img src={file.preview} style={{maxHeight: "100px", }} />
-                        <p>{file.name}</p>
-                    </div>
-                ))}
-            </div>
+            return <table>
+                <thead>
+                    <tr><td>img</td><td>result</td></tr>
+                </thead>
+                <tbody>
+                {this.props.recognize.dropped_files.map((file, index) => {
+                    return (
+                    <tr key={index}>
+                        <td>
+                            <img src={file.preview} style={{maxHeight: "100px", }} />
+                        </td>
+                        <td>
+                            {(this.props.recognize.outputs) ? <p>{this.props.recognize.outputs[file.name]}</p> : <p></p>}
+                        </td>
+                    </tr>
+                )})}
+                </tbody>
+            </table>
         } else {
             return <div></div>
         }
