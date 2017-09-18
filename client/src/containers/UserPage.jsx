@@ -41,24 +41,29 @@ class UserPage extends React.Component {
 
     preview_images() {
         if(this.props.recognize && Array.isArray(this.props.recognize.dropped_files)) {
-            return <table>
-                <thead>
-                    <tr><td>img</td><td>result</td></tr>
-                </thead>
-                <tbody>
-                {this.props.recognize.dropped_files.map((file, index) => {
-                    return (
-                    <tr key={index}>
-                        <td>
-                            <img src={file.preview} style={{maxHeight: "100px", }} />
-                        </td>
-                        <td>
-                            {(this.props.recognize.outputs) ? <p>{this.props.recognize.outputs[file.name]}</p> : <p></p>}
-                        </td>
-                    </tr>
-                )})}
-                </tbody>
-            </table>
+            switch(this.props.recognize.status) {
+                case 'upload_files_ing':
+                    return <div><p>analyzing...</p></div>
+                default:
+                    return <div>
+                                {(this.props.recognize.outputs) ? <p>{this.props.recognize.outputs}</p> : <p></p>}
+                                <table>
+                                    <thead>
+                                        <tr><td>img</td></tr>
+                                    </thead>
+                                    <tbody>
+                                    {this.props.recognize.dropped_files.map((file, index) => {
+                                        return (
+                                        <tr key={index}>
+                                            <td>
+                                                <img src={file.preview} style={{maxHeight: "100px", }} />
+                                            </td>
+                                        </tr>
+                                    )})}
+                                    </tbody>
+                                </table>
+                            </div>
+            }
         } else {
             return <div></div>
         }
@@ -74,21 +79,25 @@ class UserPage extends React.Component {
     }
 
     upload_images() {
-        this.props.promise_upload_files_ing();
-        var imgForm = new FormData();
-        this.props.recognize.dropped_files.forEach(file => {
-            imgForm.append('images', file);
-        })
-        Axios.post('/api/recognize', imgForm, {
-            headers: {
-                "x-token": this.props.auth.data.token,
-                "Content-Type": "multipart/form-data"
-            }
-        }).then(response => {
-            this.props.promise_upload_files_done(response);
-        }).catch(err => {
-            this.props.prommise_upload_files_err(err);
-        })
+        if(this.props.recognize && this.props.recognize.dropped_files) {
+            this.props.promise_upload_files_ing();
+            var imgForm = new FormData();
+            this.props.recognize.dropped_files.forEach(file => {
+                imgForm.append('images', file);
+            })
+            Axios.post('/api/recognize', imgForm, {
+                headers: {
+                    "x-token": this.props.auth.data.token,
+                    "Content-Type": "multipart/form-data"
+                }
+            }).then(response => {
+                this.props.promise_upload_files_done(response);
+            }).catch(err => {
+                this.props.prommise_upload_files_err(err);
+            })
+        } else {
+            alert('please choose images first.');
+        }
     }
 
     render() {

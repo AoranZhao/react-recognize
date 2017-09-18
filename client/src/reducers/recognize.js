@@ -12,11 +12,7 @@ const recognize = (state = {}, action) => {
             state = {...state, status: 'upload_files_ing'};
             return state;
         case 'UPLOAD_FILES_DONE':
-            var outputs = {};
-            Object.keys(action.response.data).forEach(key => {
-                outputs[action.response.data[key].original_file_name] = action.response.data[key].data;
-            })
-            state = {...state, status: 'upload_files_done', outputs: outputs};
+            state = {...state, status: 'upload_files_done', outputs: action.response.data};
             return state;
         case 'UPLOAD_FILES_ERR':
             state = {...state, status: 'upload_files_err', data: action.err};
