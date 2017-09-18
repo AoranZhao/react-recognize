@@ -15,7 +15,7 @@ const recognize = (state = {}, action) => {
             state = {...state, status: 'upload_files_ing'};
             return state;
         case 'UPLOAD_FILES_DONE':
-            state = {...state, status: 'upload_files_done', outputs: action.response.data};
+            state = {...state, status: 'upload_files_done', outputs: action.response.data.output, api_duration: action.response.data.api_dur, script_duration: action.response.data.script_dur};
             return state;
         case 'UPLOAD_FILES_ERR':
             state = {...state, status: 'upload_files_err', data: action.err};
