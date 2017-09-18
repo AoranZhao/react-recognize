@@ -68,7 +68,7 @@ class UserPage extends React.Component {
                                         return (
                                         <tr key={index}>
                                             <td>
-                                                <img src={file.preview} style={{maxHeight: "100px", }} />
+                                                <img src={file.preview} style={{maxHeight: "100px", maxWidth: "500px"}} />
                                             </td>
                                         </tr>
                                     )})}
