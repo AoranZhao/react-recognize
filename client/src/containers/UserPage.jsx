@@ -73,7 +73,7 @@ class UserPage extends React.Component {
                                             <p>{this.props.recognize.outputs}</p>
                                         </div>
                                     </div> : <div></div>}
-                                    {(Array.isArray(this.props.recognize.dropped_files) && this.props.recognize.dropped_files.length === 0) ? 
+                                    {(Array.isArray(this.props.recognize.dropped_files) && this.props.recognize.dropped_files.length !== 0) ? 
                                         <table>
                                             <thead>
                                                 <tr><td>img</td></tr>
