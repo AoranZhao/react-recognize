@@ -2,6 +2,9 @@
 
 const recognize = (state = {}, action) => {
     switch(action.type) {
+        case 'RESET_FILES':
+            state = {...state, dropped_files: []}
+            return state;
         case 'DROP_FILES':
             if(!Array.isArray(state.dropped_files)) {
                 state.dropped_files = [];

@@ -82,6 +82,10 @@ export const add_user_err = (err) => ({
 })
 
 // recognize
+export const reset_files = () => ({
+    type: 'RESET_FILES'
+})
+
 export const drop_files = (files) => ({
     type: 'DROP_FILES',
     files: files

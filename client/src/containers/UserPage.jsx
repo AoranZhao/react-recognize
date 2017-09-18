@@ -4,7 +4,7 @@ import React from 'react';
 import { connect } from 'react-redux';
 import Dropzone from 'react-dropzone';
 
-import { drop_files, upload_files_ing, upload_files_done, upload_files_err } from '../actions';
+import { reset_files, drop_files, upload_files_ing, upload_files_done, upload_files_err } from '../actions';
 import { Axios } from '../utils';
 
 const mapStateToProps = state => {
@@ -12,6 +12,9 @@ const mapStateToProps = state => {
 }
 
 const mapDispatchToProps = dispatch => ({
+    sync_reset_files: () => {
+        dispatch(reset_files());
+    },
     sync_drop_files: (files) => {
         dispatch(drop_files(files));
     },
@@ -33,6 +36,15 @@ class UserPage extends React.Component {
         this.preview_images = this.preview_images.bind(this);
         this.generate_btn_ctrl = this.generate_btn_ctrl.bind(this);
         this.upload_images = this.upload_images.bind(this);
+        this.resetImages = this.resetImages.bind(this);
+    }
+
+    componentWillMount() {
+        this.resetImages();
+    }
+
+    resetImages() {
+        this.props.sync_reset_files();
     }
 
     onImageDrop(files) {
