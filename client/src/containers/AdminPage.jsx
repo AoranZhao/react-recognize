@@ -114,14 +114,15 @@ class AdminPage extends React.Component {
     generateUserTable(arr) {
         return <table>
                     <thead>
-                        <tr><th>Account</th><th>validation</th><th>expire date(GTM+8)</th><th>options</th></tr>
+                        <tr><th>Account</th><th>Password</th><th>validation</th><th>expire date(GTM+8)</th><th>options</th></tr>
                     </thead>
                     <tbody>
                     {arr.map((user, index) => {
                         return (
                             <tr key={index}>
                                 <td><p>{user.email}</p></td>
-                                    <td>{user.disable ? <p>Disabled</p> : <p>Abled</p>}</td>
+                                <td><p>{user.password}</p></td>
+                                    <td>{user.disable ? <p>Disabled</p> : <p>Enabled</p>}</td>
                                     <td><DatePicker
                                             selected={moment(user.expire).tz(tz_str)}
                                             onChange={param => this.handleDatePicker_onChange(param, user)}
