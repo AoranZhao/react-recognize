@@ -4,6 +4,9 @@ import React from 'react';
 import { connect } from 'react-redux';
 import Dropzone from 'react-dropzone';
 
+import moment from 'moment-timezone';
+const tz_str = 'Asia/Shanghai';
+
 import { reset_files, drop_files, upload_files_ing, upload_files_done, upload_files_err } from '../actions';
 import { Axios } from '../utils';
 
@@ -37,6 +40,7 @@ class UserPage extends React.Component {
         this.generate_btn_ctrl = this.generate_btn_ctrl.bind(this);
         this.upload_images = this.upload_images.bind(this);
         this.resetImages = this.resetImages.bind(this);
+        this.get_user_info = this.get_user_info.bind(this);
     }
 
     componentWillMount() {
@@ -58,22 +62,35 @@ class UserPage extends React.Component {
                     return <div><p>analyzing...</p></div>
                 default:
                     return <div>
-                                {(this.props.recognize.outputs) ? <p>{this.props.recognize.outputs}</p> : <p></p>}
-                                <table>
-                                    <thead>
-                                        <tr><td>img</td></tr>
-                                    </thead>
-                                    <tbody>
-                                    {this.props.recognize.dropped_files.map((file, index) => {
-                                        return (
-                                        <tr key={index}>
-                                            <td>
-                                                <img src={file.preview} style={{maxHeight: "100px", maxWidth: "500px"}} />
-                                            </td>
-                                        </tr>
-                                    )})}
-                                    </tbody>
-                                </table>
+                                {(this.props.recognize.outputs) ? <div>
+                                        <div>
+                                            {(this.props.recognize.api_duration) ? <p>API execution time: {this.props.recognize.api_duration / 1000} s</p> : <p>API execution time: unknow</p>}
+                                            <br />
+                                            {(this.props.recognize.script_duration) ? <p>Script execution time: {this.props.recognize.script_duration / 1000} s</p> : <p>Script execution time: unknow</p>}
+                                        </div>
+                                        <div>
+                                            <p>Output: </p><br />
+                                            <p>{this.props.recognize.outputs}</p>
+                                        </div>
+                                    </div> : <div></div>}
+                                    {(this.props.recognize.dropped_files) ? 
+                                        <table>
+                                            <thead>
+                                                <tr><td>img</td></tr>
+                                            </thead>
+                                            <tbody>
+                                            {this.props.recognize.dropped_files.map((file, index) => {
+                                                return (
+                                                <tr key={index}>
+                                                    <td>
+                                                        <img src={file.preview} style={{maxHeight: "100px", maxWidth: "500px"}} />
+                                                    </td>
+                                                </tr>
+                                            )})}
+                                            </tbody>
+                                        </table> : 
+                                        <div><p>Not select img file yet.</p></div>
+                                    }
                             </div>
             }
         } else {
@@ -112,11 +129,26 @@ class UserPage extends React.Component {
         }
     }
 
+    get_user_info() {
+        if(this.props.auth.data) {
+            let greeting = (this.props.auth.data.email) ? <p>hello, {this.props.auth.data.email}</p> : <p>hello, </p>,
+                expir_mention = (this.props.auth.data.expire) ? <p>Account expire at {moment(this.props.auth.data.expire).tz(tz_str)}</p> : <p>Account expire at unknow</p>;
+            return <div>
+                {greeting}
+                {expir_mention}
+            </div>
+        } else {
+            return <div><p>loading user infomation</p></div>
+        }
+    }
+
     render() {
+        var frame_user_info = this.get_user_info();
         var images_preview = this.preview_images();
         var btn_ctrl = this.generate_btn_ctrl();
         return(
             <div>
+                {frame_user_info}
                 <Dropzone
                     multiple={true}
                     accept="image/*"
