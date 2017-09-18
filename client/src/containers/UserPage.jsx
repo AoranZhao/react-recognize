@@ -65,14 +65,15 @@ class UserPage extends React.Component {
                                 {(this.props.recognize.outputs) ? <div>
                                         <div>
                                             {(this.props.recognize.api_duration) ? <p>API execution time: {this.props.recognize.api_duration / 1000} s</p> : <p>API execution time: unknow</p>}
-                                            <br />
                                             {(this.props.recognize.script_duration) ? <p>Script execution time: {this.props.recognize.script_duration / 1000} s</p> : <p>Script execution time: unknow</p>}
                                         </div>
+                                        <br />
                                         <div>
-                                            <p>Output: </p><br />
+                                            <p>Output: </p>
                                             <p>{this.props.recognize.outputs}</p>
                                         </div>
                                     </div> : <div></div>}
+                                    <br />
                                     {(Array.isArray(this.props.recognize.dropped_files) && this.props.recognize.dropped_files.length !== 0) ? 
                                         <table>
                                             <thead>
