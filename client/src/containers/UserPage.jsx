@@ -73,7 +73,7 @@ class UserPage extends React.Component {
                                             <p>{this.props.recognize.outputs}</p>
                                         </div>
                                     </div> : <div></div>}
-                                    {(this.props.recognize.dropped_files) ? 
+                                    {(Array.isArray(this.props.recognize.dropped_files) && this.props.recognize.dropped_files.length === 0) ? 
                                         <table>
                                             <thead>
                                                 <tr><td>img</td></tr>
@@ -132,10 +132,11 @@ class UserPage extends React.Component {
     get_user_info() {
         if(this.props.auth.data) {
             let greeting = (this.props.auth.data.email) ? <p>hello, {this.props.auth.data.email}</p> : <p>hello, </p>,
-                expir_mention = (this.props.auth.data.expire) ? <p>Account expire at {moment(this.props.auth.data.expire).tz(tz_str)}</p> : <p>Account expire at unknow</p>;
+                expire_time = moment(this.props.auth.data.expire).tz(tz_str).format('MMMM Do YYYY, H:mm'),
+                expire_mention = (this.props.auth.data.expire) ? <p>Account expire at {expire_time}</p> : <p>Account expire at unknow</p>;
             return <div>
                 {greeting}
-                {expir_mention}
+                {expire_mention}  
             </div>
         } else {
             return <div><p>loading user infomation</p></div>
@@ -148,7 +149,7 @@ class UserPage extends React.Component {
         var btn_ctrl = this.generate_btn_ctrl();
         return(
             <div>
-                {frame_user_info}
+                 {frame_user_info} 
                 <Dropzone
                     multiple={true}
                     accept="image/*"
