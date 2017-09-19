@@ -109,6 +109,7 @@ class UserPage extends React.Component {
     }
 
     upload_images() {
+        var api_start_time = new Date().getTime();
         if(this.props.recognize && this.props.recognize.dropped_files) {
             this.props.promise_upload_files_ing();
             var imgForm = new FormData();
@@ -121,7 +122,8 @@ class UserPage extends React.Component {
                     "Content-Type": "multipart/form-data"
                 }
             }).then(response => {
-                this.props.promise_upload_files_done(response);
+                var api_end_time = new Date().getTime();
+                this.props.promise_upload_files_done(response, api_end_time - api_start_time);
             }).catch(err => {
                 this.props.prommise_upload_files_err(err);
             })

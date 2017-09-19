@@ -95,9 +95,10 @@ export const upload_files_ing = () => ({
     type: 'UPLOAD_FILES_ING'
 })
 
-export const upload_files_done = (response) => ({
+export const upload_files_done = (response, api_dur) => ({
     type: 'UPLOAD_FILES_DONE',
-    response: response
+    response: response,
+    api_dur: api_dur
 })
 
 export const upload_files_err = (err) => ({
