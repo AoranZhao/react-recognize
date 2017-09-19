@@ -77,12 +77,15 @@ class UserPage extends React.Component {
                                     {(Array.isArray(this.props.recognize.dropped_files) && this.props.recognize.dropped_files.length !== 0) ? 
                                         <table>
                                             <thead>
-                                                <tr><td>img</td></tr>
+                                                <tr><td>filename</td><td>img</td></tr>
                                             </thead>
                                             <tbody>
                                             {this.props.recognize.dropped_files.reverse().map((file, index) => {
                                                 return (
                                                 <tr key={index}>
+                                                    <td>
+                                                        <p>{file.originalFilename}</p>
+                                                    </td>
                                                     <td>
                                                         <img src={file.preview} style={{maxHeight: "100px", maxWidth: "500px"}} />
                                                     </td>
