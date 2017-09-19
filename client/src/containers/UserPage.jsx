@@ -70,7 +70,7 @@ class UserPage extends React.Component {
                                         <br />
                                         <div>
                                             <p>Output: </p>
-                                            <p>{this.props.recognize.outputs}</p>
+                                            <pre>{this.props.recognize.outputs}</pre>
                                         </div>
                                     </div> : <div></div>}
                                     <br />
@@ -80,7 +80,7 @@ class UserPage extends React.Component {
                                                 <tr><td>img</td></tr>
                                             </thead>
                                             <tbody>
-                                            {this.props.recognize.dropped_files.map((file, index) => {
+                                            {this.props.recognize.dropped_files.reverse().map((file, index) => {
                                                 return (
                                                 <tr key={index}>
                                                     <td>
