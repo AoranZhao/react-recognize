@@ -24,8 +24,8 @@ const mapDispatchToProps = dispatch => ({
     promise_upload_files_ing: () => {
         dispatch(upload_files_ing());
     },
-    promise_upload_files_done: (response) => {
-        dispatch(upload_files_done(response));
+    promise_upload_files_done: (response, api_dur) => {
+        dispatch(upload_files_done(response, api_dur));
     },
     prommise_upload_files_err: (err) => {
         dispatch(upload_files_err(err));
