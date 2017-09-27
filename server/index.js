@@ -54,6 +54,7 @@ app.all('*', function (req, res, next) {
 
 app.post('/api/callback', (req, res) => {
     // body: {output: output, script_dur: end_time - script_start_time}
+    console.log('callback');
     let emitter_io = emitter(),
         ioRedis = redis(),
         socket_id = req.body.socket_id;

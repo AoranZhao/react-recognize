@@ -148,7 +148,8 @@ class UserPage extends React.Component {
             imgForm.set('cb_api', '/api/callback');
             imgForm.set('socket_id', this.socket ? this.socket.id : '');
             // Axios.post('/api/upload', imgForm, {
-            Axios.post('/api/recognize', imgForm, {
+            console.log('recognize....!!!');
+	    Axios.post('/api/recognize', imgForm, {
                 headers: {
                     "x-token": this.props.auth.data.token,
                     "Content-Type": "multipart/form-data"
