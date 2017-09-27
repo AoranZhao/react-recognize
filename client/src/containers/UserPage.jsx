@@ -132,18 +132,18 @@ class UserPage extends React.Component {
             var imgForm = new FormData(),
                 sharedSize = 2 * 1024 * 1024;
             this.props.recognize.dropped_files.forEach(file => {
-                // var total_shares = Math.ceil(file.size / sharedSize);
-                
-                // for(var i = 0; i < total_shares; i++) {
-                //     var start = i * total_shares,
-                //         end = Math.min(file.size, start + sharedSize);
+                var total_shares = Math.ceil(file.size / sharedSize);
+               console.log('total_shares:', total_shares); 
+                for(var i = 0; i < total_shares; i++) {
+                     var start = i * total_shares,
+                         end = Math.min(file.size, start + sharedSize);
                     
-                //     imgForm.append('images', file.slice(start, end));
-                //     imgForm.append('name', file.name);
-                //     imgForm.append('total', total_shares);
-                //     imgForm.append('index', i);
-                // }
-                imgForm.append('images', file);
+                     imgForm.append('images', file.slice(start, end));
+                     imgForm.append('name', file.name);
+                     imgForm.append('total', total_shares);
+                     imgForm.append('index', i);
+                 }
+                //imgForm.append('images', file);
             })
             imgForm.set('cb_api', '/api/callback');
             imgForm.set('socket_id', this.socket ? this.socket.id : '');
