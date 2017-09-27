@@ -3,6 +3,7 @@
 import React from 'react';
 import { connect } from 'react-redux';
 import Dropzone from 'react-dropzone';
+import io from 'socket.io-client';
 
 import moment from 'moment-timezone';
 const tz_str = 'Asia/Shanghai';
@@ -41,6 +42,8 @@ class UserPage extends React.Component {
         this.upload_images = this.upload_images.bind(this);
         this.resetImages = this.resetImages.bind(this);
         this.get_user_info = this.get_user_info.bind(this);
+        this.setupSocket = this.setupSocket.bind(this);
+        this.socket = this.setupSocket();
     }
 
     componentWillMount() {
@@ -53,6 +56,17 @@ class UserPage extends React.Component {
 
     onImageDrop(files) {
         this.props.sync_drop_files(files);
+    }
+
+    setupSocket() {
+        let socket = io('http://localhost:2979');
+        socket.on('connect', () => {
+            console.log('socket id:', this.socket.id);
+        })
+        socket.on('message', (data) => {
+            console.log('message:', data);
+        })
+        return socket;
     }
 
     preview_images() {
@@ -115,10 +129,25 @@ class UserPage extends React.Component {
         var api_start_time = new Date().getTime();
         if(this.props.recognize && this.props.recognize.dropped_files) {
             this.props.promise_upload_files_ing();
-            var imgForm = new FormData();
+            var imgForm = new FormData(),
+                sharedSize = 2 * 1024 * 1024;
             this.props.recognize.dropped_files.forEach(file => {
-                imgForm.append('images', file);
+                var total_shares = Math.ceil(file.size / sharedSize);
+                
+                for(var i = 0; i < total_shares; i++) {
+                    var start = i * total_shares,
+                        end = Math.min(file.size, start + sharedSize);
+                    
+                    imgForm.append('images', file.slice(start, end));
+                    imgForm.append('name', file.name);
+                    imgForm.append('total', total_shares);
+                    imgForm.append('index', i);
+                }
+                // imgForm.append('images', file);
             })
+            imgForm.set('cb_api', '/api/callback');
+            imgForm.set('socket_id', this.socket ? this.socket.id : '');
+            // Axios.post('/api/upload', imgForm, {
             Axios.post('/api/recognize', imgForm, {
                 headers: {
                     "x-token": this.props.auth.data.token,

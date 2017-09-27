@@ -28,7 +28,10 @@
   "dependencies": {
     "aaron-loader": "0.0.1",
     "axios": "^0.16.2",
+    "body-parser": "^1.18.2",
+    "cors": "^2.8.4",
     "express": "^4.15.4",
+    "ioredis": "^3.1.4",
     "moment": "^2.18.1",
     "moment-timezone": "^0.5.13",
     "path": "^0.12.7",
@@ -41,6 +44,9 @@
     "react-router-dom": "^4.2.2",
     "redux": "^3.7.2",
     "redux-logger": "^3.0.6",
-    "redux-thunk": "^2.2.0"
+    "redux-thunk": "^2.2.0",
+    "socket.io": "^2.0.3",
+    "socket.io-emitter": "^3.1.0",
+    "socket.io-redis": "^5.2.0"
   }
 }
