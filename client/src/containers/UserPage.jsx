@@ -56,6 +56,7 @@ class UserPage extends React.Component {
             this.props.sync_setup_socket(this.setupSocket());
         }
         this.socket = this.props.recognize.socket;
+        this.sendingStatus = ['upload_files_ing', 'upload_files_done', 'upload_analysis_ing', 'upload_analysis_done'];
     }
 
     componentWillMount() {
@@ -137,7 +138,7 @@ class UserPage extends React.Component {
 
     generate_btn_ctrl() {
         return <div>
-            <input type="button" value="Upload" onClick={e => {
+            <input type="button" value="Upload" disabled={(this.sendingStatus.indexOf(this.props.recognize.status) !== -1) ? true : false} onClick={e => {
                 e.preventDefault();
                 this.upload_images();
             }} />
@@ -179,7 +180,7 @@ class UserPage extends React.Component {
                 this.props.promise_upload_files_err(err);
             })
         } else {
-            alert('please choose images first.');
+            alert('please choose images to upload first.');
         }
     }
 
