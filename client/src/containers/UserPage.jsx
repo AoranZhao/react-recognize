@@ -78,7 +78,9 @@ class UserPage extends React.Component {
         if(this.props.recognize && Array.isArray(this.props.recognize.dropped_files)) {
             switch(this.props.recognize.status) {
                 case 'upload_files_ing':
-                    return <div><p>analyzing...</p></div>
+                    return <div><p>uploading...</p></div>
+                case 'upload_analysis_done':
+                    return <div><p>upload done. analyzing...</p></div>
                 default:
                     return <div>
                                 {(this.props.recognize.outputs) ? <div>
