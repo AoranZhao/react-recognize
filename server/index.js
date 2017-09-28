@@ -58,6 +58,8 @@ app.post('/api/callback', (req, res) => {
     let emitter_io = emitter(),
         ioRedis = redis(),
         socket_id = req.body.socket_id;
+    console.log('socket_id:', socket_id);
+    console.log('req.body:', req.body);
     emitter_io.to(socket_id).emit('message', req.body);
     res.status(200).send('ok');
 })
