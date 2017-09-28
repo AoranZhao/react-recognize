@@ -147,7 +147,7 @@ class UserPage extends React.Component {
 
     upload_images() {
         this.api_start_time = new Date().getTime();
-        if(this.props.recognize && this.props.recognize.dropped_files) {
+        if(this.props.recognize && Array.isArray(this.props.recognize.dropped_files) && this.props.recognize.drop_files.length > 0) {
             this.props.promise_upload_files_ing();
             var imgForm = new FormData(),
                 sharedSize = 2 * 1024 * 1024;
