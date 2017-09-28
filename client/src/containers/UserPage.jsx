@@ -8,7 +8,7 @@ import io from 'socket.io-client';
 import moment from 'moment-timezone';
 const tz_str = 'Asia/Shanghai';
 
-import { reset_files, drop_files, upload_files_ing, upload_files_done, upload_files_err } from '../actions';
+import { reset_files, drop_files, upload_files_ing, upload_files_done, upload_analysis_done, upload_files_err } from '../actions';
 import { Axios } from '../utils';
 
 const mapStateToProps = state => {
@@ -28,8 +28,11 @@ const mapDispatchToProps = dispatch => ({
     promise_upload_files_done: (response, api_dur) => {
         dispatch(upload_files_done(response, api_dur));
     },
-    prommise_upload_files_err: (err) => {
+    promise_upload_files_err: (err) => {
         dispatch(upload_files_err(err));
+    },
+    promise_upload_analysis_done: (response, api_dur) => {
+        dispatch(upload_analysis_done(response, api_dur));
     }
 })
 
@@ -65,6 +68,8 @@ class UserPage extends React.Component {
         })
         socket.on('message', (data) => {
             console.log('message:', data);
+            var api_end_time = new Date().getTime();
+
         })
         return socket;
     }
@@ -154,10 +159,9 @@ class UserPage extends React.Component {
                     "Content-Type": "multipart/form-data"
                 }
             }).then(response => {
-                var api_end_time = new Date().getTime();
-                this.props.promise_upload_files_done(response, api_end_time - api_start_time);
+                this.props.promise_upload_files_done();
             }).catch(err => {
-                this.props.prommise_upload_files_err(err);
+                this.props.promise_upload_files_err(err);
             })
         } else {
             alert('please choose images first.');
