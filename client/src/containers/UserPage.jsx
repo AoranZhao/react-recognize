@@ -74,7 +74,7 @@ class UserPage extends React.Component {
         console.log('set up socket');
         let socket = io('http://localhost:2979');
         socket.on('connect', () => {
-            console.log('socket id:', this.socket.id);
+            console.log('socket id:', socket.id);
         })
         socket.on('message', (data) => {
             console.log('message:', data);
