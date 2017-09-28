@@ -8,7 +8,7 @@ import io from 'socket.io-client';
 import moment from 'moment-timezone';
 const tz_str = 'Asia/Shanghai';
 
-import { reset_files, drop_files, upload_files_ing, upload_files_done, upload_analysis_ing, upload_analysis_done, upload_files_err } from '../actions';
+import { reset_files, drop_files, upload_files_ing, upload_files_done, upload_analysis_ing, upload_analysis_done, upload_files_err, setup_socket } from '../actions';
 import { Axios } from '../utils';
 
 const mapStateToProps = state => {
@@ -36,6 +36,9 @@ const mapDispatchToProps = dispatch => ({
     },
     promise_upload_analysis_done: (response, api_dur) => {
         dispatch(upload_analysis_done(response, api_dur));
+    },
+    sync_setup_socket: (socket) => {
+        dispatch(setup_socket(socket));
     }
 })
 
@@ -49,7 +52,10 @@ class UserPage extends React.Component {
         this.resetImages = this.resetImages.bind(this);
         this.get_user_info = this.get_user_info.bind(this);
         this.setupSocket = this.setupSocket.bind(this);
-        this.socket = this.setupSocket();
+        if(!this.props.recognize.socket) {
+            this.props.sync_setup_socket(this.setupSocket());
+        }
+        this.socket = this.props.recognize.socket;
     }
 
     componentWillMount() {
@@ -65,6 +71,7 @@ class UserPage extends React.Component {
     }
 
     setupSocket() {
+        console.log('set up socket');
         let socket = io('http://localhost:2979');
         socket.on('connect', () => {
             console.log('socket id:', this.socket.id);

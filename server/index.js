@@ -60,7 +60,11 @@ app.post('/api/callback', (req, res) => {
         socket_id = req.body.socket_id;
     console.log('socket_id:', socket_id);
     console.log('req.body:', req.body);
-    emitter_io.to(socket_id).emit('message', req.body);
+    var data = {
+        output: req.body.output,
+        script_dur: req.body.script_dur
+    }
+    emitter_io.to(socket_id).emit('message', data);
     res.status(200).send('ok');
 })
 
