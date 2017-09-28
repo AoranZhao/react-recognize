@@ -103,9 +103,9 @@ export const upload_analysis_ing = () => ({
     type: 'UPLOAD_ANALYSIS_ING'
 })
 
-export const upload_analysis_done = (response, api_dur) => ({
+export const upload_analysis_done = (data, api_dur) => ({
     type: 'UPLOAD_ANALYSIS_DONE',
-    response: response,
+    data: data,
     api_dur: api_dur
 })
 

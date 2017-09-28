@@ -34,8 +34,8 @@ const mapDispatchToProps = dispatch => ({
     promise_upload_analysis_ing: () => {
         dispatch(upload_analysis_ing());
     },
-    promise_upload_analysis_done: (response, api_dur) => {
-        dispatch(upload_analysis_done(response, api_dur));
+    promise_upload_analysis_done: (data, api_dur) => {
+        dispatch(upload_analysis_done(data, api_dur));
     },
     sync_setup_socket: (socket) => {
         dispatch(setup_socket(socket));
@@ -79,7 +79,7 @@ class UserPage extends React.Component {
         socket.on('message', (data) => {
             console.log('message:', data);
             var api_end_time = new Date().getTime();
-            // this.props.promise_upload_analysis_done(response, script_dur);
+            this.props.promise_upload_analysis_done(data, api_end_time - this.api_start_time);
         })
         return socket;
     }
@@ -145,7 +145,7 @@ class UserPage extends React.Component {
     }
 
     upload_images() {
-        var api_start_time = new Date().getTime();
+        this.api_start_time = new Date().getTime();
         if(this.props.recognize && this.props.recognize.dropped_files) {
             this.props.promise_upload_files_ing();
             var imgForm = new FormData(),
