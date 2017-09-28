@@ -8,7 +8,7 @@ import io from 'socket.io-client';
 import moment from 'moment-timezone';
 const tz_str = 'Asia/Shanghai';
 
-import { reset_files, drop_files, upload_files_ing, upload_files_done, upload_analysis_done, upload_files_err } from '../actions';
+import { reset_files, drop_files, upload_files_ing, upload_files_done, upload_analysis_ing, upload_analysis_done, upload_files_err } from '../actions';
 import { Axios } from '../utils';
 
 const mapStateToProps = state => {
@@ -30,6 +30,9 @@ const mapDispatchToProps = dispatch => ({
     },
     promise_upload_files_err: (err) => {
         dispatch(upload_files_err(err));
+    },
+    promise_upload_analysis_ing: () => {
+        dispatch(upload_analysis_ing());
     },
     promise_upload_analysis_done: (response, api_dur) => {
         dispatch(upload_analysis_done(response, api_dur));
@@ -69,7 +72,7 @@ class UserPage extends React.Component {
         socket.on('message', (data) => {
             console.log('message:', data);
             var api_end_time = new Date().getTime();
-
+            // this.props.promise_upload_analysis_done(response, script_dur);
         })
         return socket;
     }
@@ -79,8 +82,10 @@ class UserPage extends React.Component {
             switch(this.props.recognize.status) {
                 case 'upload_files_ing':
                     return <div><p>uploading...</p></div>
-                case 'upload_analysis_done':
-                    return <div><p>upload done. analyzing...</p></div>
+                case 'upload_files_done':
+                    return <div><p>upload is done</p></div>
+                case 'upload_analysis_ing':
+                    return <div><p>upload is done. analyzing...</p></div>
                 default:
                     return <div>
                                 {(this.props.recognize.outputs) ? <div>
@@ -162,6 +167,7 @@ class UserPage extends React.Component {
                 }
             }).then(response => {
                 this.props.promise_upload_files_done();
+                this.props.promise_upload_analysis_ing();
             }).catch(err => {
                 this.props.promise_upload_files_err(err);
             })

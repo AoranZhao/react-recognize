@@ -99,6 +99,10 @@ export const upload_files_done = () => ({
     type: 'UPLOAD_FILES_DONE'
 })
 
+export const upload_analysis_ing = () => ({
+    type: 'UPLOAD_ANALYSIS_ING'
+})
+
 export const upload_analysis_done = (response, api_dur) => ({
     type: 'UPLOAD_ANALYSIS_DONE',
     response: response,
