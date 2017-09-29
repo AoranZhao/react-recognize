@@ -90,10 +90,10 @@ class UserPage extends React.Component {
         if(this.props.recognize.output_status) {
             switch(this.props.recognize.output_status) {
                 case 200: 
-                    output_style = {borderWidth: 1, borderStyle: 'solid', borderColor: green};
+                    output_style = {borderWidth: 1, borderStyle: 'solid', borderColor: 'green'};
                     break;
                 case 500:
-                    output_style = {borderWidth: 1, borderStyle: 'solid', borderColor: red};
+                    output_style = {borderWidth: 1, borderStyle: 'solid', borderColor: 'red'};
                     break;
                 default:
                     break;
