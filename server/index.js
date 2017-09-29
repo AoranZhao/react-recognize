@@ -62,7 +62,8 @@ app.post('/api/callback', (req, res) => {
     console.log('req.body:', req.body);
     var data = {
         output: req.body.output,
-        script_dur: req.body.script_dur
+        script_dur: req.body.script_dur,
+        status: req.body.status
     }
     emitter_io.to(socket_id).emit('message', data);
     res.status(200).send('ok');

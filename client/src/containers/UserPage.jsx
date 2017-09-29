@@ -86,6 +86,19 @@ class UserPage extends React.Component {
     }
 
     preview_images() {
+        let output_style = {};
+        if(this.props.recognize.output_status) {
+            switch(this.props.recognize.output_status) {
+                case 200: 
+                    output_style = {borderWidth: 1, borderStyle: 'solid', borderColor: green};
+                    break;
+                case 500:
+                    output_style = {borderWidth: 1, borderStyle: 'solid', borderColor: red};
+                    break;
+                default:
+                    break;
+            }
+        }
         if(this.props.recognize && Array.isArray(this.props.recognize.dropped_files)) {
             switch(this.props.recognize.status) {
                 case 'upload_files_ing':
@@ -102,7 +115,7 @@ class UserPage extends React.Component {
                                             {(this.props.recognize.script_duration) ? <p>Script execution time: {this.props.recognize.script_duration / 1000} s</p> : <p>Script execution time: unknow</p>}
                                         </div>
                                         <br />
-                                        <div>
+                                        <div style={output_style}>
                                             <p>Output: </p>
                                             <pre>{this.props.recognize.outputs}</pre>
                                         </div>
