@@ -4,7 +4,7 @@ import React from 'react';
 import { connect } from 'react-redux';
 import Dropzone from 'react-dropzone';
 import io from 'socket.io-client';
-import fa from 'react-fontawesome';
+// import { Icon } from 'react-fa';
 
 import moment from 'moment-timezone';
 const tz_str = 'Asia/Shanghai';
@@ -103,11 +103,11 @@ class UserPage extends React.Component {
         if(this.props.recognize && Array.isArray(this.props.recognize.dropped_files)) {
             switch(this.props.recognize.status) {
                 case 'upload_files_ing':
-                    return <div><fa name="cog" spin /><p>uploading...</p></div>
+                    return <div><p>uploading...</p></div>
                 case 'upload_files_done':
-                    return <div><fa name="cog" /><p>upload is done</p></div>
+                    return <div><p>upload is done</p></div>
                 case 'upload_analysis_ing':
-                    return <div><fa name="cog" spin /><p>upload is done. analyzing...</p></div>
+                    return <div><p>upload is done. analyzing...</p></div>
                 default:
                     return <div>
                                 {(this.props.recognize.outputs) ? <div>
