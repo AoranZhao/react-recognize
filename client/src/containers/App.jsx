@@ -12,12 +12,14 @@ import PrivateRoute from '../modules/PrivateRoute.jsx';
 import LoginPage from './LoginPage.jsx';
 import HomePage from './HomePage.jsx';
 
+import './App.scss';
+
 // import eye_tracking from 'aaron-loader/eye-tracking/v1';
 
 const App = () => {
     return (
         <Router history={browserHistory} >
-            <div>
+            <div style={{width: '100%'}}>
                 <Route exact path="/" render={() => (
                     <Redirect to="/home" />
                 )} />

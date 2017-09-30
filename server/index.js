@@ -69,7 +69,7 @@ app.post('/api/callback', (req, res) => {
     res.status(200).send('ok');
 })
 
-app.get('/*', (req, res) => {
+app.get(/\/[0-9a-zA-Z\/]*/, (req, res) => {
     res.sendFile(path.join(__dirname, '../../client', 'index.html'));
 })
 

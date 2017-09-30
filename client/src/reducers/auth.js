@@ -9,7 +9,7 @@ const auth = (state = {}, action) => {
             state = {status: 'login_done', data: action.response.data};
             return state;
         case 'LOGIN_ERR':
-            state = {status: 'login_err', data: action.err};
+            state = {status: 'login_err', data: action.err.response};
             return state;
         case 'LOGOUT':
             state = {status: 'logout'};

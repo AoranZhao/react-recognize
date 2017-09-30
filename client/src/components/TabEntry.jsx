@@ -4,12 +4,14 @@ import React from 'react';
 import { Link } from 'react-router-dom';
 import PropTypes from 'prop-types';
 
+import './TabEntry.scss';
+
 const TabEntry = ({
     to,
     text
 }) => {
     return (
-        <Link to={to}>{text}</Link>
+        <Link to={to} className="link_style">{text}</Link>
     )
 }
 

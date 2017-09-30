@@ -18,7 +18,7 @@ let HomePage = ({
     match,
     entries
 }) => {
-    return <div>
+    return <div style={{width: '100%'}}>
         <SideBar entries={entries} base={match.url} />
         <Route exact path={`${match.url}`} component={UserPage} />
         <Route path={`${match.url}/admin`} component={AdminPage} />
