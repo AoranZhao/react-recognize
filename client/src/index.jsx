@@ -10,8 +10,8 @@ import App from './containers/App.jsx';
 
 let store = createStore(
     AppReducers,
-    applyMiddleware(thunk)
-    //applyMiddleware(thunk, logger)
+    // applyMiddleware(thunk)
+    applyMiddleware(thunk, logger)
 )
 
 ReactDOM.render(

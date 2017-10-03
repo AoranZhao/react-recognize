@@ -4,16 +4,17 @@ import React from 'react';
 import { connect } from 'react-redux';
 import Dropzone from 'react-dropzone';
 import io from 'socket.io-client';
+import uuidv5 from 'uuid/v5';
 // import { Icon } from 'react-fa';
 
 import moment from 'moment-timezone';
 const tz_str = 'Asia/Shanghai';
 
-import { reset_files, drop_files, upload_files_ing, upload_files_done, upload_analysis_ing, upload_analysis_done, upload_files_err, setup_socket } from '../actions';
+import { reset_files, drop_files, upload_files_ing, upload_files_done, upload_analysis_ing, upload_analysis_done, upload_files_err, update_socket } from '../actions';
 import { Axios } from '../utils';
 
 const mapStateToProps = state => {
-    return {auth: state.auth, recognize: state.recognize};
+    return {auth: state.auth, recognize: state.recognize, socket: state.socket};
 }
 
 const mapDispatchToProps = dispatch => ({
@@ -38,8 +39,8 @@ const mapDispatchToProps = dispatch => ({
     promise_upload_analysis_done: (data, api_dur) => {
         dispatch(upload_analysis_done(data, api_dur));
     },
-    sync_setup_socket: (socket) => {
-        dispatch(setup_socket(socket));
+    sync_update_socket: (socket_pack) => {
+        dispatch(update_socket(socket_pack));
     }
 })
 
@@ -53,8 +54,8 @@ class UserPage extends React.Component {
         this.resetImages = this.resetImages.bind(this);
         this.get_user_info = this.get_user_info.bind(this);
         this.setupSocket = this.setupSocket.bind(this);
-        if(!this.props.recognize.socket) {
-            this.props.sync_setup_socket(this.setupSocket());
+        if(JSON.stringify(this.props.socket) === '{}') {
+            this.props.sync_update_socket(this.setupSocket());
         }
         this.socket = this.props.recognize.socket;
         this.sendingStatus = ['upload_files_ing', 'upload_files_done', 'upload_analysis_ing'];
@@ -74,16 +75,26 @@ class UserPage extends React.Component {
 
     setupSocket() {
         console.log('set up socket');
+        // let socket = io('http://localhost:2979');
         let socket = io('http://47.94.99.252:2979');
         socket.on('connect', () => {
             console.log('socket id:', socket.id);
+            let auth_uuid = '';
+            if(this.props.socket.uuid) {
+                auth_uuid = this.props.socket.uuid;
+            } else {
+                auth_uuid = uuidv5(socket.id, uuidv5.URL);
+                this.props.sync_update_socket({uuid: auth_uuid});
+            }
+            console.log('auth_uuid:', auth_uuid);
+            socket.emit('initial', {uuid: auth_uuid, socket_id: socket.id});
         })
         socket.on('message', (data) => {
             console.log('message:', data);
             var api_end_time = new Date().getTime();
             this.props.promise_upload_analysis_done(data, api_end_time - this.api_start_time);
         })
-        return socket;
+        return {socket: socket};
     }
 
     preview_images() {
@@ -184,7 +195,7 @@ class UserPage extends React.Component {
                 imgForm.append('images', file);
             })
             imgForm.set('cb_api', '/api/callback');
-            imgForm.set('socket_id', this.props.recognize.socket ? this.props.recognize.socket.id : '');
+            imgForm.set('uuid', this.props.socket.uuid);
         // Axios.post('/api/upload', imgForm, {
 	    Axios.post('/api/recognize', imgForm, {
                 headers: {

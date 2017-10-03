@@ -114,7 +114,8 @@ export const upload_files_err = (err) => ({
     err: err
 })
 
-export const setup_socket = (socket) => ({
-    type: 'SETUP_SOCKET',
-    socket: socket
+// socket
+export const update_socket = (socket_pack) => ({
+    type: 'UPDATE_SOCKET',
+    socket_pack: socket_pack
 })
