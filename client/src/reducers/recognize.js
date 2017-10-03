@@ -26,9 +26,6 @@ const recognize = (state = {}, action) => {
         case 'UPLOAD_FILES_ERR':
             state = {...state, status: 'upload_files_err', data: action.err};
             return state;
-        case 'SETUP_SOCKET':
-            state = {...state, socket: action.socket};
-            return state;
         default:
             return state;
     }

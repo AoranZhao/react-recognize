@@ -33,6 +33,10 @@ let emitter = () => {
         host: 'localhost'
     })
 }
+let emitter_io = emitter(),
+    io_Redis = redis();
+const EXPIRE_TIME = 60 * 60 * 24;
+
 io.adapter(io_redis());
 
 app.use(express.static(path.join(__dirname, '../../client/dist')));
@@ -55,18 +59,22 @@ app.all('*', function (req, res, next) {
 app.post('/api/callback', (req, res) => {
     // body: {output: output, script_dur: end_time - script_start_time}
     console.log('callback');
-    let emitter_io = emitter(),
-        ioRedis = redis(),
-        socket_id = req.body.socket_id;
-    console.log('socket_id:', socket_id);
+    let uuid = req.body.uuid;
+    console.log('uuid:', uuid);
     console.log('req.body:', req.body);
     var data = {
         output: req.body.output,
         script_dur: req.body.script_dur,
         status: req.body.status
     }
-    emitter_io.to(socket_id).emit('message', data);
-    res.status(200).send('ok');
+    io_Redis.get(uuid, (err, result) => {
+        if(!err && result) {
+            emitter_io.to(result).emit('message', data);
+            res.status(200).send('ok');
+        }
+    })
+    // emitter_io.to(socket_id).emit('message', data);
+    // res.status(200).send('ok');
 })
 
 app.get(/\/[0-9a-zA-Z\/]*/, (req, res) => {
@@ -78,4 +86,12 @@ server.listen(2979, () => {
 })
 
 io.on('connection', (socket) => {
+    console.log('connection:', socket.id);
+    socket.on('initial', (data) => {
+        console.log('data:', data);
+        let uuid = data.uuid,
+            socket_id = data.socket_id;
+        // set socket id in redis
+        io_Redis.set(uuid, socket_id, 'ex', EXPIRE_TIME);
+    })
 })
