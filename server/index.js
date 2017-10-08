@@ -81,8 +81,8 @@ app.get(/\/[0-9a-zA-Z\/]*/, (req, res) => {
     res.sendFile(path.join(__dirname, '../../client', 'index.html'));
 })
 
-server.listen(2979, () => {
-    console.log('listening on port 2979.....');
+server.listen(2977, () => {
+    console.log('listening on port 2977.....');
 })
 
 io.on('connection', (socket) => {
