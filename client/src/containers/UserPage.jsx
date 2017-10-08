@@ -76,7 +76,7 @@ class UserPage extends React.Component {
     setupSocket() {
         console.log('set up socket');
         // let socket = io('http://localhost:2979');
-	var baseUrl = window.location.href.split('//')[1].split('/')[0];
+	    var baseUrl = window.location.href.split('//')[1].split('/')[0];
         let socket = io('http://' + baseUrl);
         socket.on('connect', () => {
             console.log('socket id:', socket.id);
@@ -99,7 +99,7 @@ class UserPage extends React.Component {
     }
 
     preview_images() {
-        let output_style = {};
+        let output_style = {}, script_dur = <em></em>;
         if(this.props.recognize.output_status) {
             switch(this.props.recognize.output_status) {
                 case 200: 
@@ -121,11 +121,16 @@ class UserPage extends React.Component {
                 case 'upload_analysis_ing':
                     return <div><p>upload is done. analyzing...</p></div>
                 default:
+                    if(this.props.recognize.outputs && this.props.recognize.script_duration && this.props.recognize.length) {
+                        var str = (this.props.recognize.script_duration / this.props.recognize.length).toString();
+                        var substr = str.match(/^\d+.\d{2}/) ? str.match(/^\d+.\d{2}/)[1] : str;
+                        script_dur = <em>( {substr} s per image)</em>
+                    }
                     return <div>
                                 {(this.props.recognize.outputs) ? <div>
                                         <div>
                                             {(this.props.recognize.api_duration) ? <p>API execution time: {this.props.recognize.api_duration / 1000} s</p> : <p>API execution time: unknow</p>}
-                                            {(this.props.recognize.script_duration) ? <p>Script execution time: {this.props.recognize.script_duration / 1000} s</p> : <p>Script execution time: unknow</p>}
+                                            {(this.props.recognize.script_duration) ? <p>Script execution time: {this.props.recognize.script_duration / 1000} s {script_dur}</p> : <p>Script execution time: unknow</p>}
                                         </div>
                                         <br />
                                         <div style={output_style}>

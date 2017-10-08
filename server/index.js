@@ -65,7 +65,8 @@ app.post('/api/callback', (req, res) => {
     var data = {
         output: req.body.output,
         script_dur: req.body.script_dur,
-        status: req.body.status
+        status: req.body.status,
+        length: req.body.length
     }
     io_Redis.get(uuid, (err, result) => {
         if(!err && result) {
