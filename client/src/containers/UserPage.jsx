@@ -54,7 +54,7 @@ class UserPage extends React.Component {
         this.resetImages = this.resetImages.bind(this);
         this.get_user_info = this.get_user_info.bind(this);
         this.setupSocket = this.setupSocket.bind(this);
-        if(JSON.stringify(this.props.socket) === '{}') {
+        if(Object.keys(this.props.socket).length === 0 && this.props.socket.constructor === Object) {
             this.props.sync_update_socket(this.setupSocket());
         }
         this.socket = this.props.recognize.socket;
