@@ -122,9 +122,8 @@ class UserPage extends React.Component {
                     return <div><p>upload is done. analyzing...</p></div>
                 default:
                     if(this.props.recognize.outputs && this.props.recognize.script_duration && this.props.recognize.length) {
-                        var str = (this.props.recognize.script_duration / this.props.recognize.length).toString();
-                        var substr = str.match(/^\d+.\d{2}/) ? str.match(/^\d+.\d{2}/)[1] : str;
-                        script_dur = <em>( {substr} s per image)</em>
+                        var str = Math.round(this.props.recognize.script_duration * 100 / this.props.recognize.length) / 100000;
+                        script_dur = <em>( {str} s per image)</em>
                     }
                     return <div>
                                 {(this.props.recognize.outputs) ? <div>
