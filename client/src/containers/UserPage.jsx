@@ -167,12 +167,16 @@ class UserPage extends React.Component {
     }
 
     generate_btn_ctrl() {
+        let isExpire = false;
+        if(this.props.auth.data.expire < new Date().getTime()) {
+            isExpire = true;
+        }
         return <div>
-            <input type="button" value="Upload" disabled={(this.sendingStatus.indexOf(this.props.recognize.status) !== -1) ? true : false} onClick={e => {
+            <input type="button" value="Upload" disabled={this.sendingStatus.indexOf(this.props.recognize.status) !== -1 || isExpire} onClick={e => {
                 e.preventDefault();
                 this.upload_images();
             }} />
-            <input type="button" value="Clean" disabled={(this.sendingStatus.indexOf(this.props.recognize.status) !== -1) ? true : false} onClick={e => {
+            <input type="button" value="Clean" disabled={this.sendingStatus.indexOf(this.props.recognize.status) !== -1 || isExpire} onClick={e => {
                 e.preventDefault();
                 this.resetImages();
             }} />
@@ -219,10 +223,14 @@ class UserPage extends React.Component {
     }
 
     get_user_info() {
+        let expire_style = {};
+        if(this.props.auth.data.expire < new Date().getTime()) {
+            expire_style = { color: 'red' }
+        }
         if(this.props.auth.data) {
             let greeting = (this.props.auth.data.email) ? <p>hello, {this.props.auth.data.email}</p> : <p>hello, </p>,
                 expire_time = moment(this.props.auth.data.expire).tz(tz_str).format('MMMM Do YYYY, H:mm'),
-                expire_mention = (this.props.auth.data.expire) ? <p>Account expire at {expire_time}</p> : <p>Account expire at unknow</p>;
+                expire_mention = (this.props.auth.data.expire) ? <p>Account expire at <em style={expire_style}>{expire_time}</em></p> : <p>Account expire at unknow</p>;
             return <div>
                 {greeting}
                 {expire_mention}  
