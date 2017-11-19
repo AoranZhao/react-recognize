@@ -11,8 +11,9 @@ class NninPage extends React.Component {
     }
 
     render() {
+        console.log('rendering');
         return <p>Nnin Page</p>
     }
 }
 
-export default connect()(NninPage);
+export default NninPage;
