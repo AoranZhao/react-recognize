@@ -7,6 +7,7 @@ import { connect } from 'react-redux';
 import SideBar from '../components/SideBar.jsx';
 import UserPage from './UserPage.jsx';
 import AdminPage from './AdminPage.jsx';
+import NninPage from './NninPage.jsx';
 
 const mapStateToProps = state => {
     var obj = {};
@@ -21,6 +22,7 @@ let HomePage = ({
     return <div style={{width: '100%'}}>
         <SideBar entries={entries} base={match.url} />
         <Route exact path={`${match.url}`} component={UserPage} />
+        <Route path={`${match.url}/nnin`} component={NninPage} />
         <Route path={`${match.url}/admin`} component={AdminPage} />
     </div>
 }
