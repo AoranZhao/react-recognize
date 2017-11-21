@@ -69,7 +69,7 @@ class NninPage extends React.Component {
             el = <div style={{height: '600px', width: '800px'}}><Tree data={this.output_convert(this.props.nnin.output)} /></div>
         }
         return <div>
-            {/* <p>{JSON.stringify(this.props.nnin.output)}</p> */}
+            {<p>{JSON.stringify(this.props.nnin.output)}</p>}
             {el}
         </div>
     }
