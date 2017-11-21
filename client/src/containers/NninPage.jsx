@@ -95,11 +95,11 @@ class NninPage extends React.Component {
     generate_node(node) {
         return {
             name: node.Concept,
-            attributes: {
-                Confidence: node.Confidence,
-                Prediction: node.Prediction,
-                Level: node.Level
-            }
+            // attributes: {
+            //     Confidence: node.Confidence,
+            //     Prediction: node.Prediction,
+            //     Level: node.Level
+            // }
         }
     }
 
