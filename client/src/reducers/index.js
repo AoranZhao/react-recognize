@@ -6,12 +6,14 @@ import auth from './auth';
 import users from './users';
 import recognize from './recognize';
 import socket from './socket';
+import nnin from './nnin';
 
 const AppReducers = combineReducers({
     auth,
     users,
     recognize,
-    socket
+    socket,
+    nnin
 })
 
 export default AppReducers;

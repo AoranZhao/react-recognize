@@ -119,3 +119,23 @@ export const update_socket = (socket_pack) => ({
     type: 'UPDATE_SOCKET',
     socket_pack: socket_pack
 })
+
+// nnin
+export const upload_question_ing = (question) => ({
+    type: 'UPLOAD_QUESTION_ING',
+    question: question
+})
+
+export const upload_question_done = (data) => ({
+    type: 'UPLOAD_QUESTION_DONE',
+    data: data
+})
+
+export const upload_question_err = (err) => ({
+    type: 'UPLOAD_QUESTION_ERR',
+    err: err
+})
+
+export const reset_question = () => ({
+    type: 'RESET_QUESTION'
+})
