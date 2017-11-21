@@ -57,7 +57,7 @@ class NninPage extends React.Component {
                         return;
                     this.upload_question(ref_question.value.trim());
                 }}>
-                <textarea ref={node => ref_question = node}></textarea>
+                <textarea style={{height: '100px', width: '300px'}} ref={node => ref_question = node}></textarea>
                 <input type="submit" value="Upload" />
             </form>
         </div>
@@ -66,10 +66,10 @@ class NninPage extends React.Component {
     generate_question_image() {
         let el = <div></div>;
         if(typeof this.props.nnin.output === 'object') {
-            el = <Tree data={this.output_convert(this.props.nnin.output)} />
+            el = <div style={{height: '600px', width: '800px'}}><Tree data={this.output_convert(this.props.nnin.output)} /></div>
         }
         return <div>
-            <p>{JSON.stringify(this.props.nnin.output)}</p>
+            {/* <p>{JSON.stringify(this.props.nnin.output)}</p> */}
             {el}
         </div>
     }
