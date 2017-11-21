@@ -42,8 +42,8 @@ class NninPage extends React.Component {
 
     generate_question_preview() {
         return <div>
-            <pre>{this.props.nnin.question}</pre>
-            {(this.props.nnin.err) ? <pre>{ this.props.nnin.err.message }</pre> : <pre></pre>}
+            <pre style={{width: '800px', whiteSpace: 'pre-wrap', wordWrap: 'break-word'}}>{this.props.nnin.question}</pre>
+            {(this.props.nnin.err) ? <pre style={{color: 'red'}}>{ this.props.nnin.err }</pre> : <pre></pre>}
         </div>
     }
 
@@ -57,7 +57,7 @@ class NninPage extends React.Component {
                         return;
                     this.upload_question(ref_question.value.trim());
                 }}>
-                <textarea style={{height: '100px', width: '300px'}} ref={node => ref_question = node}></textarea>
+                <textarea style={{height: '100px', width: '700px'}} ref={node => ref_question = node}></textarea><br />
                 <input type="submit" value="Upload" />
             </form>
         </div>
@@ -66,10 +66,10 @@ class NninPage extends React.Component {
     generate_question_image() {
         let el = <div></div>;
         if(typeof this.props.nnin.output === 'object') {
-            el = <div style={{height: '600px', width: '800px'}}><Tree data={this.output_convert(this.props.nnin.output)} /></div>
+            el = <div style={{height: '600px', width: '800px'}}><Tree translate={{x: 100, y: 250}} data={this.output_convert(this.props.nnin.output)} /></div>
         }
         return <div>
-            {<p>{JSON.stringify(this.props.nnin.output)}</p>}
+            {/* <p>{JSON.stringify(this.props.nnin.output)}</p> */}
             {el}
         </div>
     }
@@ -142,7 +142,11 @@ class NninPage extends React.Component {
             }
         }).then(response => {
             console.log(response.data);
-            this.props.promise_upload_question_done(response.data);
+            if(response.data.err) {
+                this.props.promise_upload_question_err(response.data.err);
+            } else {
+                this.props.promise_upload_question_done(response.data);
+            }
         }).catch(err => {
             console.log(err);
             this.props.promise_upload_question_err(err);
@@ -153,7 +157,7 @@ class NninPage extends React.Component {
         var question_preview = this.generate_question_preview(),
             question_input = this.generate_question_input(),
             question_image = this.generate_question_image();
-        return <div>
+        return <div style={{marginLeft: '20px'}}>
             <p>Upload Question</p>
             {question_preview}
             {question_input}
