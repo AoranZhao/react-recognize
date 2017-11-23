@@ -7,15 +7,19 @@ import bodyParser from 'body-parser';
 import ioRedis from 'ioredis';
 import socketIOEmitter from 'socket.io-emitter';
 import socketIORedis from 'socket.io-redis';
+import rds from 'redis';
 
 let app = express();
 let server = http.createServer(app);
 let io = socketIO(server);
+let Redis_Password = 'Gelenk0408';
+
 
 let redis = () => {
     return ioRedis({
         port: 9851,
         host: 'localhost',
+	password: Redis_Password,
         retryStrategy: function (times) {
             return null; // no retry
         }
@@ -23,15 +27,12 @@ let redis = () => {
 }
 let io_redis = () => {
     return socketIORedis({
-        port: 9851,
-        host: 'localhost'
+	pubClient: rds.createClient(9851, 'localhost', { auth_pass: Redis_Password }),
+	subClient: rds.createClient(9851, 'localhost', { auth_pass: Redis_Password })
     })
 }
 let emitter = () => {
-    return socketIOEmitter({
-        port: 9851,
-        host: 'localhost'
-    })
+    return socketIOEmitter(rds.createClient(9851, 'localhost', { auth_pass: Redis_Password }))
 }
 let emitter_io = emitter(),
     io_Redis = redis();
