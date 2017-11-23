@@ -14,7 +14,7 @@ let io = socketIO(server);
 
 let redis = () => {
     return ioRedis({
-        port: 6379,
+        port: 9851,
         host: 'localhost',
         retryStrategy: function (times) {
             return null; // no retry
@@ -23,13 +23,13 @@ let redis = () => {
 }
 let io_redis = () => {
     return socketIORedis({
-        port: 6379,
+        port: 9851,
         host: 'localhost'
     })
 }
 let emitter = () => {
     return socketIOEmitter({
-        port: 6379,
+        port: 9851,
         host: 'localhost'
     })
 }
