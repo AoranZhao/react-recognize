@@ -12,14 +12,16 @@ import rds from 'redis';
 let app = express();
 let server = http.createServer(app);
 let io = socketIO(server);
-let Redis_Password = 'Gelenk0408';
-
+const PORT = process.env.PORT || 2979;
+const REDIS_PASSWORD = process.env.REDIS_PASSWORD || 'Gelenk0408',
+    REDIS_PORT = process.env.REDIS_PORT || 9851,
+    REDIS_HOST = process.env.REDIS_HOST || 'localhost';
 
 let redis = () => {
     return ioRedis({
-        port: 9851,
-        host: 'localhost',
-	password: Redis_Password,
+        port: REDIS_PORT,
+        host: REDIS_HOST,
+	password: REDIS_PASSWORD,
         retryStrategy: function (times) {
             return null; // no retry
         }
@@ -27,12 +29,12 @@ let redis = () => {
 }
 let io_redis = () => {
     return socketIORedis({
-	pubClient: rds.createClient(9851, 'localhost', { auth_pass: Redis_Password }),
-	subClient: rds.createClient(9851, 'localhost', { auth_pass: Redis_Password })
+	pubClient: rds.createClient(REDIS_PORT, REDIS_HOST, { auth_pass: REDIS_PASSWORD }),
+	subClient: rds.createClient(REDIS_PORT, REDIS_HOST, { auth_pass: REDIS_PASSWORD })
     })
 }
 let emitter = () => {
-    return socketIOEmitter(rds.createClient(9851, 'localhost', { auth_pass: Redis_Password }))
+    return socketIOEmitter(rds.createClient(REDIS_PORT, REDIS_HOST, { auth_pass: REDIS_PASSWORD }))
 }
 let emitter_io = emitter(),
     io_Redis = redis();
@@ -84,8 +86,8 @@ app.get(/\/[0-9a-zA-Z\/]*/, (req, res) => {
     res.sendFile(path.join(__dirname, '../../client', 'index.html'));
 })
 
-server.listen(2979, () => {
-    console.log('listening on port 2979.....');
+server.listen(PORT, () => {
+    console.log(`listening on port ${PORT}.....`);
 })
 
 io.on('connection', (socket) => {
