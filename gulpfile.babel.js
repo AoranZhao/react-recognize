@@ -35,4 +35,4 @@ gulp.task('watch:js', () => {
 gulp.task('dist', ['dist:js', 'dist:server']);
 gulp.task('watch', ['watch:js', 'watch:server']);
 
-gulp.task('default', ['dist', 'watch']);
+gulp.task('default', ['dist']);
