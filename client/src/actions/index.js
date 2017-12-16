@@ -120,6 +120,45 @@ export const update_socket = (socket_pack) => ({
     socket_pack: socket_pack
 })
 
+// formula ocr
+export const fo_reset_files = () => ({
+    type: 'FO_RESET_FILES'
+})
+
+export const fo_drop_files = (files) => ({
+    type: 'FO_DROP_FILES',
+    files: files
+})
+
+export const fo_upload_files_ing = () => ({
+    type: 'FO_UPLOAD_FILES_ING'
+})
+
+export const fo_upload_files_done = () => ({
+    type: 'FO_UPLOAD_FILES_DONE'
+})
+
+export const fo_upload_analysis_ing = () => ({
+    type: 'FO_UPLOAD_ANALYSIS_ING'
+})
+
+export const fo_upload_analysis_done = (data, api_dur) => ({
+    type: 'FO_UPLOAD_ANALYSIS_DONE',
+    data: data,
+    api_dur: api_dur
+})
+
+export const fo_upload_files_err = (err) => ({
+    type: 'FO_UPLOAD_FILES_ERR',
+    err: err
+})
+
+// socket
+export const fo_update_socket = (socket_pack) => ({
+    type: 'FO_UPDATE_SOCKET',
+    socket_pack: socket_pack
+})
+
 // nnin
 export const upload_question_ing = (question) => ({
     type: 'UPLOAD_QUESTION_ING',

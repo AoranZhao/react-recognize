@@ -15,6 +15,9 @@ let SideBar = ({
             <TabEntry text="Home" to="/" />
         </div>
         <div className="sidebar_item">
+            <TabEntry text="FormulaOCR" to="/home/formulaocr" />
+        </div>
+        <div className="sidebar_item">
             <TabEntry text="Nnin" to="/home/nnin" />
         </div>
         {entries.map((entry, index) => (

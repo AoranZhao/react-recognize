@@ -13,7 +13,8 @@ const AppReducers = combineReducers({
     users,
     recognize,
     socket,
-    nnin
+    nnin,
+    formulaocr
 })
 
 export default AppReducers;
