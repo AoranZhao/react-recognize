@@ -75,7 +75,7 @@ class FOrmulaOCRPage extends React.Component {
         }
         console.log(`drop file, ${files.length}`);
         console.dir(files);
-        this.props.sync_drop_files(files[0]);
+        this.props.sync_drop_files(files.slice(0, 1));
     }
 
     setupSocket() {
