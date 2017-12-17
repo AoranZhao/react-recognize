@@ -14,7 +14,7 @@ import { fo_reset_files, fo_drop_files, fo_upload_files_ing, fo_upload_files_don
 import { Axios } from '../utils';
 
 const mapStateToProps = state => {
-    return {auth: state.auth, recognize: state.recognize, socket: state.socket};
+    return {auth: state.auth, formulaocr: state.formulaocr, socket: state.socket};
 }
 
 const mapDispatchToProps = dispatch => ({
@@ -57,7 +57,7 @@ class FOrmulaOCRPage extends React.Component {
         if(Object.keys(this.props.socket).length === 0 && this.props.socket.constructor === Object) {
             this.props.sync_update_socket(this.setupSocket());
         }
-        this.socket = this.props.recognize.socket;
+        this.socket = this.props.formulaocr.socket;
         this.sendingStatus = ['upload_files_ing', 'upload_files_done', 'upload_analysis_ing'];
     }
 
@@ -105,8 +105,8 @@ class FOrmulaOCRPage extends React.Component {
 
     preview_images() {
         let output_style = {}, script_dur = <em></em>;
-        if(this.props.recognize.output_status) {
-            switch(this.props.recognize.output_status) {
+        if(this.props.formulaocr.output_status) {
+            switch(this.props.formulaocr.output_status) {
                 case 200: 
                     output_style = {borderWidth: 1, borderStyle: 'solid', borderColor: 'green'};
                     break;
@@ -117,8 +117,8 @@ class FOrmulaOCRPage extends React.Component {
                     break;
             }
         }
-        if(this.props.recognize && Array.isArray(this.props.recognize.dropped_files)) {
-            switch(this.props.recognize.status) {
+        if(this.props.formulaocr && Array.isArray(this.props.formulaocr.dropped_files)) {
+            switch(this.props.formulaocr.status) {
                 case 'upload_files_ing':
                     return <div><p>uploading...</p></div>
                 case 'upload_files_done':
@@ -126,30 +126,30 @@ class FOrmulaOCRPage extends React.Component {
                 case 'upload_analysis_ing':
                     return <div><p>upload is done. analyzing...</p></div>
                 default:
-                    if(this.props.recognize.outputs && this.props.recognize.script_duration && this.props.recognize.length) {
-                        var str = Math.round(this.props.recognize.script_duration * 100 / this.props.recognize.length) / 100000;
+                    if(this.props.formulaocr.outputs && this.props.formulaocr.script_duration && this.props.formulaocr.length) {
+                        var str = Math.round(this.props.formulaocr.script_duration * 100 / this.props.formulaocr.length) / 100000;
                         script_dur = <em>( {str} s per image)</em>
                     }
                     return <div>
-                                {(this.props.recognize.outputs) ? <div>
+                                {(this.props.formulaocr.outputs) ? <div>
                                         <div>
-                                            {(this.props.recognize.api_duration) ? <p>API execution time: {this.props.recognize.api_duration / 1000} s</p> : <p>API execution time: unknow</p>}
-                                            {(this.props.recognize.script_duration) ? <p>Script execution time: {this.props.recognize.script_duration / 1000} s {script_dur}</p> : <p>Script execution time: unknow</p>}
+                                            {(this.props.formulaocr.api_duration) ? <p>API execution time: {this.props.formulaocr.api_duration / 1000} s</p> : <p>API execution time: unknow</p>}
+                                            {(this.props.formulaocr.script_duration) ? <p>Script execution time: {this.props.formulaocr.script_duration / 1000} s {script_dur}</p> : <p>Script execution time: unknow</p>}
                                         </div>
                                         <br />
                                         <div style={output_style}>
                                             <p>Output: </p>
-                                            <pre>{this.props.recognize.outputs}</pre>
+                                            <pre>{this.props.formulaocr.outputs}</pre>
                                         </div>
                                     </div> : <div></div>}
                                     <br />
-                                    {(Array.isArray(this.props.recognize.dropped_files) && this.props.recognize.dropped_files.length !== 0) ? 
+                                    {(Array.isArray(this.props.formulaocr.dropped_files) && this.props.formulaocr.dropped_files.length !== 0) ? 
                                         <table>
                                             <thead>
                                                 <tr><td>filename</td><td>img</td></tr>
                                             </thead>
                                             <tbody>
-                                            {this.props.recognize.dropped_files.reverse().map((file, index) => {
+                                            {this.props.formulaocr.dropped_files.reverse().map((file, index) => {
                                                 return (
                                                 <tr key={index}>
                                                     <td>
@@ -177,11 +177,11 @@ class FOrmulaOCRPage extends React.Component {
             isExpire = true;
         }
         return <div>
-            <input type="button" value="Upload" disabled={this.sendingStatus.indexOf(this.props.recognize.status) !== -1 || isExpire} onClick={e => {
+            <input type="button" value="Upload" disabled={this.sendingStatus.indexOf(this.props.formulaocr.status) !== -1 || isExpire} onClick={e => {
                 e.preventDefault();
                 this.upload_images();
             }} />
-            <input type="button" value="Clean" disabled={this.sendingStatus.indexOf(this.props.recognize.status) !== -1 || isExpire} onClick={e => {
+            <input type="button" value="Clean" disabled={this.sendingStatus.indexOf(this.props.formulaocr.status) !== -1 || isExpire} onClick={e => {
                 e.preventDefault();
                 this.resetImages();
             }} />
@@ -190,11 +190,11 @@ class FOrmulaOCRPage extends React.Component {
 
     upload_images() {
         this.api_start_time = new Date().getTime();
-        if(this.props.recognize && Array.isArray(this.props.recognize.dropped_files) && this.props.recognize.dropped_files.length > 0) {
+        if(this.props.formulaocr && Array.isArray(this.props.formulaocr.dropped_files) && this.props.formulaocr.dropped_files.length > 0) {
             this.props.promise_upload_files_ing();
             var imgForm = new FormData(),
                 sharedSize = 2 * 1024 * 1024;
-            this.props.recognize.dropped_files.forEach(file => {
+            this.props.formulaocr.dropped_files.forEach(file => {
                 // var total_shares = Math.ceil(file.size / sharedSize);
                 
                 // for(var i = 0; i < total_shares; i++) {
@@ -258,7 +258,7 @@ class FOrmulaOCRPage extends React.Component {
                     accept="image/*"
                     onDrop={this.onImageDrop}>
                     <p>Drop an image or click to select a file to upload.</p>
-                    <p>Currently our recognize function is supported by firefox and chrome.</p>
+                    <p>Currently our formulaocr function is supported by firefox and chrome.</p>
                 </Dropzone>
                 {btn_ctrl}
                 {images_preview}
