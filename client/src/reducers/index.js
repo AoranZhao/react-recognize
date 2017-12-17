@@ -7,6 +7,7 @@ import users from './users';
 import recognize from './recognize';
 import socket from './socket';
 import nnin from './nnin';
+import formulaocr from './formulaocr';
 
 const AppReducers = combineReducers({
     auth,
