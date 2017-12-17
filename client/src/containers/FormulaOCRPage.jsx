@@ -70,7 +70,12 @@ class FOrmulaOCRPage extends React.Component {
     }
 
     onImageDrop(files) {
-        this.props.sync_drop_files(files);
+        if(files.length > 1) {
+            alert('only upload one file, please');
+        }
+        console.log(`drop file, ${files.length}`);
+        console.dir(files);
+        this.props.sync_drop_files(files[0]);
     }
 
     setupSocket() {
