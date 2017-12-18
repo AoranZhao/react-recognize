@@ -95,8 +95,8 @@ class FOrmulaOCRPage extends React.Component {
             console.log('auth_uuid:', auth_uuid);
             socket.emit('initial', {uuid: auth_uuid, socket_id: socket.id});
         })
-        socket.on('message', (data) => {
-            console.log('message:', data);
+        socket.on('messagefo', (data) => {
+            console.log('messagefo:', data);
             var api_end_time = new Date().getTime();
             this.props.promise_upload_analysis_done(data, api_end_time - this.api_start_time);
         })
