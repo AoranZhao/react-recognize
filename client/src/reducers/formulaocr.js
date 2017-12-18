@@ -9,7 +9,7 @@ const formulaocr = (state = {}, action) => {
             if(!Array.isArray(state.dropped_files)) {
                 state.dropped_files = [];
             }
-            state = {...state, status: 'drop_files', dropped_files: [...state.dropped_files, ...action.files]}
+            state = {...state, status: 'drop_files', dropped_files: [...action.files]}
             return state;
         case 'FO_UPLOAD_FILES_ING':
             state = {...state, status: 'upload_files_ing'};
