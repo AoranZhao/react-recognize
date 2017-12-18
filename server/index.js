@@ -97,7 +97,7 @@ app.post('/api/callbackfo', (req, res) => {
     io_Redis.get(uuid, (err, result) => {
         if(!err && result) {
 	    console.log(result);
-            emitter_io.to(result).emit('message', data);
+            emitter_io.to(result).emit('messagefo', data);
             res.status(200).send('ok');
         }
     })
