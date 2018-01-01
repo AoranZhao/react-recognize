@@ -9,6 +9,7 @@ import UserPage from './UserPage.jsx';
 import AdminPage from './AdminPage.jsx';
 import NninPage from './NninPage.jsx';
 import FormulaOCRPage from './FormulaOCRPage.jsx';
+import AutosolvePage from './AutosolvePage.jsx';
 
 const mapStateToProps = state => {
     var obj = {};
@@ -26,6 +27,7 @@ let HomePage = ({
         <Route path={`${match.url}/formulaocr`} component={FormulaOCRPage} />
         <Route path={`${match.url}/nnin`} component={NninPage} />
         <Route path={`${match.url}/admin`} component={AdminPage} />
+        <Route path={`${match.url}/autosolve`} component={AutosolvePage} />
     </div>
 }
 

@@ -8,6 +8,7 @@ import recognize from './recognize';
 import socket from './socket';
 import nnin from './nnin';
 import formulaocr from './formulaocr';
+import autosolve from './autosolve';
 
 const AppReducers = combineReducers({
     auth,
@@ -15,7 +16,8 @@ const AppReducers = combineReducers({
     recognize,
     socket,
     nnin,
-    formulaocr
+    formulaocr,
+    autosolve
 })
 
 export default AppReducers;

@@ -10,41 +10,44 @@ import uuidv5 from 'uuid/v5';
 import moment from 'moment-timezone';
 const tz_str = 'Asia/Shanghai';
 
-import { fo_reset_files, fo_drop_files, fo_upload_files_ing, fo_upload_files_done, fo_upload_analysis_ing, fo_upload_analysis_done, fo_upload_files_err, fo_update_socket } from '../actions';
+import { au_reset_files, au_drop_files, au_upload_files_ing, au_upload_files_done, au_upload_analysis_ing, au_upload_analysis_done, au_upload_files_err, au_update_socket, au_update_type } from '../actions';
 import { Axios } from '../utils';
 
 const mapStateToProps = state => {
-    return {auth: state.auth, formulaocr: state.formulaocr, socket: state.socket};
+    return {auth: state.auth, autosolve: state.autosolve, socket: state.socket};
 }
 
 const mapDispatchToProps = dispatch => ({
     sync_reset_files: () => {
-        dispatch(fo_reset_files());
+        dispatch(au_reset_files());
     },
     sync_drop_files: (files) => {
-        dispatch(fo_drop_files(files));
+        dispatch(au_drop_files(files));
     },
     promise_upload_files_ing: () => {
-        dispatch(fo_upload_files_ing());
+        dispatch(au_upload_files_ing());
     },
     promise_upload_files_done: (response, api_dur) => {
-        dispatch(fo_upload_files_done(response, api_dur));
+        dispatch(au_upload_files_done(response, api_dur));
     },
     promise_upload_files_err: (err) => {
-        dispatch(fo_upload_files_err(err));
+        dispatch(au_upload_files_err(err));
     },
     promise_upload_analysis_ing: () => {
-        dispatch(fo_upload_analysis_ing());
+        dispatch(au_upload_analysis_ing());
     },
     promise_upload_analysis_done: (data, api_dur) => {
-        dispatch(fo_upload_analysis_done(data, api_dur));
+        dispatch(au_upload_analysis_done(data, api_dur));
     },
     sync_update_socket: (socket_pack) => {
-        dispatch(fo_update_socket(socket_pack));
+        dispatch(au_update_socket(socket_pack));
+    },
+    sync_update_type: (type) => {
+        dispatch(au_update_type(type));
     }
 })
 
-class FOrmulaOCRPage extends React.Component {
+class AutosolvePage extends React.Component {
     constructor(props) {
         super(props);
         this.onImageDrop = this.onImageDrop.bind(this);
@@ -57,8 +60,8 @@ class FOrmulaOCRPage extends React.Component {
         if(Object.keys(this.props.socket).length === 0 && this.props.socket.constructor === Object) {
             this.props.sync_update_socket(this.setupSocket());
         }
-        this.props.socket.socket.on('messagefo', (data) => {
-            console.log('messagefo:', data);
+        this.props.socket.socket.on('messageau', (data) => {
+            console.log('messageau:', data);
             var api_end_time = new Date().getTime();
             this.props.promise_upload_analysis_done(data, api_end_time - this.api_start_time);
         })
@@ -109,8 +112,8 @@ class FOrmulaOCRPage extends React.Component {
 
     preview_images() {
         let output_style = {}, script_dur = <em></em>;
-        if(this.props.formulaocr.output_status) {
-            switch(this.props.formulaocr.output_status) {
+        if(this.props.autosolve.output_status) {
+            switch(this.props.autosolve.output_status) {
                 case 200: 
                     output_style = {borderWidth: 1, borderStyle: 'solid', borderColor: 'green'};
                     break;
@@ -121,8 +124,8 @@ class FOrmulaOCRPage extends React.Component {
                     break;
             }
         }
-        if(this.props.formulaocr && Array.isArray(this.props.formulaocr.dropped_files)) {
-            switch(this.props.formulaocr.status) {
+        if(this.props.autosolve && Array.isArray(this.props.autosolve.dropped_files)) {
+            switch(this.props.autosolve.status) {
                 case 'upload_files_ing':
                     return <div><p>uploading...</p></div>
                 case 'upload_files_done':
@@ -130,30 +133,30 @@ class FOrmulaOCRPage extends React.Component {
                 case 'upload_analysis_ing':
                     return <div><p>upload is done. analyzing...</p></div>
                 default:
-                    if(this.props.formulaocr.outputs && this.props.formulaocr.script_duration && this.props.formulaocr.length) {
-                        var str = Math.round(this.props.formulaocr.script_duration * 100 / this.props.formulaocr.length) / 100000;
+                    if(this.props.autosolve.outputs && this.props.autosolve.script_duration && this.props.autosolve.length) {
+                        var str = Math.round(this.props.autosolve.script_duration * 100 / this.props.autosolve.length) / 100000;
                         script_dur = <em>( {str} s per image)</em>
                     }
                     return <div>
-                                {(this.props.formulaocr.outputs) ? <div>
+                                {(this.props.autosolve.outputs) ? <div>
                                         <div>
-                                            {(this.props.formulaocr.api_duration) ? <p>API execution time: {this.props.formulaocr.api_duration / 1000} s</p> : <p>API execution time: unknow</p>}
-                                            {(this.props.formulaocr.script_duration) ? <p>Script execution time: {this.props.formulaocr.script_duration / 1000} s {script_dur}</p> : <p>Script execution time: unknow</p>}
+                                            {(this.props.autosolve.api_duration) ? <p>API execution time: {this.props.autosolve.api_duration / 1000} s</p> : <p>API execution time: unknow</p>}
+                                            {(this.props.autosolve.script_duration) ? <p>Script execution time: {this.props.autosolve.script_duration / 1000} s {script_dur}</p> : <p>Script execution time: unknow</p>}
                                         </div>
                                         <br />
                                         <div style={output_style}>
                                             <p>Output: </p>
-                                            <pre>{this.props.formulaocr.outputs}</pre>
+                                            <pre>{this.props.autosolve.outputs}</pre>
                                         </div>
                                     </div> : <div></div>}
                                     <br />
-                                    {(Array.isArray(this.props.formulaocr.dropped_files) && this.props.formulaocr.dropped_files.length !== 0) ? 
+                                    {(Array.isArray(this.props.autosolve.dropped_files) && this.props.autosolve.dropped_files.length !== 0) ? 
                                         <table>
                                             <thead>
                                                 <tr><td>filename</td><td>img</td></tr>
                                             </thead>
                                             <tbody>
-                                            {this.props.formulaocr.dropped_files.reverse().map((file, index) => {
+                                            {this.props.autosolve.dropped_files.reverse().map((file, index) => {
                                                 return (
                                                 <tr key={index}>
                                                     <td>
@@ -181,11 +184,21 @@ class FOrmulaOCRPage extends React.Component {
             isExpire = true;
         }
         return <div>
-            <input type="button" value="Upload" disabled={this.sendingStatus.indexOf(this.props.formulaocr.status) !== -1 || isExpire} onClick={e => {
+            <select value={ (typeof this.props.autosolve.question_type === 'undefined') ? 'no' : this.props.autosolve.question_type } disabled={this.sendingStatus.indexOf(this.props.autosolve.status) !== -1 || isExpire} onChange={e => {
+                e.preventDefault();
+                this.props.sync_update_type(e.target.value);
+            }}>
+                <option value="no">Not choose</option>
+                <option value="ineq">Ineq</option>
+                <option value="poly">Poly</option>
+                <option value="factor">Factor</option>
+                <option value="num_exp">Num_Exp</option>
+            </select>
+            <input type="button" value="Upload" disabled={this.sendingStatus.indexOf(this.props.autosolve.status) !== -1 || isExpire} onClick={e => {
                 e.preventDefault();
                 this.upload_images();
             }} />
-            <input type="button" value="Clean" disabled={this.sendingStatus.indexOf(this.props.formulaocr.status) !== -1 || isExpire} onClick={e => {
+            <input type="button" value="Clean" disabled={this.sendingStatus.indexOf(this.props.autosolve.status) !== -1 || isExpire} onClick={e => {
                 e.preventDefault();
                 this.resetImages();
             }} />
@@ -194,11 +207,11 @@ class FOrmulaOCRPage extends React.Component {
 
     upload_images() {
         this.api_start_time = new Date().getTime();
-        if(this.props.formulaocr && Array.isArray(this.props.formulaocr.dropped_files) && this.props.formulaocr.dropped_files.length > 0) {
+        if(this.props.autosolve && Array.isArray(this.props.autosolve.dropped_files) && this.props.autosolve.dropped_files.length > 0) {
             this.props.promise_upload_files_ing();
             var imgForm = new FormData(),
                 sharedSize = 2 * 1024 * 1024;
-            this.props.formulaocr.dropped_files.forEach(file => {
+            this.props.autosolve.dropped_files.forEach(file => {
                 // var total_shares = Math.ceil(file.size / sharedSize);
                 
                 // for(var i = 0; i < total_shares; i++) {
@@ -212,11 +225,11 @@ class FOrmulaOCRPage extends React.Component {
                 // }
                 imgForm.append('images', file);
             })
-            imgForm.set('cb_api', '/api/callbackfo');
+            imgForm.set('cb_api', '/api/callbackau');
             imgForm.set('uuid', this.props.socket.uuid);
+            imgForm.set('question_type', this.props.autosolve.question_type);
         // Axios.post('/api/upload', imgForm, {
-            console.dir(imgForm);
-	    Axios.post('/api/formulaocr', imgForm, {
+	    Axios.post('/api/autosolve', imgForm, {
                 headers: {
                     "x-token": this.props.auth.data.token,
                     "Content-Type": "multipart/form-data"
@@ -256,14 +269,14 @@ class FOrmulaOCRPage extends React.Component {
         var btn_ctrl = this.generate_btn_ctrl();
         return(
             <div>
-                <h2>Formula OCR</h2>
+                <h2>Autosolve</h2>
                  {frame_user_info} 
                 <Dropzone
                     multiple={true}
                     accept="image/*"
                     onDrop={this.onImageDrop}>
                     <p>Drop an image or click to select a file to upload.</p>
-                    <p>Currently our formulaocr function is supported by firefox and chrome.</p>
+                    <p>Currently our autosolve function is supported by firefox and chrome.</p>
                 </Dropzone>
                 {btn_ctrl}
                 {images_preview}
@@ -272,4 +285,4 @@ class FOrmulaOCRPage extends React.Component {
     }
 }
 
-export default connect(mapStateToProps, mapDispatchToProps)(FOrmulaOCRPage);
+export default connect(mapStateToProps, mapDispatchToProps)(AutosolvePage);
