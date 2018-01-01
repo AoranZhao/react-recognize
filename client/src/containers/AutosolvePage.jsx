@@ -249,7 +249,9 @@ class AutosolvePage extends React.Component {
             })
             imgForm.set('cb_api', '/api/callbackau');
             imgForm.set('uuid', this.props.socket.uuid);
-            imgForm.set('question_type', this.props.autosolve.question_type);
+            if(typeof this.props.autosolve.question_type !== 'undefined' && this.props.autosolve.question_type !== 'no') {
+                imgForm.set('question_type', this.props.autosolve.question_type);
+            }
         // Axios.post('/api/upload', imgForm, {
 	    Axios.post('/api/autosolve', imgForm, {
                 headers: {
