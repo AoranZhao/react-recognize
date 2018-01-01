@@ -115,10 +115,10 @@ class AutosolvePage extends React.Component {
         if(this.props.autosolve.output_status) {
             switch(this.props.autosolve.output_status) {
                 case 200: 
-                    output_style = {borderWidth: 1, borderStyle: 'solid', borderColor: 'green'};
+                    output_style = {borderWidth: 1, borderStyle: 'solid', borderColor: 'green', margin: '3px 5px 3px 5px'};
                     break;
                 case 500:
-                    output_style = {borderWidth: 1, borderStyle: 'solid', borderColor: 'red'};
+                    output_style = {borderWidth: 1, borderStyle: 'solid', borderColor: 'red', margin: '3px 5px 3px 5px'};
                     break;
                 default:
                     break;
@@ -149,6 +149,30 @@ class AutosolvePage extends React.Component {
                         solution = this.props.autosolve.outputs;
                     }
                     return <div style={{maxWidth: '550px'}}>
+                        {(Array.isArray(this.props.autosolve.dropped_files) && this.props.autosolve.dropped_files.length !== 0) ? 
+                            <table>
+                                <tbody>
+                                {this.props.autosolve.dropped_files.reverse().map((file, index) => {
+                                    return (
+                                    <tr key={index}>
+                                        <td>
+                                            <p>{file.name}</p>
+                                        </td>
+                                        <td>
+                                            <img src={file.preview} style={{maxHeight: "100px", maxWidth: "500px"}} />
+                                        </td>
+                                    </tr>
+                                )})}
+                                </tbody>
+                            </table> : 
+                            <Dropzone
+                                multiple={true}
+                                accept="image/*"
+                                onDrop={this.onImageDrop}>
+                                <p>Drop an image or click to select a file to upload.</p>
+                                <p>Currently our autosolve function is supported by firefox and chrome.</p>
+                            </Dropzone>
+                        }
                         {(this.props.autosolve.outputs) ? <div>
                                 <div>
                                     {(this.props.autosolve.api_duration) ? <p>API execution time: {this.props.autosolve.api_duration / 1000} s</p> : <p>API execution time: unknow</p>}
@@ -157,38 +181,13 @@ class AutosolvePage extends React.Component {
                                 <br />
                                 { (detected_type) ?  <div style={output_style}>
                                     <p>Detected Question Type:</p>
-                                    <pre>{detected_type}</pre>
+                                    <pre style={{whiteSpace: 'pre-wrap'}}>{detected_type}</pre>
                                 </div> : <div></div>}
                                 <div style={output_style}>
                                     { (this.props.autosolve.output_status === 200) ? <p>Solution: </p> : <p>Error: </p>}
-                                    <pre>{solution}</pre>
+                                    <pre style={{whiteSpace: 'pre-wrap'}}>{solution}</pre>
                                 </div>
                             </div> : <div></div>}
-                            <br />
-                            {(Array.isArray(this.props.autosolve.dropped_files) && this.props.autosolve.dropped_files.length !== 0) ? 
-                                <table>
-                                    <tbody>
-                                    {this.props.autosolve.dropped_files.reverse().map((file, index) => {
-                                        return (
-                                        <tr key={index}>
-                                            <td>
-                                                <p>{file.name}</p>
-                                            </td>
-                                            <td>
-                                                <img src={file.preview} style={{maxHeight: "100px", maxWidth: "500px"}} />
-                                            </td>
-                                        </tr>
-                                    )})}
-                                    </tbody>
-                                </table> : 
-                                <Dropzone
-                                    multiple={true}
-                                    accept="image/*"
-                                    onDrop={this.onImageDrop}>
-                                    <p>Drop an image or click to select a file to upload.</p>
-                                    <p>Currently our autosolve function is supported by firefox and chrome.</p>
-                                </Dropzone>
-                            }
                         </div>
             }
         } else {
