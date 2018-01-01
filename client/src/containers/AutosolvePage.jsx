@@ -138,40 +138,46 @@ class AutosolvePage extends React.Component {
                         script_dur = <em>( {str} s per image)</em>
                     }
                     return <div>
-                                {(this.props.autosolve.outputs) ? <div>
-                                        <div>
-                                            {(this.props.autosolve.api_duration) ? <p>API execution time: {this.props.autosolve.api_duration / 1000} s</p> : <p>API execution time: unknow</p>}
-                                            {(this.props.autosolve.script_duration) ? <p>Script execution time: {this.props.autosolve.script_duration / 1000} s {script_dur}</p> : <p>Script execution time: unknow</p>}
-                                        </div>
-                                        <br />
-                                        <div style={output_style}>
-                                            <p>Output: </p>
-                                            <pre>{this.props.autosolve.outputs}</pre>
-                                        </div>
-                                    </div> : <div></div>}
-                                    <br />
-                                    {(Array.isArray(this.props.autosolve.dropped_files) && this.props.autosolve.dropped_files.length !== 0) ? 
-                                        <table>
-                                            <thead>
-                                                <tr><td>filename</td><td>img</td></tr>
-                                            </thead>
-                                            <tbody>
-                                            {this.props.autosolve.dropped_files.reverse().map((file, index) => {
-                                                return (
-                                                <tr key={index}>
-                                                    <td>
-                                                        <p>{file.name}</p>
-                                                    </td>
-                                                    <td>
-                                                        <img src={file.preview} style={{maxHeight: "100px", maxWidth: "500px"}} />
-                                                    </td>
-                                                </tr>
-                                            )})}
-                                            </tbody>
-                                        </table> : 
-                                        <div><p>Not select img file yet.</p></div>
-                                    }
-                            </div>
+                        {(this.props.autosolve.outputs) ? <div>
+                                <div>
+                                    {(this.props.autosolve.api_duration) ? <p>API execution time: {this.props.autosolve.api_duration / 1000} s</p> : <p>API execution time: unknow</p>}
+                                    {(this.props.autosolve.script_duration) ? <p>Script execution time: {this.props.autosolve.script_duration / 1000} s {script_dur}</p> : <p>Script execution time: unknow</p>}
+                                </div>
+                                <br />
+                                <div style={output_style}>
+                                    <p>Output: </p>
+                                    <pre>{this.props.autosolve.outputs}</pre>
+                                </div>
+                            </div> : <div></div>}
+                            <br />
+                            {(Array.isArray(this.props.autosolve.dropped_files) && this.props.autosolve.dropped_files.length !== 0) ? 
+                                <table>
+                                    <thead>
+                                        <tr><td>filename</td><td>img</td></tr>
+                                    </thead>
+                                    <tbody>
+                                    {this.props.autosolve.dropped_files.reverse().map((file, index) => {
+                                        return (
+                                        <tr key={index}>
+                                            <td>
+                                                <p>{file.name}</p>
+                                            </td>
+                                            <td>
+                                                <img src={file.preview} style={{maxHeight: "100px", maxWidth: "500px"}} />
+                                            </td>
+                                        </tr>
+                                    )})}
+                                    </tbody>
+                                </table> : 
+                                <Dropzone
+                                    multiple={true}
+                                    accept="image/*"
+                                    onDrop={this.onImageDrop}>
+                                    <p>Drop an image or click to select a file to upload.</p>
+                                    <p>Currently our autosolve function is supported by firefox and chrome.</p>
+                                </Dropzone>
+                            }
+                        </div>
             }
         } else {
             return <div></div>
@@ -271,13 +277,6 @@ class AutosolvePage extends React.Component {
             <div>
                 <h2>Autosolve</h2>
                  {frame_user_info} 
-                <Dropzone
-                    multiple={true}
-                    accept="image/*"
-                    onDrop={this.onImageDrop}>
-                    <p>Drop an image or click to select a file to upload.</p>
-                    <p>Currently our autosolve function is supported by firefox and chrome.</p>
-                </Dropzone>
                 {btn_ctrl}
                 {images_preview}
             </div>
