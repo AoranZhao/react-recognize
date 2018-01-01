@@ -159,6 +159,50 @@ export const fo_update_socket = (socket_pack) => ({
     socket_pack: socket_pack
 })
 
+// autosolve
+export const au_reset_files = () => ({
+    type: 'AU_RESET_FILES'
+})
+
+export const au_drop_files = (files) => ({
+    type: 'AU_DROP_FILES',
+    files: files
+})
+
+export const au_upload_files_ing = () => ({
+    type: 'AU_UPLOAD_FILES_ING'
+})
+
+export const au_upload_files_done = () => ({
+    type: 'AU_UPLOAD_FILES_DONE'
+})
+
+export const au_upload_analysis_ing = () => ({
+    type: 'AU_UPLOAD_ANALYSIS_ING'
+})
+
+export const au_upload_analysis_done = (data, api_dur) => ({
+    type: 'AU_UPLOAD_ANALYSIS_DONE',
+    data: data,
+    api_dur: api_dur
+})
+
+export const au_upload_files_err = (err) => ({
+    type: 'AU_UPLOAD_FILES_ERR',
+    err: err
+})
+
+export const au_update_type = (question_type) => ({
+    type: 'AU_UPDATE_TYPE',
+    question_type: question_type
+})
+
+// socket
+export const au_update_socket = (socket_pack) => ({
+    type: 'AU_UPDATE_SOCKET',
+    socket_pack: socket_pack
+})
+
 // nnin
 export const upload_question_ing = (question) => ({
     type: 'UPLOAD_QUESTION_ING',
