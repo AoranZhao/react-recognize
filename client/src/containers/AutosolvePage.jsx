@@ -139,9 +139,9 @@ class AutosolvePage extends React.Component {
                     }
                     var detected_type = '', solution = '';
                     if(this.props.autosolve.outputs && this.props.autosolve.output_status === 200) {
-                        if(this.props.autosolve.outputs.split(/\r?\n/).length > 1) {
-                            solution = this.props.autosolve.outputs.split(/\r?\n/)[0];
-                            detected_type = this.props.autosolve.outputs.split(/\r?\n/)[1];
+                        if(this.props.autosolve.outputs.split(/\n[\s|\t]*\r*\n/).length > 1) {
+                            solution = this.props.autosolve.outputs.split(/\n[\s|\t]*\r*\n/).slice(1).join(/\n\n/);
+                            detected_type = this.props.autosolve.outputs.split(/\n[\s|\t]*\r*\n/)[0];
                         } else {
                             solution = this.props.autosolve.outputs;
                         }
