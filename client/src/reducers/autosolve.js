@@ -3,7 +3,7 @@
 const autosolve = (state = {}, action) => {
     switch(action.type) {
         case 'AU_RESET_FILES':
-            state = {...state, dropped_files: [], outputs: ''}
+            state = {...state, dropped_files: [], outputs: '', question_type: 'no'}
             return state;
         case 'AU_DROP_FILES':
             if(!Array.isArray(state.dropped_files)) {

@@ -159,7 +159,7 @@ class AutosolvePage extends React.Component {
                                             <p>{file.name}</p>
                                         </td>
                                         <td>
-                                            <img src={file.preview} style={{maxHeight: "100px", maxWidth: "500px"}} />
+                                            <img src={file.preview} style={{maxHeight: "100px", maxWidth: "400px"}} />
                                         </td>
                                     </tr>
                                 )})}
