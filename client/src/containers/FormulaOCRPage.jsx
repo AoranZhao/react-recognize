@@ -215,6 +215,7 @@ class FOrmulaOCRPage extends React.Component {
             imgForm.set('cb_api', '/api/callbackfo');
             imgForm.set('uuid', this.props.socket.uuid);
         // Axios.post('/api/upload', imgForm, {
+            console.dir(imgForm);
 	    Axios.post('/api/formulaocr', imgForm, {
                 headers: {
                     "x-token": this.props.auth.data.token,
