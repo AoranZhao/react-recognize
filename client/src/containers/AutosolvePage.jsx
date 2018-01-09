@@ -175,16 +175,16 @@ class AutosolvePage extends React.Component {
                         }
                         {(this.props.autosolve.outputs) ? <div>
                                 <div>
-                                    {(this.props.autosolve.api_duration) ? <p>API execution time: {this.props.autosolve.api_duration / 1000} s</p> : <p>API execution time: unknow</p>}
-                                    {(this.props.autosolve.script_duration) ? <p>Script execution time: {this.props.autosolve.script_duration / 1000} s {script_dur}</p> : <p>Script execution time: unknow</p>}
+                                    {(this.props.autosolve.api_duration) ? <p>API执行时间: {this.props.autosolve.api_duration / 1000} s</p> : <p>API执行时间: unknow</p>}
+                                    {(this.props.autosolve.script_duration) ? <p>脚本执行时间: {this.props.autosolve.script_duration / 1000} s {script_dur}</p> : <p>脚本执行时间: unknow</p>}
                                 </div>
                                 <br />
                                 { (detected_type) ?  <div style={output_style}>
-                                    <p>Detected Question Type:</p>
+                                    <p>检测到问题类型:</p>
                                     <pre style={{whiteSpace: 'pre-wrap'}}>{detected_type}</pre>
                                 </div> : <div></div>}
                                 <div style={output_style}>
-                                    { (this.props.autosolve.output_status === 200) ? <p>Solution: </p> : <p>Error: </p>}
+                                    { (this.props.autosolve.output_status === 200) ? <p>解答: </p> : <p>错误: </p>}
                                     <pre style={{whiteSpace: 'pre-wrap'}}>{solution}</pre>
                                 </div>
                             </div> : <div></div>}
@@ -210,11 +210,11 @@ class AutosolvePage extends React.Component {
                 e.preventDefault();
                 this.props.sync_update_type(e.target.value);
             }}>
-                <option value="no">Not choose</option>
-                <option value="ineq">Ineq</option>
-                <option value="poly">Poly</option>
-                <option value="factor">Factor</option>
-                <option value="num_exp">Num_Exp</option>
+                <option value="no">未选择</option>
+                <option value="ineq">不等式组</option>
+                <option value="poly">方程</option>
+                <option value="factor">因式分解</option>
+                <option value="num_exp">有理数式</option>
             </select><br />
             <input style={style} type="button" value="Solve !" disabled={this.sendingStatus.indexOf(this.props.autosolve.status) !== -1 || isExpire} onClick={e => {
                 e.preventDefault();
