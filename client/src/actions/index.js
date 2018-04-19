@@ -261,3 +261,23 @@ export const ktjx_update_socket = (socket_pack) => ({
     type: 'KTJX_UPDATE_SOCKET',
     socket_pack: socket_pack
 })
+
+// kt_jx
+export const kt_jx_upload_question_ing = (question) => ({
+    type: 'KT_JX_UPLOAD_QUESTION_ING',
+    question: question
+})
+
+export const kt_jx_upload_question_done = (data) => ({
+    type: 'KT_JX_UPLOAD_QUESTION_DONE',
+    data: data
+})
+
+export const kt_jx_upload_question_err = (err) => ({
+    type: 'KT_JX_UPLOAD_QUESTION_ERR',
+    err: err
+})
+
+export const kt_jx_reset_question = () => ({
+    type: 'KT_JX_RESET_QUESTION'
+})
