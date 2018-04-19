@@ -10,7 +10,7 @@ import { kt_jx_upload_question_ing, kt_jx_upload_question_done, kt_jx_upload_que
 import { Axios } from '../utils';
 
 const mapStateToProps = state => {
-    return { auth: state.auth, nnin: state.nnin };
+    return { auth: state.auth, ktjx: state.ktjx };
 }
 
 const mapDispatchToProps = dispatch => ({
@@ -42,8 +42,8 @@ class KTJXPage extends React.Component {
 
     generate_question_preview() {
         return <div>
-            <pre style={{ width: '800px', whiteSpace: 'pre-wrap', wordWrap: 'break-word' }}>{this.props.nnin.question}</pre>
-            {(this.props.nnin.err) ? <pre style={{ color: 'red' }}>{this.props.nnin.err}</pre> : <pre></pre>}
+            <pre style={{ width: '800px', whiteSpace: 'pre-wrap', wordWrap: 'break-word' }}>{this.props.ktjx.question}</pre>
+            {(this.props.ktjx.err) ? <pre style={{ color: 'red' }}>{this.props.ktjx.err}</pre> : <pre></pre>}
         </div>
     }
 
@@ -65,11 +65,11 @@ class KTJXPage extends React.Component {
 
     generate_question_image() {
         let el = <div></div>;
-        if (typeof this.props.nnin.output === 'object') {
-            el = <div style={{ height: '600px', width: '800px' }}><Tree translate={{ x: 100, y: 250 }} data={this.output_convert(this.props.nnin.output)} /></div>
+        if (typeof this.props.ktjx.output === 'object') {
+            el = <div style={{ height: '600px', width: '800px' }}><Tree translate={{ x: 100, y: 250 }} data={this.output_convert(this.props.ktjx.output)} /></div>
         }
         return <div>
-            {/* <p>{JSON.stringify(this.props.nnin.output)}</p> */}
+            {/* <p>{JSON.stringify(this.props.ktjx.output)}</p> */}
             {el}
         </div>
     }
