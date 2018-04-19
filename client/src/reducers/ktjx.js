@@ -10,6 +10,7 @@ const ktjx = (state = {}, action) => {
                 state.dropped_files = [];
             }
             state = { ...state, status: 'drop_files', dropped_files: [...action.files] }
+            console.log('dropped_files:', state.dropped_files);
             return state;
         case 'KTJX_UPLOAD_FILES_ING':
             state = { ...state, status: 'upload_files_ing' };

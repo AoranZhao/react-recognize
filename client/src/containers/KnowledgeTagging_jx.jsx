@@ -47,10 +47,10 @@ const mapDispatchToProps = dispatch => ({
 class KTJXPage extends React.Component {
     constructor(props) {
         super(props);
-        this.onImageDrop = this.onImageDrop.bind(this);
-        this.preview_images = this.preview_images.bind(this);
+        this.onFileDrop = this.onFileDrop.bind(this);
+        this.preview_texts = this.preview_texts.bind(this);
         this.generate_btn_ctrl = this.generate_btn_ctrl.bind(this);
-        this.upload_images = this.upload_images.bind(this);
+        this.upload_files = this.upload_files.bind(this);
         this.resetImages = this.resetImages.bind(this);
         this.get_user_info = this.get_user_info.bind(this);
         this.setupSocket = this.setupSocket.bind(this);
@@ -73,7 +73,7 @@ class KTJXPage extends React.Component {
         this.props.sync_reset_files();
     }
 
-    onImageDrop(files) {
+    onFileDrop(files) {
         if (files.length > 1) {
             alert('only upload one file, please');
         }
@@ -107,7 +107,7 @@ class KTJXPage extends React.Component {
         return { socket: socket };
     }
 
-    preview_images() {
+    preview_texts() {
         let output_style = {}, script_dur = <em></em>;
         if (this.props.ktjx.output_status) {
             switch (this.props.ktjx.output_status) {
@@ -150,7 +150,7 @@ class KTJXPage extends React.Component {
                         {(Array.isArray(this.props.ktjx.dropped_files) && this.props.ktjx.dropped_files.length !== 0) ?
                             <table>
                                 <thead>
-                                    <tr><td>filename</td><td>img</td></tr>
+                                    <tr><td>filename</td><td>content</td></tr>
                                 </thead>
                                 <tbody>
                                     {this.props.ktjx.dropped_files.reverse().map((file, index) => {
@@ -160,7 +160,7 @@ class KTJXPage extends React.Component {
                                                     <p>{file.name}</p>
                                                 </td>
                                                 <td>
-                                                    <img src={file.preview} style={{ maxHeight: "100px", maxWidth: "500px" }} />
+                                                    <pre></pre>
                                                 </td>
                                             </tr>
                                         )
@@ -184,7 +184,7 @@ class KTJXPage extends React.Component {
         return <div>
             <input type="button" value="Upload" disabled={this.sendingStatus.indexOf(this.props.ktjx.status) !== -1 || isExpire} onClick={e => {
                 e.preventDefault();
-                this.upload_images();
+                this.upload_files();
             }} />
             <input type="button" value="Clean" disabled={this.sendingStatus.indexOf(this.props.ktjx.status) !== -1 || isExpire} onClick={e => {
                 e.preventDefault();
@@ -193,7 +193,7 @@ class KTJXPage extends React.Component {
         </div>
     }
 
-    upload_images() {
+    upload_files() {
         this.api_start_time = new Date().getTime();
         if (this.props.ktjx && Array.isArray(this.props.ktjx.dropped_files) && this.props.ktjx.dropped_files.length > 0) {
             this.props.promise_upload_files_ing();
@@ -253,7 +253,7 @@ class KTJXPage extends React.Component {
 
     render() {
         var frame_user_info = this.get_user_info();
-        var images_preview = this.preview_images();
+        var texts_preview = this.preview_texts();
         var btn_ctrl = this.generate_btn_ctrl();
         return (
             <div>
@@ -262,12 +262,12 @@ class KTJXPage extends React.Component {
                 <Dropzone
                     multiple={true}
                     accept="text/plain"
-                    onDrop={this.onImageDrop}>
+                    onDrop={this.onFileDrop}>
                     <p>Drop an image or click to select a file to upload.</p>
                     <p>Currently our ktjx function is supported by firefox and chrome.</p>
                 </Dropzone>
                 {btn_ctrl}
-                {images_preview}
+                {texts_preview}
             </div>
         )
     }
