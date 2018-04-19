@@ -143,7 +143,7 @@ class KTJXPage extends React.Component {
                             <br />
                             <div style={output_style}>
                                 <p>Output: </p>
-                                <pre>{this.props.ktjx.outputs}</pre>
+                                <pre>{JSON.stringify(this.props.ktjx.outputs, null, 4)}</pre>
                             </div>
                         </div> : <div></div>}
                         <br />
@@ -160,7 +160,7 @@ class KTJXPage extends React.Component {
                                                     <p>{file.name}</p>
                                                 </td>
                                                 <td>
-                                                    <pre></pre>
+                                                    <pre>{file.preview}</pre>
                                                 </td>
                                             </tr>
                                         )
