@@ -13,6 +13,8 @@ const tz_str = 'Asia/Shanghai';
 import { ktjx_reset_files, ktjx_drop_files, ktjx_upload_files_ing, ktjx_upload_files_done, ktjx_upload_analysis_ing, ktjx_upload_analysis_done, ktjx_upload_files_err, ktjx_update_socket } from '../actions';
 import { Axios } from '../utils';
 
+import './KnowledgeTagging_jx.scss';
+
 const mapStateToProps = state => {
     return { auth: state.auth, ktjx: state.ktjx, socket: state.socket };
 }
@@ -54,6 +56,7 @@ class KTJXPage extends React.Component {
         this.resetImages = this.resetImages.bind(this);
         this.get_user_info = this.get_user_info.bind(this);
         this.setupSocket = this.setupSocket.bind(this);
+        this.syntaxHighlight = this.syntaxHighlight.bind(this);
         if (Object.keys(this.props.socket).length === 0 && this.props.socket.constructor === Object) {
             this.props.sync_update_socket(this.setupSocket());
         }
@@ -143,7 +146,7 @@ class KTJXPage extends React.Component {
                             <br />
                             <div style={output_style}>
                                 <p>Output: </p>
-                                <pre>{JSON.stringify(JSON.parse(this.props.ktjx.outputs), null, 4)}</pre>
+                                <pre>{this.syntaxHighlight(JSON.parse(this.props.ktjx.outputs))}</pre>
                             </div>
                         </div> : <div></div>}
                         <br />
@@ -249,6 +252,28 @@ class KTJXPage extends React.Component {
         } else {
             return <div><p>loading user infomation</p></div>
         }
+    }
+
+    syntaxHighlight(json) {
+        if (typeof json != 'string') {
+            json = JSON.stringify(json, undefined, 2);
+        }
+        json = json.replace(/&/g, '&amp;').replace(/</g, '&lt;').replace(/>/g, '&gt;');
+        return json.replace(/("(\\u[a-zA-Z0-9]{4}|\\[^u]|[^\\"])*"(\s*:)?|\b(true|false|null)\b|-?\d+(?:\.\d*)?(?:[eE][+\-]?\d+)?)/g, function (match) {
+            var cls = 'number';
+            if (/^"/.test(match)) {
+                if (/:$/.test(match)) {
+                    cls = 'key';
+                } else {
+                    cls = 'string';
+                }
+            } else if (/true|false/.test(match)) {
+                cls = 'boolean';
+            } else if (/null/.test(match)) {
+                cls = 'null';
+            }
+            return '<span class="' + cls + '">' + match + '</span>';
+        });
     }
 
     render() {
