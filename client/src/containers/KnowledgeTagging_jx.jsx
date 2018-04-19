@@ -69,7 +69,7 @@ class KTJXPage extends React.Component {
     generate_question_image() {
         let el = <div></div>;
         if (typeof this.props.ktjx.output === 'object') {
-            el = <div style={{ height: '600px', width: '800px' }}><Tree translate={{ x: 100, y: 250 }} data={this.output_convert(this.props.ktjx.output)} /></div>
+            el = <div style={{ height: '600px', width: '800px' }}><Tree translate={{ x: 100, y: 250 }} data={this.output_convert(this.props.ktjx.output)} orientation='vertical' /></div>
         }
         return <div>
             {/* <p>{JSON.stringify(this.props.ktjx.output)}</p> */}
