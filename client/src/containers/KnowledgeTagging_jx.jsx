@@ -257,7 +257,7 @@ class KTJXPage extends React.Component {
         var btn_ctrl = this.generate_btn_ctrl();
         return (
             <div>
-                <h2>Formula OCR</h2>
+                <h2>Knowledge Tagging(Jixin version)</h2>
                 {frame_user_info}
                 <Dropzone
                     multiple={true}
