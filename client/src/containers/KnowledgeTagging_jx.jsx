@@ -38,6 +38,9 @@ class KTJXPage extends React.Component {
         this.generate_node = this.generate_node.bind(this);
         this.check_node = this.check_node.bind(this);
         this.generate_children = this.generate_children.bind(this);
+
+        this.handleResponse = this.handleResponse.bind(this);
+        this.handleOutput = this.handleOutput.bind(this);
     }
 
     generate_question_preview() {
@@ -145,12 +148,40 @@ class KTJXPage extends React.Component {
             if (response.data.err) {
                 this.props.promise_upload_question_err(response.data.err);
             } else {
-                this.props.promise_upload_question_done(response.data);
+                this.props.promise_upload_question_done(this.handleResponse(response.data));
             }
         }).catch(err => {
             console.log(err);
             this.props.promise_upload_question_err(err);
         })
+    }
+
+    handleResponse(data) {
+        if (Array.isArray(data.output)) {
+            data.output = this.handleOutput(data.output);
+        }
+        return data;
+    }
+
+    handleOutput(output) {
+        let result = [];
+        let temp_map = output.reduce((obj, value) => {
+            obj[value.Level] = value.Concept;
+            return obj;
+        }, {});
+        let defaultParent = 'This is a dummy root that connects all forest roots';
+        output.forEach(o => {
+            if (Array.isArray(o)) {
+                result.push(this.handleOutput(o));
+            } else {
+                if (o.Level === 0) {
+                    o.Parent = defaultParent;
+                } else {
+                    o.Parent = temp_map[--o.Level];
+                }
+            }
+        })
+        return result;
     }
 
     render() {
