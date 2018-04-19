@@ -222,3 +222,42 @@ export const upload_question_err = (err) => ({
 export const reset_question = () => ({
     type: 'RESET_QUESTION'
 })
+
+// knowledge tagging jixin
+export const ktjx_reset_files = () => ({
+    type: 'KTJX_RESET_FILES'
+})
+
+export const ktjx_drop_files = (files) => ({
+    type: 'KTJX_DROP_FILES',
+    files: files
+})
+
+export const ktjx_upload_files_ing = () => ({
+    type: 'KTJX_UPLOAD_FILES_ING'
+})
+
+export const ktjx_upload_files_done = () => ({
+    type: 'KTJX_UPLOAD_FILES_DONE'
+})
+
+export const ktjx_upload_analysis_ing = () => ({
+    type: 'KTJX_UPLOAD_ANALYSIS_ING'
+})
+
+export const ktjx_upload_analysis_done = (data, api_dur) => ({
+    type: 'KTJX_UPLOAD_ANALYSIS_DONE',
+    data: data,
+    api_dur: api_dur
+})
+
+export const ktjx_upload_files_err = (err) => ({
+    type: 'KTJX_UPLOAD_FILES_ERR',
+    err: err
+})
+
+// socket
+export const ktjx_update_socket = (socket_pack) => ({
+    type: 'KTJX_UPDATE_SOCKET',
+    socket_pack: socket_pack
+})

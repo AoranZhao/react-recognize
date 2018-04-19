@@ -21,7 +21,7 @@ let redis = () => {
     return ioRedis({
         port: REDIS_PORT,
         host: REDIS_HOST,
-	password: REDIS_PASSWORD,
+        password: REDIS_PASSWORD,
         retryStrategy: function (times) {
             return null; // no retry
         }
@@ -29,8 +29,8 @@ let redis = () => {
 }
 let io_redis = () => {
     return socketIORedis({
-	pubClient: rds.createClient(REDIS_PORT, REDIS_HOST, { auth_pass: REDIS_PASSWORD }),
-	subClient: rds.createClient(REDIS_PORT, REDIS_HOST, { auth_pass: REDIS_PASSWORD })
+        pubClient: rds.createClient(REDIS_PORT, REDIS_HOST, { auth_pass: REDIS_PASSWORD }),
+        subClient: rds.createClient(REDIS_PORT, REDIS_HOST, { auth_pass: REDIS_PASSWORD })
     })
 }
 let emitter = () => {
@@ -72,8 +72,8 @@ app.post('/api/callback', (req, res) => {
         length: req.body.length
     }
     io_Redis.get(uuid, (err, result) => {
-        if(!err && result) {
-	    console.log(result);
+        if (!err && result) {
+            console.log(result);
             emitter_io.to(result).emit('message', data);
             res.status(200).send('ok');
         }
@@ -95,8 +95,8 @@ app.post('/api/callbackfo', (req, res) => {
         length: req.body.length
     }
     io_Redis.get(uuid, (err, result) => {
-        if(!err && result) {
-	    console.log(result);
+        if (!err && result) {
+            console.log(result);
             emitter_io.to(result).emit('messagefo', data);
             res.status(200).send('ok');
         }
@@ -118,9 +118,32 @@ app.post('/api/callbackau', (req, res) => {
         length: req.body.length
     }
     io_Redis.get(uuid, (err, result) => {
-        if(!err && result) {
-	    console.log(result);
+        if (!err && result) {
+            console.log(result);
             emitter_io.to(result).emit('messageau', data);
+            res.status(200).send('ok');
+        }
+    })
+    // emitter_io.to(socket_id).emit('message', data);
+    // res.status(200).send('ok');
+})
+
+app.post('/api/callbackktjx', (req, res) => {
+    // body: {output: output, script_dur: end_time - script_start_time}
+    console.log('callbackktjx');
+    let uuid = req.body.uuid;
+    console.log('uuid:', uuid);
+    console.log('req.body:', req.body);
+    var data = {
+        output: req.body.output,
+        script_dur: req.body.script_dur,
+        status: req.body.status,
+        length: req.body.length
+    }
+    io_Redis.get(uuid, (err, result) => {
+        if (!err && result) {
+            console.log(result);
+            emitter_io.to(result).emit('messagekt_jx', data);
             res.status(200).send('ok');
         }
     })

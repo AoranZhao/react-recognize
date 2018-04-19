@@ -10,10 +10,11 @@ import AdminPage from './AdminPage.jsx';
 import NninPage from './NninPage.jsx';
 import FormulaOCRPage from './FormulaOCRPage.jsx';
 import AutosolvePage from './AutosolvePage.jsx';
+import KTJXPage from './KnowledgeTagging_jx.jsx';
 
 const mapStateToProps = state => {
     var obj = {};
-    obj.entries = (typeof state.auth.data === 'undefined' || state.auth.data.type !== 'admin') ? [] : [{text: 'Admin', url: '/admin'}];
+    obj.entries = (typeof state.auth.data === 'undefined' || state.auth.data.type !== 'admin') ? [] : [{ text: 'Admin', url: '/admin' }];
     return obj;
 }
 
@@ -21,13 +22,14 @@ let HomePage = ({
     match,
     entries
 }) => {
-    return <div style={{width: '100%'}}>
+    return <div style={{ width: '100%' }}>
         <SideBar entries={entries} base={match.url} />
         <Route exact path={`${match.url}`} component={UserPage} />
         <Route path={`${match.url}/formulaocr`} component={FormulaOCRPage} />
         <Route path={`${match.url}/nnin`} component={NninPage} />
         <Route path={`${match.url}/admin`} component={AdminPage} />
         <Route path={`${match.url}/autosolve`} component={AutosolvePage} />
+        <Route path={`${match.url}/ktjx`} component={KTJXPage} />
     </div>
 }
 

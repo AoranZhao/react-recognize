@@ -9,6 +9,7 @@ import socket from './socket';
 import nnin from './nnin';
 import formulaocr from './formulaocr';
 import autosolve from './autosolve';
+import ktjx from './ktjx';
 
 const AppReducers = combineReducers({
     auth,
@@ -17,7 +18,8 @@ const AppReducers = combineReducers({
     socket,
     nnin,
     formulaocr,
-    autosolve
+    autosolve,
+    ktjx
 })
 
 export default AppReducers;
