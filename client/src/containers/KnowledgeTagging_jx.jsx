@@ -179,6 +179,7 @@ class KTJXPage extends React.Component {
                 } else {
                     o.Parent = temp_map[--o.Level];
                 }
+                result.push(o);
             }
         })
         return result;
