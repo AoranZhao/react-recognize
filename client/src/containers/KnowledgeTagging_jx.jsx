@@ -146,7 +146,7 @@ class KTJXPage extends React.Component {
                             <br />
                             <div style={output_style}>
                                 <p>Output: </p>
-                                <pre>{new DOMParser().parseFromString(this.syntaxHighlight(JSON.parse(this.props.ktjx.outputs)), 'text/xml')}</pre>
+                                <pre>{this.syntaxHighlight(JSON.parse(this.props.ktjx.outputs))}</pre>
                             </div>
                         </div> : <div></div>}
                         <br />
@@ -272,7 +272,8 @@ class KTJXPage extends React.Component {
             } else if (/null/.test(match)) {
                 cls = 'null';
             }
-            return '<span class="' + cls + '">' + match + '</span>';
+            // return '<span class="' + cls + '">' + match + '</span>';
+            return match;
         });
     }
 
