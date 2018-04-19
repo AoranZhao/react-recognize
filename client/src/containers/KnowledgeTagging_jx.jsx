@@ -143,8 +143,8 @@ class KTJXPage extends React.Component {
                             <br />
                             <div style={output_style}>
                                 <p>Output: </p>
-                                <pre>{JSON.parse(this.props.ktjx.outputs)}</pre>
-                                {/* <pre>{JSON.stringify(JSON.parse(this.props.ktjx.outputs, null, 4))}</pre> */}
+                                {/* <pre>{JSON.parse(this.props.ktjx.outputs)}</pre> */}
+                                <pre>{JSON.stringify(JSON.parse(this.props.ktjx.outputs, null, 4))}</pre>
                             </div>
                         </div> : <div></div>}
                         <br />
