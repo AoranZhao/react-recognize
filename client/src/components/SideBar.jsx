@@ -10,28 +10,31 @@ let SideBar = ({
     entries,
     base
 }) => (
-    <div className="sidebar">
-        <div className="sidebar_item">
-            <TabEntry text="Home" to="/" />
-        </div>
-        <div className="sidebar_item">
-            <TabEntry text="FormulaOCR" to="/home/formulaocr" />
-        </div>
-        <div className="sidebar_item">
-            <TabEntry text="Nnin" to="/home/nnin" />
-        </div>
-        <div className="sidebar_item">
-            <TabEntry text="Autosolve" to="/home/autosolve" />
-        </div>
-        {entries.map((entry, index) => (
-            <div key={index} className="sidebar_item">
-                <TabEntry text={entry.text} to={`${base}${entry.url}`} />
+        <div className="sidebar">
+            <div className="sidebar_item">
+                <TabEntry text="Home" to="/" />
             </div>
-        ))}
-        <div className="frame_logout_btn">
-            <LogoutButton />
+            <div className="sidebar_item">
+                <TabEntry text="FormulaOCR" to="/home/formulaocr" />
+            </div>
+            <div className="sidebar_item">
+                <TabEntry text="Nnin" to="/home/nnin" />
+            </div>
+            <div className="sidebar_item">
+                <TabEntry text="Autosolve" to="/home/autosolve" />
+            </div>
+            <div className="sidebar_item">
+                <TabEntry text="Knowledge(Jixin)" to="/home/ktjx" />
+            </div>
+            {entries.map((entry, index) => (
+                <div key={index} className="sidebar_item">
+                    <TabEntry text={entry.text} to={`${base}${entry.url}`} />
+                </div>
+            ))}
+            <div className="frame_logout_btn">
+                <LogoutButton />
+            </div>
         </div>
-    </div>
-)
+    )
 
 export default SideBar;
