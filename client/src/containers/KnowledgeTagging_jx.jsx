@@ -146,7 +146,7 @@ class KTJXPage extends React.Component {
                             <br />
                             <div style={output_style}>
                                 <p>Output: </p>
-                                <pre>{new DOMParser().parseFromString(this.syntaxHighlight(JSON.parse(this.props.ktjx.outputs)))}</pre>
+                                <pre>{new DOMParser().parseFromString(this.syntaxHighlight(JSON.parse(this.props.ktjx.outputs), 'text/xml'))}</pre>
                             </div>
                         </div> : <div></div>}
                         <br />
