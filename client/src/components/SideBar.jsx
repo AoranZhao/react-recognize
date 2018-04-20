@@ -24,10 +24,10 @@ let SideBar = ({
                 <TabEntry text="Autosolve" to="/home/autosolve" />
             </div>
             <div className="sidebar_item">
-                <TabEntry text="Knowledge(Jixin)" to="/home/ktjx" />
+                <TabEntry text="KT(Jixin)" to="/home/ktjx" />
             </div>
             <div className="sidebar_item">
-                <TabEntry text="Knowledge(Yichen)" to="/home/ktyc" />
+                <TabEntry text="KT(Yichen)" to="/home/ktyc" />
             </div>
             {entries.map((entry, index) => (
                 <div key={index} className="sidebar_item">

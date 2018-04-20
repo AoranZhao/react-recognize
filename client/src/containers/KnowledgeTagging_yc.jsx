@@ -107,26 +107,26 @@ class KTYCPage extends React.Component {
 
     check_node(output) {
         var result = {};
-        // output.forEach(nodes => {
-        //     nodes.slice(1).forEach(node => {
-        //         if (Object.keys(result).indexOf(node.Parent) !== -1 && Array.isArray(result[node.Parent])) {
-        //             if (result[node.Parent].map(n => n.name).indexOf(node.Concept) === -1)
-        //                 result[node.Parent].push(this.generate_node(node));
-        //         } else {
-        //             result[node.Parent] = [];
-        //             result[node.Parent].push(this.generate_node(node));
-        //         }
-        //     })
-        // })
-        output.forEach(node => {
-            if (Object.keys(result).indexOf(node.Parent) !== -1 && Array.isArray(result[node.Parent])) {
-                if (result[node.Parent].map(n => n.name).indexOf(node.Concept) === -1)
+        output.forEach(nodes => {
+            nodes.slice(1).forEach(node => {
+                if (Object.keys(result).indexOf(node.Parent) !== -1 && Array.isArray(result[node.Parent])) {
+                    if (result[node.Parent].map(n => n.name).indexOf(node.Concept) === -1)
+                        result[node.Parent].push(this.generate_node(node));
+                } else {
+                    result[node.Parent] = [];
                     result[node.Parent].push(this.generate_node(node));
-            } else {
-                result[node.Parent] = [];
-                result[node.Parent].push(this.generate_node(node));
-            }
+                }
+            })
         })
+        // output.forEach(node => {
+        //     if (Object.keys(result).indexOf(node.Parent) !== -1 && Array.isArray(result[node.Parent])) {
+        //         if (result[node.Parent].map(n => n.name).indexOf(node.Concept) === -1)
+        //             result[node.Parent].push(this.generate_node(node));
+        //     } else {
+        //         result[node.Parent] = [];
+        //         result[node.Parent].push(this.generate_node(node));
+        //     }
+        // })
         return result;
     }
 
@@ -168,6 +168,7 @@ class KTYCPage extends React.Component {
         if (Array.isArray(data.output)) {
             data.output = this.handleOutput(data.output);
         }
+        data.output = [data.output];
         return data;
     }
 
