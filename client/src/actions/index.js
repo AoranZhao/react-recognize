@@ -281,3 +281,23 @@ export const kt_jx_upload_question_err = (err) => ({
 export const kt_jx_reset_question = () => ({
     type: 'KT_JX_RESET_QUESTION'
 })
+
+// kt_yc
+export const kt_yc_upload_question_ing = (question) => ({
+    type: 'KT_YC_UPLOAD_QUESTION_ING',
+    question: question
+})
+
+export const kt_yc_upload_question_done = (data) => ({
+    type: 'KT_YC_UPLOAD_QUESTION_DONE',
+    data: data
+})
+
+export const kt_yc_upload_question_err = (err) => ({
+    type: 'KT_YC_UPLOAD_QUESTION_ERR',
+    err: err
+})
+
+export const kt_yc_reset_question = () => ({
+    type: 'KT_YC_RESET_QUESTION'
+})

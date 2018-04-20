@@ -26,6 +26,9 @@ let SideBar = ({
             <div className="sidebar_item">
                 <TabEntry text="Knowledge(Jixin)" to="/home/ktjx" />
             </div>
+            <div className="sidebar_item">
+                <TabEntry text="Knowledge(Yichen)" to="/home/ktyc" />
+            </div>
             {entries.map((entry, index) => (
                 <div key={index} className="sidebar_item">
                     <TabEntry text={entry.text} to={`${base}${entry.url}`} />
