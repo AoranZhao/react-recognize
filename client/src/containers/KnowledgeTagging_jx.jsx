@@ -34,7 +34,6 @@ class KTJXPage extends React.Component {
         this.upload_question = this.upload_question.bind(this);
         this.output_convert = this.output_convert.bind(this);
 
-        this.output_convert = this.output_convert.bind(this);
         this.generate_node = this.generate_node.bind(this);
         this.check_node = this.check_node.bind(this);
         this.generate_children = this.generate_children.bind(this);
