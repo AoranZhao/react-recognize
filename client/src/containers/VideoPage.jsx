@@ -156,8 +156,8 @@ class VideoPage extends React.Component {
     }
 
     generate_output() {
-        return (typeof this.props.video.output !== 'undefined' && !!this.props.video.output.toString().match(/^http:\/\//)) ?
-            <div><a>{'download result from <' + this.props.video.output.toString() + '>'}</a></div> : <div></div>
+        return (typeof this.props.video.output !== 'undefined' && typeof this.props.video.output.output !== 'undefined' && !!this.props.video.output.output.toString().match(/^http:\/\//)) ?
+            <div><a>{'download result from <' + this.props.video.output.output.toString() + '>'}</a></div> : <div></div>
     }
 
     render() {
