@@ -118,7 +118,7 @@ class VideoPage extends React.Component {
 
     send_video() {
         console.log('prepare send video');
-        if (typeof this.props.video === 'undefined' || (typeof this.props.video.student === 'undefined' && typeof this.props.video.teacher === 'undefined')) {
+        if (typeof this.props.video === 'undefined' || (typeof this.props.video.input.student === 'undefined' && typeof this.props.video.input.teacher === 'undefined')) {
             alert('can not upload empty video');
         } else {
             this.props.promise_send_video_ing();
