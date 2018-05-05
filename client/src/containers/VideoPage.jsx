@@ -51,10 +51,7 @@ class VideoPage extends React.Component {
         this.onTeacherFileDrop = this.onTeacherFileDrop.bind(this);
         this.onStudentFileDrop = this.onStudentFileDrop.bind(this);
         this.get_user_info = this.get_user_info.bind(this);
-        // this.setupSocket = this.setupSocket.bind(this);
-        // if (Object.keys(this.props.socket).length === 0 && this.props.socket.constructor === Object) {
-        //     this.props.sync_update_socket(this.setupSocket());
-        // }
+        this.generate_output = this.generate_output.bind(this);
         this.props.socket.socket.on('messagevd', (data) => {
             console.log('messagevd:', data);
             this.props.promise_analysis_done(data);
@@ -83,31 +80,6 @@ class VideoPage extends React.Component {
         console.log(files);
         this.props.sync_drop_video(files[0], category);
     }
-
-    // setupSocket() {
-    //     console.log('set up socket');
-    //     // let socket = io('http://localhost:2979');
-    //     var baseUrl = window.location.href.split('//')[1].split('/')[0];
-    //     let socket = io('http://' + baseUrl);
-    //     socket.on('connect', () => {
-    //         console.log('socket id:', socket.id);
-    //         let auth_uuid = '';
-    //         if (this.props.socket.uuid) {
-    //             auth_uuid = this.props.socket.uuid;
-    //         } else {
-    //             auth_uuid = uuidv5(socket.id, uuidv5.URL);
-    //             this.props.sync_update_socket({ uuid: auth_uuid });
-    //         }
-    //         console.log('auth_uuid:', auth_uuid);
-    //         socket.emit('initial', { uuid: auth_uuid, socket_id: socket.id });
-    //     })
-    //     // socket.on('messagefo', (data) => {
-    //     //     console.log('messagefo:', data);
-    //     //     var api_end_time = new Date().getTime();
-    //     //     this.props.promise_upload_analysis_done(data, api_end_time - this.api_start_time);
-    //     // })
-    //     return { socket: socket };
-    // }
 
     onTeacherFileDrop(files) {
         this.onFileDrop(files, 'teacher');
@@ -183,56 +155,70 @@ class VideoPage extends React.Component {
         }
     }
 
+    generate_output() {
+        return (typeof this.props.video.output !== 'undefine' && !!this.props.video.output.match(/^http:\/\//)) ?
+            <div><a>{'download result from <' + this.props.video.output + '>'}</a></div> : <div></div>
+    }
+
     render() {
         let frame_user_info = this.get_user_info();
         let btn_ctl = this.generate_btn_ctrl();
+        let output = this.generate_output();
         return (<div>
             <h2>Video</h2>
             {frame_user_info}
-            <div>
-                <div>
-                    <div style={{}}>
-                        <p>Student Video:</p>
-                        <Dropzone
-                            multiple={false}
-                            accept="video/mp4"
-                            onDrop={this.onStudentFileDrop}>
-                            <p>Drop Student Video with MP4 format.</p>
-                            <p>Only accept one student video</p>
-                        </Dropzone>
-                    </div>
-                    {(typeof this.props.video.input !== 'undefined' && typeof this.props.video.input.student !== 'undefined') ?
-                        <div>
-                            <video width="400" controls>
-                                <source src={this.props.video.input.student.preview} type="video/mp4" />
-                                Your browser does not support HTML5 video.
+            <table>
+                <tr>
+                    <td>
+                        <div style={{}}>
+                            <p>Student Video:</p>
+                            <Dropzone
+                                multiple={false}
+                                accept="video/mp4"
+                                onDrop={this.onStudentFileDrop}>
+                                <p>Drop Student Video with MP4 format.</p>
+                                <p>Only accept one student video</p>
+                            </Dropzone>
+                        </div>
+                    </td>
+                    <td>
+                        {(typeof this.props.video.input !== 'undefined' && typeof this.props.video.input.student !== 'undefined') ?
+                            <div>
+                                <video width="400" controls>
+                                    <source src={this.props.video.input.student.preview} type="video/mp4" />
+                                    Your browser does not support HTML5 video.
                         </video>
-                        </div> : <div></div>
-                    }
-                </div>
-                <br />
-                <div>
-                    <div style={{}}>
-                        <p>Teacher Video:</p>
-                        <Dropzone
-                            multiple={false}
-                            accept="video/mp4"
-                            onDrop={this.onTeacherFileDrop}>
-                            <p>Drop Teacher Video with MP4 format.</p>
-                            <p>Only accept one teacher video</p>
-                        </Dropzone>
-                    </div>
-                    {(typeof this.props.video.input !== 'undefined' && typeof this.props.video.input.teacher !== 'undefined') ?
-                        <div>
-                            <video width="400" controls>
-                                <source src={this.props.video.input.teacher.preview} type="video/mp4" />
-                                Your browser does not support HTML5 video.
+                            </div> : <div></div>
+                        }
+                    </td>
+                </tr>
+                <tr>
+                    <td>
+                        <div style={{}}>
+                            <p>Teacher Video:</p>
+                            <Dropzone
+                                multiple={false}
+                                accept="video/mp4"
+                                onDrop={this.onTeacherFileDrop}>
+                                <p>Drop Teacher Video with MP4 format.</p>
+                                <p>Only accept one teacher video</p>
+                            </Dropzone>
+                        </div>
+                    </td>
+                    <td>
+                        {(typeof this.props.video.input !== 'undefined' && typeof this.props.video.input.teacher !== 'undefined') ?
+                            <div>
+                                <video width="400" controls>
+                                    <source src={this.props.video.input.teacher.preview} type="video/mp4" />
+                                    Your browser does not support HTML5 video.
                         </video>
-                        </div> : <div></div>
-                    }
-                </div>
-            </div>
+                            </div> : <div></div>
+                        }
+                    </td>
+                </tr>
+            </table>
             {btn_ctl}
+            {output}
         </div>)
     }
 }
