@@ -9,7 +9,7 @@ import uuidv5 from 'uuid/v5';
 import moment from 'moment-timezone';
 const tz_str = 'Asia/Shanghai';
 
-import { vd_reset_video, vd_drop_video, vd_send_video_ing, vd_send_video_err, vd_send_video_done, vd_analysis_ing, vd_analysis_done } from '../actions';
+import { vd_reset_video, vd_drop_video, vd_send_video_ing, vd_send_video_err, vd_send_video_done, vd_analysis_ing, vd_analysis_done, vd_update_socket } from '../actions';
 import { Axios } from '../utils';
 
 const mapStateToProps = state => {
@@ -37,6 +37,9 @@ const mapDispatchToProps = dispatch => ({
     },
     promise_analysis_done: (data) => {
         dispatch(vd_analysis_done(data));
+    },
+    sync_update_socket: (socket_pack) => {
+        dispatch(vd_update_socket(socket_pack));
     }
 })
 
@@ -48,6 +51,14 @@ class VideoPage extends React.Component {
         this.onTeacherFileDrop = this.onTeacherFileDrop.bind(this);
         this.onStudentFileDrop = this.onStudentFileDrop.bind(this);
         this.get_user_info = this.get_user_info.bind(this);
+        // this.setupSocket = this.setupSocket.bind(this);
+        // if (Object.keys(this.props.socket).length === 0 && this.props.socket.constructor === Object) {
+        //     this.props.sync_update_socket(this.setupSocket());
+        // }
+        this.props.socket.socket.on('messagevd', (data) => {
+            console.log('messagevd:', data);
+            this.props.promise_analysis_done(data);
+        })
         this.generate_btn_ctrl = this.generate_btn_ctrl.bind(this);
         this.sendingStatus = ['send_video_ing', 'send_video_done', 'analysis_ing'];
     }
@@ -72,6 +83,31 @@ class VideoPage extends React.Component {
         console.log(files);
         this.props.sync_drop_video(files[0], category);
     }
+
+    // setupSocket() {
+    //     console.log('set up socket');
+    //     // let socket = io('http://localhost:2979');
+    //     var baseUrl = window.location.href.split('//')[1].split('/')[0];
+    //     let socket = io('http://' + baseUrl);
+    //     socket.on('connect', () => {
+    //         console.log('socket id:', socket.id);
+    //         let auth_uuid = '';
+    //         if (this.props.socket.uuid) {
+    //             auth_uuid = this.props.socket.uuid;
+    //         } else {
+    //             auth_uuid = uuidv5(socket.id, uuidv5.URL);
+    //             this.props.sync_update_socket({ uuid: auth_uuid });
+    //         }
+    //         console.log('auth_uuid:', auth_uuid);
+    //         socket.emit('initial', { uuid: auth_uuid, socket_id: socket.id });
+    //     })
+    //     // socket.on('messagefo', (data) => {
+    //     //     console.log('messagefo:', data);
+    //     //     var api_end_time = new Date().getTime();
+    //     //     this.props.promise_upload_analysis_done(data, api_end_time - this.api_start_time);
+    //     // })
+    //     return { socket: socket };
+    // }
 
     onTeacherFileDrop(files) {
         this.onFileDrop(files, 'teacher');
@@ -127,6 +163,8 @@ class VideoPage extends React.Component {
                 imgForm.set('student', this.props.video.input.student)
             if (typeof this.props.video.input.teacher !== 'undefined')
                 imgForm.set('teacher', this.props.video.input.teacher);
+            imgForm.set('cb_api', '/api/callbackvd');
+            imgForm.set('uuid', this.props.socket.uuid);
             Axios.post('/api/video', imgForm, {
                 headers: {
                     "x-token": this.props.auth.data.token,
@@ -137,7 +175,6 @@ class VideoPage extends React.Component {
                 console.log(response);
                 this.props.promise_send_video_done();
                 this.props.promise_analysis_ing();
-                this.props.promise_analysis_done({});
             }).catch(err => {
                 console.log('video err:');
                 console.log(err);

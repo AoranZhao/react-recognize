@@ -105,6 +105,28 @@ app.post('/api/callbackfo', (req, res) => {
     // res.status(200).send('ok');
 })
 
+app.post('/api/callbackvd', (req, res) => {
+    // body: {output: output, script_dur: end_time - script_start_time}
+    console.log('callbackvd');
+    let uuid = req.body.uuid;
+    console.log('uuid:', uuid);
+    console.log('req.body:', req.body);
+    var data = {
+        status: req.body.status,
+        output: req.body.output,
+        uuid: req.body.uuid
+    }
+    io_Redis.get(uuid, (err, result) => {
+        if (!err && result) {
+            console.log(result);
+            emitter_io.to(result).emit('messagevd', data);
+            res.status(200).send('ok');
+        }
+    })
+    // emitter_io.to(socket_id).emit('message', data);
+    // res.status(200).send('ok');
+})
+
 app.post('/api/callbackau', (req, res) => {
     // body: {output: output, script_dur: end_time - script_start_time}
     console.log('callbackau');
