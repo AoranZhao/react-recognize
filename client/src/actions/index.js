@@ -301,3 +301,35 @@ export const kt_yc_upload_question_err = (err) => ({
 export const kt_yc_reset_question = () => ({
     type: 'KT_YC_RESET_QUESTION'
 })
+
+// video
+export const vd_reset_video = () => ({
+    type: 'VD_RESET_VIDEO'
+})
+
+export const vd_drop_video = (file, category) => ({
+    type: 'VD_DROP_VIDEO',
+    file: file,
+    category: category
+})
+
+export const vd_send_video_ing = () => ({
+    type: 'VD_SEND_VIDEO_ING'
+})
+
+export const vd_send_video_err = () => ({
+    type: 'VD_SEND_VIDEO_ERR'
+})
+
+export const vd_send_video_done = () => ({
+    type: 'VD_SEND_VIDEO_DONE'
+})
+
+export const vd_analysis_ing = () => ({
+    type: 'VD_ANALYSIS_ING'
+})
+
+export const vd_analysis_done = (data) => ({
+    type: 'VD_ANALYSIS_DONE',
+    data: data
+})

@@ -11,6 +11,7 @@ import formulaocr from './formulaocr';
 import autosolve from './autosolve';
 import ktjx from './ktjx';
 import ktyc from './ktyc';
+import video from './video';
 
 const AppReducers = combineReducers({
     auth,
@@ -21,7 +22,8 @@ const AppReducers = combineReducers({
     formulaocr,
     autosolve,
     ktjx,
-    ktyc
+    ktyc,
+    video
 })
 
 export default AppReducers;

@@ -12,6 +12,7 @@ import FormulaOCRPage from './FormulaOCRPage.jsx';
 import AutosolvePage from './AutosolvePage.jsx';
 import KTJXPage from './KnowledgeTagging_jx.jsx';
 import KTYCPage from './KnowledgeTagging_yc.jsx';
+import VideoPage from './VideoPage.jsx';
 
 const mapStateToProps = state => {
     var obj = {};
@@ -32,6 +33,7 @@ let HomePage = ({
         <Route path={`${match.url}/autosolve`} component={AutosolvePage} />
         <Route path={`${match.url}/ktjx`} component={KTJXPage} />
         <Route path={`${match.url}/ktyc`} component={KTYCPage} />
+        <Route path={`${match.url}/video`} component={VideoPage} />
     </div>
 }
 
