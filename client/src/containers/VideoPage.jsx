@@ -123,9 +123,9 @@ class VideoPage extends React.Component {
         } else {
             this.props.promise_send_video_ing();
             let imgForm = new FormData();
-            if (typeof this.props.video.student !== 'undefined')
+            if (typeof this.props.video.input.student !== 'undefined')
                 imgForm.set('student', this.props.video.input.student)
-            if (typeof this.props.video.teacher !== 'undefined')
+            if (typeof this.props.video.input.teacher !== 'undefined')
                 imgForm.set('teacher', this.props.video.input.teacher);
             Axios.post('/api/video', imgForm, {
                 headers: {
