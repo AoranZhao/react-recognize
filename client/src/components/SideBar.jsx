@@ -11,10 +11,10 @@ let SideBar = ({
     base
 }) => (
         <div className="sidebar">
-            <div className="sidebar_item">
+            {/* <div className="sidebar_item">
                 <TabEntry text="Home" to="/" />
-            </div>
-            <div className="sidebar_item">
+            </div> */}
+            {/* <div className="sidebar_item">
                 <TabEntry text="FormulaOCR" to="/home/formulaocr" />
             </div>
             <div className="sidebar_item">
@@ -28,9 +28,9 @@ let SideBar = ({
             </div>
             <div className="sidebar_item">
                 <TabEntry text="KT(Yichen)" to="/home/ktyc" />
-            </div>
+            </div> */}
             <div className="sidebar_item">
-                <TabEntry text="Video" to="/home/video" />
+                <TabEntry text="Video" to="/" />
             </div>
             {entries.map((entry, index) => (
                 <div key={index} className="sidebar_item">
