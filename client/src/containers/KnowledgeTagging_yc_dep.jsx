@@ -68,10 +68,7 @@ class KTYCPage extends React.Component {
     generate_question_image() {
         let el = <div></div>;
         if (typeof this.props.ktyc.output === 'object') {
-            // el = <div style={{ height: '600px', width: '800px' }}><Tree translate={{ x: 100, y: 250 }} data={this.output_convert(this.props.ktyc.output)} orientation='vertical' /></div>
-            el = <div style={{ height: '600px', width: '800px' }}>
-                <pre>{JSON.stringify(this.props.ktyc.output, null, 2)}</pre>
-            </div>
+            el = <div style={{ height: '600px', width: '800px' }}><Tree translate={{ x: 100, y: 250 }} data={this.output_convert(this.props.ktyc.output)} orientation='vertical' /></div>
         }
         return <div>
             {/* <p>{JSON.stringify(this.props.ktyc.output)}</p> */}
@@ -159,8 +156,7 @@ class KTYCPage extends React.Component {
             if (response.data.err) {
                 this.props.promise_upload_question_err(response.data.err);
             } else {
-                this.props.promise_upload_question_done(response.data);
-                // this.props.promise_upload_question_done(this.handleResponse(response.data));
+                this.props.promise_upload_question_done(this.handleResponse(response.data));
             }
         }).catch(err => {
             console.log(err);
