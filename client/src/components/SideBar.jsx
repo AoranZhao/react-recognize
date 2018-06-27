@@ -14,7 +14,7 @@ let SideBar = ({
             <div className="sidebar_item">
                 <TabEntry text="Home" to="/" />
             </div>
-            {/* <div className="sidebar_item">
+            <div className="sidebar_item">
                 <TabEntry text="FormulaOCR" to="/home/formulaocr" />
             </div>
             <div className="sidebar_item">
@@ -28,10 +28,10 @@ let SideBar = ({
             </div>
             <div className="sidebar_item">
                 <TabEntry text="KT(Yichen)" to="/home/ktyc" />
-            </div> */}
-            <div className="sidebar_item">
-                <TabEntry text="Video" to="/home/video" />
             </div>
+            {/* <div className="sidebar_item">
+                <TabEntry text="Video" to="/home/video" />
+            </div> */}
             {entries.map((entry, index) => (
                 <div key={index} className="sidebar_item">
                     <TabEntry text={entry.text} to={`${base}${entry.url}`} />
