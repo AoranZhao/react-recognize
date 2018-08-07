@@ -18,30 +18,30 @@ const REDIS_PASSWORD = process.env.REDIS_PASSWORD || 'Gelenk0408',
     REDIS_PORT = process.env.REDIS_PORT || 9851,
     REDIS_HOST = process.env.REDIS_HOST || 'localhost';
 
-let redis = () => {
-    return ioRedis({
-        port: REDIS_PORT,
-        host: REDIS_HOST,
-        password: REDIS_PASSWORD,
-        retryStrategy: function (times) {
-            return null; // no retry
-        }
-    })
-}
-let io_redis = () => {
-    return socketIORedis({
-        pubClient: rds.createClient(REDIS_PORT, REDIS_HOST, { auth_pass: REDIS_PASSWORD }),
-        subClient: rds.createClient(REDIS_PORT, REDIS_HOST, { auth_pass: REDIS_PASSWORD })
-    })
-}
-let emitter = () => {
-    return socketIOEmitter(rds.createClient(REDIS_PORT, REDIS_HOST, { auth_pass: REDIS_PASSWORD }))
-}
-let emitter_io = emitter(),
-    io_Redis = redis();
+// let redis = () => {
+//     return ioRedis({
+//         port: REDIS_PORT,
+//         host: REDIS_HOST,
+//         password: REDIS_PASSWORD,
+//         retryStrategy: function (times) {
+//             return null; // no retry
+//         }
+//     })
+// }
+// let io_redis = () => {
+//     return socketIORedis({
+//         pubClient: rds.createClient(REDIS_PORT, REDIS_HOST, { auth_pass: REDIS_PASSWORD }),
+//         subClient: rds.createClient(REDIS_PORT, REDIS_HOST, { auth_pass: REDIS_PASSWORD })
+//     })
+// }
+// let emitter = () => {
+//     return socketIOEmitter(rds.createClient(REDIS_PORT, REDIS_HOST, { auth_pass: REDIS_PASSWORD }))
+// }
+// let emitter_io = emitter(),
+//     io_Redis = redis();
 const EXPIRE_TIME = 60 * 60 * 24;
 
-io.adapter(io_redis());
+// io.adapter(io_redis());
 
 app.use(express.static(path.join(__dirname, '../../client/dist')));
 app.use(bodyParser.json({
@@ -182,13 +182,13 @@ server.listen(PORT, () => {
     console.log(`listening on port ${PORT}.....`);
 })
 
-io.on('connection', (socket) => {
-    console.log('connection:', socket.id);
-    socket.on('initial', (data) => {
-        console.log('data:', data);
-        let uuid = data.uuid,
-            socket_id = data.socket_id;
-        // set socket id in redis
-        io_Redis.set(uuid, socket_id, 'ex', EXPIRE_TIME);
-    })
-})
+// io.on('connection', (socket) => {
+//     console.log('connection:', socket.id);
+//     socket.on('initial', (data) => {
+//         console.log('data:', data);
+//         let uuid = data.uuid,
+//             socket_id = data.socket_id;
+//         // set socket id in redis
+//         io_Redis.set(uuid, socket_id, 'ex', EXPIRE_TIME);
+//     })
+// })
