@@ -76,14 +76,14 @@ class ZFPage extends React.Component {
     }
 
     generate_options() {
-        return <div style={{ width: '400px', height: '50px' }}>
-            <a style={{ cursor: 'pointer', width: '100px', display: 'inline-block', margin: '2px;', border: '1px solid #AAAAAA' }} onClick={e => {
+        return <div style={{ width: '400px', height: '60px' }}>
+            <a style={{ cursor: 'pointer', width: '100px', display: 'inline-block', margin: '2px', border: '1px solid #AAAAAA' }} onClick={e => {
                 e.preventDefault();
                 this.switchTab('missions');
             }}>
                 <p>Missions</p>
             </a>
-            <a style={{ cursor: 'pointer', width: '100px', display: 'inline-block', margin: '2px;', border: '1px solid #AAAAAA' }} onClick={e => {
+            <a style={{ cursor: 'pointer', width: '100px', display: 'inline-block', margin: '2px', border: '1px solid #AAAAAA' }} onClick={e => {
                 e.preventDefault();
                 this.switchTab('new');
             }}>
@@ -145,7 +145,7 @@ class ZFPage extends React.Component {
                 <div>
                     {this.props.zf.missions.data.map((mission, index) => {
                         return <div key={index}>
-                            <a style={{ cursor: 'pointer', width: '250px', display: 'inline-block', margin: '2px;', border: '1px solid #AAAAAA' }}
+                            <a style={{ cursor: 'pointer', width: '250px', display: 'inline-block', margin: '2px', border: (!!mission.check) ? '1px solid green' : '1px solid red' }}
                                 onClick={e => {
                                     e.preventDefault();
                                     this.switchMission(mission.id)
@@ -159,7 +159,7 @@ class ZFPage extends React.Component {
         } else {
             content = <div style={{ width: '280px', display: 'inline-block', verticalAlign: 'top' }}>
                 <div>
-                    <a style={{ cursor: 'pointer', width: '250px', display: 'inline-block', margin: '2px;', border: '1px solid #AAAAAA' }}
+                    <a style={{ cursor: 'pointer', width: '250px', display: 'inline-block', margin: '2px', border: '1px solid #AAAAAA' }}
                         onClick={e => {
                             e.preventDefault();
                             this.fetch_missions();

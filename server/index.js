@@ -11,7 +11,7 @@ import rds from 'redis';
 
 let app = express();
 let server = http.createServer(app);
-let io = socketIO(server);
+// let io = socketIO(server);
 // const PORT = process.env.PORT || 2979;
 const PORT = 2979;
 const REDIS_PASSWORD = process.env.REDIS_PASSWORD || 'Gelenk0408',

@@ -69,7 +69,6 @@ class ZFAdminPage extends React.Component {
 
     fetchMissions(keepM) {
         this.props.promise_get_missions_ing();
-        this.props.promise_get_solution_done({});
         Axios.get('/api/zf/missions?admin=yes', {
             headers: {
                 "x-token": this.props.auth.data.token,
@@ -81,6 +80,7 @@ class ZFAdminPage extends React.Component {
             if (Array.isArray(response.data) && response.data.length > 0 && typeof response.data[0] !== 'undefined') {
                 if (!keepM || !this.props.zfadmin.mission || response.data.map(d => (d.id)).indexOf(this.props.zfadmin.mission) === -1) {
                     this.switchMission(response.data[0].id);
+                    this.props.promise_get_solution_done({});
                 }
             } else {
                 this.switchMission('');
@@ -187,7 +187,7 @@ class ZFAdminPage extends React.Component {
                 <div>
                     {this.props.zfadmin.missions.data.map((mission, index) => {
                         return <div key={index}>
-                            <a style={{ cursor: 'pointer', width: '250px', display: 'inline-block', margin: '2px', border: '1px solid #AAAAAA' }} onClick={e => {
+                            <a style={{ cursor: 'pointer', width: '250px', display: 'inline-block', margin: '2px', border: (!!mission.check) ? '1px solid green' : '1px solid red' }} onClick={e => {
                                 e.preventDefault();
                                 this.switchMission(mission.id);
                             }}>
@@ -346,6 +346,10 @@ class ZFAdminPage extends React.Component {
             console.log(err);
             this.props.promise_update_mission_err(err.data);
         })
+    }
+
+    updateSolution(sid, solution) {
+
     }
 
     render() {
