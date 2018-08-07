@@ -333,3 +333,123 @@ export const vd_analysis_done = (data) => ({
     type: 'VD_ANALYSIS_DONE',
     data: data
 })
+
+// zf
+// submit a new mission
+export const zf_add_mission_ing = () => ({
+    type: 'ZF_ADD_MISSION_ING'
+})
+
+export const zf_add_mission_done = (data) => ({
+    type: 'ZF_ADD_MISSION_DONE',
+    data: data
+})
+
+export const zf_add_mission_err = (err) => ({
+    type: 'ZF_ADD_MISSION_ERR',
+    err: err
+})
+
+// get missions
+export const zf_get_missions_ing = () => ({
+    type: 'ZF_GET_MISSIONS_ING'
+})
+
+export const zf_get_missions_done = (data) => ({
+    type: 'ZF_GET_MISSIONS_DONE',
+    data: data
+})
+
+export const zf_get_missions_err = (err) => ({
+    type: 'ZF_GET_MISSIONS_ERR',
+    err: err
+})
+
+// get solution
+export const zf_get_solution_ing = () => ({
+    type: 'ZF_GET_SOLUTION_ING'
+})
+
+export const zf_get_solution_done = (data) => ({
+    type: 'ZF_GET_SOLUTION_DONE',
+    data: data
+})
+
+export const zf_get_solution_err = (err) => ({
+    type: 'ZF_GET_SOLUTION_ERR',
+    err: err
+})
+
+// other ops
+export const zf_switch_tab = (tabname) => ({
+    type: 'ZF_SWITCH_TAB',
+    tab: tabname
+})
+
+export const zf_switch_mission = (mission_id) => ({
+    type: 'ZF_SWITCH_MISSION',
+    mission: mission_id
+})
+
+export const zf_add_mission = (files) => ({
+    type: 'ZF_ADD_MISSION',
+    files: files
+})
+
+// zf admin
+// get missions
+export const zfadmin_get_missions_ing = () => ({
+    type: 'ZFADMIN_GET_MISSIONS_ING'
+})
+
+export const zfadmin_get_missions_done = (data) => ({
+    type: 'ZFADMIN_GET_MISSIONS_DONE',
+    data: data
+})
+
+export const zfadmin_get_missions_err = (err) => ({
+    type: 'ZFADMIN_GET_MISSIONS_ERR',
+    err: err
+})
+
+// get solution
+export const zfadmin_get_solution_ing = () => ({
+    type: 'ZFADMIN_GET_SOLUTION_ING'
+})
+
+export const zfadmin_get_solution_done = (data) => ({
+    type: 'ZFADMIN_GET_SOLUTION_DONE',
+    data: data
+})
+
+export const zfadmin_get_solution_err = (err) => ({
+    type: 'ZFADMIN_GET_SOLUTION_ERR',
+    err: err
+})
+
+// update mission
+export const zfadmin_update_mission_ing = () => ({
+    type: 'ZFADMIN_UPDATE_MISSION_ING'
+})
+
+export const zfadmin_update_mission_done = (data) => ({
+    type: 'ZFADMIN_UPDATE_MISSION_DONE',
+    data: data
+})
+
+export const zfadmin_update_mission_err = (err) => ({
+    type: 'ZFADMIN_UPDATE_MISSION_ERR',
+    err: err
+})
+
+// other ops
+export const zfadmin_switch_mission = (mission_id) => ({
+    type: 'ZFADMIN_SWITCH_MISSION',
+    mission: mission_id
+})
+
+export const zfadmin_change_solution = (index, value) => ({
+    type: 'ZFADMIN_CHANGE_SOLUTION',
+    index: index,
+    value: value
+})

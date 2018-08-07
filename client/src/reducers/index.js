@@ -12,6 +12,8 @@ import autosolve from './autosolve';
 import ktjx from './ktjx';
 import ktyc from './ktyc';
 import video from './video';
+import zf from './zf';
+import zfadmin from './zfadmin';
 
 const AppReducers = combineReducers({
     auth,
@@ -23,7 +25,9 @@ const AppReducers = combineReducers({
     autosolve,
     ktjx,
     ktyc,
-    video
+    video,
+    zf,
+    zfadmin
 })
 
 export default AppReducers;
