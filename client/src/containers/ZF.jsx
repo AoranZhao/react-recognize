@@ -375,7 +375,7 @@ class ZFPage extends React.Component {
                         <p>{`created at ${this.props.zf.solution.data.created_date}`}</p>
                         <div>
                             <p>Image: </p>
-                            <img src={this.props.zf.solution.image} />
+                            <img src={this.props.zf.solution.data.image} />
                         </div>
                         <div>
                             <table>
