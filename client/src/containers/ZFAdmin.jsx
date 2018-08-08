@@ -55,6 +55,7 @@ class ZFAdminPage extends React.Component {
         this.switchMission = this.switchMission.bind(this);
         this.fetchMissions = this.fetchMissions.bind(this);
         this.updateMission = this.updateMission.bind(this);
+        this.updateSolution = this.updateSolution.bind(this);
 
         this.generateContent = this.generateContent.bind(this);
         this.generateSidebar = this.generateSidebar.bind(this);
@@ -141,7 +142,7 @@ class ZFAdminPage extends React.Component {
         let content = <div><p>Ctrl</p></div>;
         if (typeof this.props.zfadmin !== 'undefined') {
             if (typeof this.props.zfadmin.update_mission !== 'undefined' && this.props.zfadmin.update_mission.status === 'ing') {
-                content = <div><p>Changing...</p></div>
+                content = <div><p>Saving...</p></div>
             } else if (typeof this.props.zfadmin.update_mission !== 'undefined' && this.props.zfadmin.update_mission.status === 'err') {
                 let sid, solution;
                 if (typeof this.props.zfadmin.solution !== 'undefined' && typeof this.props.zfadmin.solution.data !== 'undefined') {
@@ -151,7 +152,11 @@ class ZFAdminPage extends React.Component {
                 content = <div>
                     <input type="button" value={(mission.check) ? 'Unmark it' : 'Mark it'} style={{ height: '50px', width: '100px', margin: '10px', color: 'white', backgroundColor: '#5394fc', fontSize: '20px', cursor: 'pointer' }} onClick={e => {
                         e.preventDefault();
-                        this.updateMission(mission.id, (mission.check) ? false : true, sid, solution);
+                        this.updateMission(mission.id, (mission.check) ? false : true);
+                    }} />
+                    <input type="button" value="Save" style={{ height: '50px', width: '100px', margin: '10px', color: 'white', backgroundColor: '#5394fc', fontSize: '20px', cursor: 'pointer' }} onClick={e => {
+                        e.preventDefault();
+                        this.updateSolution(sid, solution);
                     }} />
                     <p>Error: {this.props.zfadmin.update_mission.err}</p>
                 </div>
@@ -164,7 +169,11 @@ class ZFAdminPage extends React.Component {
                 content = <div>
                     <input type="button" value={(mission.check) ? 'Unmark it' : 'Mark it'} style={{ height: '50px', width: '100px', margin: '10px', color: 'white', backgroundColor: '#5394fc', fontSize: '20px', cursor: 'pointer' }} onClick={e => {
                         e.preventDefault();
-                        this.updateMission(mission.id, (mission.check) ? false : true, sid, solution);
+                        this.updateMission(mission.id, (mission.check) ? false : true);
+                    }} />
+                    <input type="button" value="Save" style={{ height: '50px', width: '100px', margin: '10px', color: 'white', backgroundColor: '#5394fc', fontSize: '20px', cursor: 'pointer' }} onClick={e => {
+                        e.preventDefault();
+                        this.updateSolution(sid, solution);
                     }} />
                 </div>
             }
@@ -317,7 +326,7 @@ class ZFAdminPage extends React.Component {
         return content;
     }
 
-    updateMission(mid, check, sid, solution) {
+    updateMission(mid, check) {
         this.props.promise_update_mission_ing();
         Axios.put(`/api/zf/mission/${mid}?admin=yes`, { check: (check === true) ? true : false }, {
             headers: {
@@ -325,9 +334,34 @@ class ZFAdminPage extends React.Component {
                 "Content-Type": "application/json"
             }
         }).then(response => {
+            // if (Array.isArray(solution) && solution.length > 0) {
+            //     let body = { solution: solution };
+            //     Axios.put(`/api/zf/solution/${sid}`, body, {
+            //         headers: {
+            //             "x-token": this.props.auth.data.token,
+            //             "Content-Type": "application/json"
+            //         }
+            //     }).then(response => {
+            //         this.props.promise_update_mission_done(response.data);
+            //         this.fetchMissions(true);
+            //     }).catch(err => {
+            //         this.props.promise_update_mission_err(err.data);
+            //     })
+            // } else {
+            this.props.promise_update_mission_done(response.data);
+            this.fetchMissions(true);
+            // }
+        }).catch(err => {
+            console.log(err);
+            this.props.promise_update_mission_err(err.data);
+        })
+    }
+
+    updateSolution(sid, solution) {
+        this.props.promise_update_mission_ing();
+        if (typeof sid !== 'undefined' && typeof solution !== 'undefined') {
             if (Array.isArray(solution) && solution.length > 0) {
-                let body = { solution: solution };
-                Axios.put(`/api/zf/solution/${sid}`, body, {
+                Axios.put(`/api/zf/solution/${sid}`, { solution: solution }, {
                     headers: {
                         "x-token": this.props.auth.data.token,
                         "Content-Type": "application/json"
@@ -339,17 +373,11 @@ class ZFAdminPage extends React.Component {
                     this.props.promise_update_mission_err(err.data);
                 })
             } else {
-                this.props.promise_update_mission_done(response.data);
-                this.fetchMissions(true);
+                alert('wrong solution format.');
             }
-        }).catch(err => {
-            console.log(err);
-            this.props.promise_update_mission_err(err.data);
-        })
-    }
-
-    updateSolution(sid, solution) {
-
+        } else {
+            alert('not found sid and solution');
+        }
     }
 
     render() {

@@ -117,12 +117,12 @@ class ZFPage extends React.Component {
             <p>Content Page</p>
         </div>;
         if (!!this.props.zf && this.props.zf.tab === 'missions') {
-            content = <div style={{ width: '700px' }}>
+            content = <div style={{ width: '900px' }}>
                 {this.generate_sidebar()}
                 {this.generate_content()}
             </div>;
         } else if (!!this.props.zf && this.props.zf.tab === 'new') {
-            content = <div style={{ width: '700px' }}>
+            content = <div style={{ width: '900px' }}>
                 {this.generate_new()}
             </div>
         }
@@ -176,13 +176,13 @@ class ZFPage extends React.Component {
     }
 
     generate_content() {
-        let content = <div style={{ width: '400px', display: 'inline-block', verticalAlign: 'top' }}>
+        let content = <div style={{ width: '600px', display: 'inline-block', verticalAlign: 'top' }}>
             <h2>Mission: </h2>
         </div>
         if (!!this.props.zf && !!this.props.zf.mission && Array.isArray(this.props.zf.missions.data)) {
             let missions = this.props.zf.missions.data.filter(mission => ((mission.id === this.props.zf.mission) ? true : false));
             if (missions.length > 0) {
-                content = <div style={{ width: '400px', display: 'inline-block', verticalAlign: 'top' }}>
+                content = <div style={{ width: '600px', display: 'inline-block', verticalAlign: 'top' }}>
                     <Tabs>
                         <TabList>
                             <Tab>Mission</Tab>
@@ -201,7 +201,7 @@ class ZFPage extends React.Component {
                     </Tabs>
                 </div>
             } else {
-                content = <div style={{ width: '400px', display: 'inline-block', verticalAlign: 'top' }}>
+                content = <div style={{ width: '600px', display: 'inline-block', verticalAlign: 'top' }}>
                     <h2>Mission: </h2>
                     <p>{`not found ${this.props.zf.mission}`}</p>
                 </div>
@@ -364,7 +364,7 @@ class ZFPage extends React.Component {
             </div>
         } else {
             if (typeof this.props.zf !== 'undefined' && typeof this.props.zf.solution !== 'undefined' && typeof this.props.zf.solution.data !== 'undefined' && Object.keys(this.props.zf.solution.data).length > 0) {
-                content = <div>
+                content = <div style={{ width: '600px' }}>
                     <p>Solution: </p>
                     <input type="button" value="Get Solution" onClick={e => {
                         e.preventDefault();
@@ -373,26 +373,36 @@ class ZFPage extends React.Component {
                     <div>
                         <p>{`Solution id: ${this.props.zf.solution.data.id}`}</p>
                         <p>{`created at ${this.props.zf.solution.data.created_date}`}</p>
-                        <div>
-                            <p>Image: </p>
-                            <img src={this.props.zf.solution.data.image} />
-                        </div>
-                        <div>
-                            <table>
-                                <thead>
-                                    <tr><td>Index</td><td>Value</td><td>Image</td></tr>
-                                </thead>
-                                <tbody>
-                                    {this.props.zf.solution.data.solution.map((sol, index) => {
-                                        return <tr key={index}>
-                                            <td><p>{sol.index}</p></td>
-                                            <td><p>{sol.value}</p></td>
-                                            <td>{(!!sol.image_url) ? <img src={sol.image_url} /> : <p></p>}</td>
-                                        </tr>
-                                    })}
-                                </tbody>
-                            </table>
-                        </div>
+                        <Tabs>
+                            <TabList>
+                                <Tab>Image</Tab>
+                                <Tab>List</Tab>
+                            </TabList>
+                            <TabPanel>
+                                <div>
+                                    <p>Image: </p>
+                                    <img src={this.props.zf.solution.data.image} style={{ maxWidth: '550px' }} />
+                                </div>
+                            </TabPanel>
+                            <TabPanel>
+                                <div>
+                                    <table>
+                                        <thead>
+                                            <tr><td>Index</td><td style={{ width: '300px' }}>Value</td><td style={{ width: '200px' }}>Image</td></tr>
+                                        </thead>
+                                        <tbody>
+                                            {this.props.zf.solution.data.solution.map((sol, index) => {
+                                                return <tr key={index}>
+                                                    <td><p>{sol.index}</p></td>
+                                                    <td style={{ width: '300px' }}><p>{sol.value}</p></td>
+                                                    <td>{(!!sol.image_url) ? <img src={sol.image_url} style={{ maxWidth: '200px' }} /> : <p></p>}</td>
+                                                </tr>
+                                            })}
+                                        </tbody>
+                                    </table>
+                                </div>
+                            </TabPanel>
+                        </Tabs>
                     </div>
                 </div>
             } else {
