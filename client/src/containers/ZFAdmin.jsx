@@ -196,7 +196,7 @@ class ZFAdminPage extends React.Component {
                 <div>
                     {this.props.zfadmin.missions.data.map((mission, index) => {
                         return <div key={index}>
-                            <a style={{ cursor: 'pointer', width: '250px', display: 'inline-block', margin: '2px', border: (!!mission.check) ? '1px solid green' : '1px solid red' }} onClick={e => {
+                            <a style={{ cursor: 'pointer', width: '250px', display: 'inline-block', margin: '2px', border: (!!mission.check) ? '1px solid green' : '1px solid red', borderRightWidth: (!!this.props.zfadmin.mission && this.props.zfadmin.mission === mission.id) ? '10px' : '1px' }} onClick={e => {
                                 e.preventDefault();
                                 this.switchMission(mission.id);
                             }}>
@@ -274,11 +274,22 @@ class ZFAdminPage extends React.Component {
                         </div>
                     </TabPanel>
                 </Tabs>
-            } else if (this.props.zfadmin.solution.status === 'done' && typeof this.props.zfadmin.solution.data !== 'undefined') {
+            } else if (this.props.zfadmin.solution.status === 'done' && !!this.props.zfadmin.solution.data) {
+                let temp_solution = this.props.zfadmin.solution.data.solution;
+                if (!Array.isArray(temp_solution) || temp_solution.length === 0) {
+                    temp_solution = [];
+                    for (var i = 1; i <= 51; i++) {
+                        temp_solution.push({
+                            index: i,
+                            value: ''
+                        });
+                    }
+                }
                 content = <Tabs>
                     <TabList>
                         <Tab>Image</Tab>
                         <Tab>List</Tab>
+                        <Tab>Log</Tab>
                         <Tab>Mission</Tab>
                     </TabList>
                     <TabPanel>
@@ -298,19 +309,30 @@ class ZFAdminPage extends React.Component {
                                 </tr>
                             </thead>
                             <tbody>
-                                {(Array.isArray(this.props.zfadmin.solution.data.solution) ?
-                                    this.props.zfadmin.solution.data.solution.map((sol, index) => {
-                                        return <tr key={index}>
-                                            <td><p>{sol.index}</p></td>
-                                            <td><input type="input" value={sol.value} onChange={e => {
-                                                e.preventDefault();
-                                                this.props.sync_change_solution(sol.index, e.target.value);
-                                            }} /></td>
-                                            <td>{(!!sol.image_url) ? <img src={sol.image_url} style={{ maxWidth: '300px' }} /> : <p></p>}</td>
-                                        </tr>
-                                    }) : <tr></tr>)}
+                                {temp_solution.map((sol, index) => {
+                                    return <tr key={index}>
+                                        <td><p>{sol.index}</p></td>
+                                        <td><textarea value={sol.value} rows="3" style={{ width: '250px', resize: 'none' }} onChange={e => {
+                                            e.preventDefault();
+                                            this.props.sync_change_solution(sol.index, e.target.value);
+                                        }}>
+                                        </textarea>
+                                        </td>
+                                        <td>{(!!sol.image_url) ? <img src={sol.image_url} style={{ maxWidth: '300px' }} /> : <p></p>}</td>
+                                    </tr>
+                                })}
                             </tbody>
                         </table>
+                    </TabPanel>
+                    <TabPanel>
+                        <p>Log:</p>
+                        <p>Code: {(typeof this.props.zfadmin.solution.data.log !== 'undefined') ? this.props.zfadmin.solution.data.log.code : 'none'}</p>
+                        <br />
+                        <p>Output:</p>
+                        <pre>{(typeof this.props.zfadmin.solution.data.log !== 'undefined') ? this.props.zfadmin.solution.data.log.stdout : ''}</pre>
+                        <br />
+                        <p>Err:</p>
+                        <pre>{(typeof this.props.zfadmin.solution.data.log !== 'undefined') ? this.props.zfadmin.solution.data.log.stderr : ''}</pre>
                     </TabPanel>
                     <TabPanel>
                         <div>
@@ -321,6 +343,11 @@ class ZFAdminPage extends React.Component {
                         </div>
                     </TabPanel>
                 </Tabs>
+            } else {
+                content = <div>
+                    <p>Solution for {mission_id}</p>
+                    <p>Some Err on fetching result, please contact with us.</p>
+                </div>
             }
         }
         return content;
@@ -358,9 +385,9 @@ class ZFAdminPage extends React.Component {
     }
 
     updateSolution(sid, solution) {
-        this.props.promise_update_mission_ing();
         if (typeof sid !== 'undefined' && typeof solution !== 'undefined') {
             if (Array.isArray(solution) && solution.length > 0) {
+                this.props.promise_update_mission_ing();
                 Axios.put(`/api/zf/solution/${sid}`, { solution: solution }, {
                     headers: {
                         "x-token": this.props.auth.data.token,

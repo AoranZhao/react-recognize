@@ -145,7 +145,7 @@ class ZFPage extends React.Component {
                 <div>
                     {this.props.zf.missions.data.map((mission, index) => {
                         return <div key={index}>
-                            <a style={{ cursor: 'pointer', width: '250px', display: 'inline-block', margin: '2px', border: (!!mission.check) ? '1px solid green' : '1px solid red' }}
+                            <a style={{ cursor: 'pointer', width: '250px', display: 'inline-block', margin: '2px', border: (!!mission.check) ? '1px solid green' : '1px solid red', borderRightWidth: (!!this.props.zf.mission && this.props.zf.mission === mission.id) ? '10px' : '1px' }}
                                 onClick={e => {
                                     e.preventDefault();
                                     this.switchMission(mission.id)
@@ -192,7 +192,7 @@ class ZFPage extends React.Component {
                             <div>
                                 <h2>{`Mission: ${missions[0].id}`}</h2>
                                 <p>{`creat at ${missions[0].created_date}`}</p>
-                                <img src={`${missions[0].image_url}`} />
+                                <img src={`${missions[0].image_url}`} style={{ maxWidth: '550px' }} />
                             </div>
                         </TabPanel>
                         <TabPanel>
@@ -271,66 +271,87 @@ class ZFPage extends React.Component {
                 if (this.props.zf.add_mission.status === 'ing') {
                     content = <div><p>Submitting.....</p></div>
                 } else if (this.props.zf.add_mission.status === 'err') {
-                    content = <div>
-                        <Dropzone
-                            multiple={false}
-                            accept="image/*"
-                            onDrop={this.add_mission}>
-                            <p>Drop an image or click to select a image to upload.</p>
-                        </Dropzone>
-                        <input type="button" value="Submit" disabled={(typeof this.props.zf.new_mission !== 'undefined' && Array.isArray(this.props.zf.new_mission) && this.props.zf.new_mission.length > 0) ? false : true} onClick={e => {
-                            e.preventDefault();
-                            this.submit_mission();
-                        }} />
-                        <div>
-                            <p>{`Error: ${this.props.zf.add_mission.err}`}</p>
+                    content = <div style={{ width: '900px' }}>
+                        <div style={{ width: '280px', display: 'inline-block', verticalAlign: 'top' }}>
+                            <div style={{ margin: '2px' }}>
+                                <Dropzone
+                                    multiple={false}
+                                    accept="image/*"
+                                    onDrop={this.add_mission}>
+                                    <p>Drop an image or click to select a image to upload.</p>
+                                </Dropzone>
+                            </div>
+                            <input type="button" value="Submit"
+                                style={{ height: '30px', width: '80px', margin: '2px', color: 'white', backgroundColor: '#5394fc', fontSize: '15px', cursor: 'pointer' }}
+                                disabled={(typeof this.props.zf.new_mission !== 'undefined' && Array.isArray(this.props.zf.new_mission) && this.props.zf.new_mission.length > 0) ? false : true}
+                                onClick={e => {
+                                    e.preventDefault();
+                                    this.submit_mission();
+                                }} />
+                            <div>
+                                <p>{`Error: ${this.props.zf.add_mission.err}`}</p>
+                            </div>
                         </div>
-                        <div>
+                        <div style={{ width: '600px', display: 'inline-block', verticalAlign: 'top' }}>
                             <p>Preview:</p>
                             {(Array.isArray(this.props.zf.new_mission) && this.props.zf.new_mission.length > 0) ? <div>
                                 <p>{this.props.zf.new_mission[0].name}</p>
-                                <img src={this.props.zf.new_mission[0].preview} />
+                                <img src={this.props.zf.new_mission[0].preview} style={{ maxWidth: '550px' }} />
                             </div> : <div></div>}
                         </div>
                     </div>
                 } else {
-                    content = <div>
-                        <Dropzone
-                            multiple={false}
-                            accept="image/*"
-                            onDrop={this.add_mission}>
-                            <p>Drop an image or click to select a image to upload.</p>
-                        </Dropzone>
-                        <input type="button" value="Submit" disabled={(typeof this.props.zf.new_mission !== 'undefined' && Array.isArray(this.props.zf.new_mission) && this.props.zf.new_mission.length > 0) ? false : true} onClick={e => {
-                            e.preventDefault();
-                            this.submit_mission();
-                        }} />
-                        <div>
+                    content = <div style={{ width: '900px' }}>
+                        <div style={{ width: '280px', display: 'inline-block', verticalAlign: 'top' }}>
+                            <div style={{ margin: '2px' }}>
+                                <Dropzone
+                                    multiple={false}
+                                    accept="image/*"
+                                    onDrop={this.add_mission}>
+                                    <p>Drop an image or click to select a image to upload.</p>
+                                </Dropzone>
+                            </div>
+                            <input type="button" value="Submit"
+                                style={{ height: '30px', width: '80px', margin: '2px', color: 'white', backgroundColor: '#5394fc', fontSize: '15px', cursor: 'pointer' }}
+                                disabled={(typeof this.props.zf.new_mission !== 'undefined' && Array.isArray(this.props.zf.new_mission) && this.props.zf.new_mission.length > 0) ? false : true}
+                                onClick={e => {
+                                    e.preventDefault();
+                                    this.submit_mission();
+                                }} />
+                        </div>
+                        <div style={{ width: '600px', display: 'inline-block', verticalAlign: 'top' }}>
                             <p>Preview:</p>
                             {(Array.isArray(this.props.zf.new_mission) && this.props.zf.new_mission.length > 0) ? <div>
                                 <p>{this.props.zf.new_mission[0].name}</p>
-                                <img src={this.props.zf.new_mission[0].preview} />
+                                <img src={this.props.zf.new_mission[0].preview} style={{ maxWidth: '550px' }} />
                             </div> : <div></div>}
                         </div>
                     </div>
                 }
             } else {
-                content = <div>
-                    <Dropzone
-                        multiple={false}
-                        accept="image/*"
-                        onDrop={this.add_mission}>
-                        <p>Drop an image or click to select a image to upload.</p>
-                    </Dropzone>
-                    <input type="button" value="Submit" disabled={(typeof this.props.zf !== 'undefined' && typeof this.props.zf.new_mission !== 'undefined' && Array.isArray(this.props.zf.new_mission) && this.props.zf.new_mission.length > 0) ? false : true} onClick={e => {
-                        e.preventDefault();
-                        this.submit_mission();
-                    }} />
-                    <div>
+                content = <div style={{ width: '900px' }}>
+                    <div style={{ width: '280px', display: 'inline-block', verticalAlign: 'top' }}>
+                        <div style={{ margin: '2px' }}>
+                            <Dropzone
+                                multiple={false}
+                                accept="image/*"
+                                onDrop={this.add_mission}>
+                                <p>Drop an image or click to select a image to upload.</p>
+                            </Dropzone>
+                        </div>
+                        <input type="button" value="Submit"
+                            style={{ height: '30px', width: '80px', margin: '2px', color: 'white', backgroundColor: '#5394fc', fontSize: '15px', cursor: 'pointer' }}
+                            disabled={(typeof this.props.zf !== 'undefined' && typeof this.props.zf.new_mission !== 'undefined' && Array.isArray(this.props.zf.new_mission) && this.props.zf.new_mission.length > 0) ? false : true}
+                            onClick={e => {
+                                e.preventDefault();
+                                this.submit_mission();
+                            }} />
+                    </div>
+                    <div style={{ width: '600px', display: 'inline-block', verticalAlign: 'top' }}>
                         <p>Preview:</p>
                         {(Array.isArray(this.props.zf.new_mission) && this.props.zf.new_mission.length > 0) ? <div>
                             <p>{this.props.zf.new_mission[0].name}</p>
-                            <img src={this.props.zf.new_mission[0].preview} />
+                            <img src={this.props.zf.new_mission[0].preview} style={{ maxWidth: '550px' }} />
                         </div> : <div></div>}
                     </div>
                 </div>
@@ -366,10 +387,11 @@ class ZFPage extends React.Component {
             if (typeof this.props.zf !== 'undefined' && typeof this.props.zf.solution !== 'undefined' && typeof this.props.zf.solution.data !== 'undefined' && Object.keys(this.props.zf.solution.data).length > 0) {
                 content = <div style={{ width: '600px' }}>
                     <p>Solution: </p>
-                    <input type="button" value="Get Solution" onClick={e => {
-                        e.preventDefault();
-                        this.fetch_solution()
-                    }} />
+                    <input type="button" value="Get Solution" style={{ height: '30px', width: '120px', margin: '2px', color: 'white', backgroundColor: '#5394fc', fontSize: '15px', cursor: 'pointer' }}
+                        onClick={e => {
+                            e.preventDefault();
+                            this.fetch_solution()
+                        }} />
                     <div>
                         <p>{`Solution id: ${this.props.zf.solution.data.id}`}</p>
                         <p>{`created at ${this.props.zf.solution.data.created_date}`}</p>
@@ -408,10 +430,11 @@ class ZFPage extends React.Component {
             } else {
                 content = <div>
                     <p>Solution: </p>
-                    <input type="button" value="Get Solution" onClick={e => {
-                        e.preventDefault();
-                        this.fetch_solution();
-                    }} />
+                    <input type="button" value="Get Solution" style={{ height: '30px', width: '120px', margin: '2px', color: 'white', backgroundColor: '#5394fc', fontSize: '15px', cursor: 'pointer' }}
+                        onClick={e => {
+                            e.preventDefault();
+                            this.fetch_solution();
+                        }} />
                 </div>
             }
         }

@@ -33,14 +33,32 @@ const zfadmin = (state = {}, action) => {
             state = { ...state, mission: action.mission };
             return state;
         case 'ZFADMIN_CHANGE_SOLUTION':
-            if (typeof state.solution !== 'undefined' && typeof state.solution.data !== 'undefined' && Array.isArray(state.solution.data.solution)) {
-                let data = state.solution.data.solution.reduce((arr, val) => {
-                    if (val.index === action.index.toString())
-                        arr = [...arr, { ...val, value: action.value }];
-                    else
-                        arr = [...arr, { ...val }];
-                    return arr;
-                }, [])
+            if (typeof state.solution !== 'undefined' && typeof state.solution.data !== 'undefined') {
+                let data = [];
+                if (Array.isArray(state.solution.data.solution) && state.solution.data.solution.length > 0) {
+                    data = state.solution.data.solution.reduce((arr, val) => {
+                        if (val.index === action.index.toString())
+                            arr = [...arr, { ...val, value: action.value }];
+                        else
+                            arr = [...arr, { ...val }];
+                        return arr;
+                    }, []);
+                } else {
+                    let temp_data = [];
+                    for (var i = 1; i <= 51; i++) {
+                        temp_data.push({
+                            index: i.toString(),
+                            value: ''
+                        });
+                    }
+                    data = temp_data.reduce((arr, val) => {
+                        if (val.index === action.index.toString())
+                            arr = [...arr, { ...val, value: action.value }];
+                        else
+                            arr = [...arr, { ...val }];
+                        return arr;
+                    }, []);
+                }
                 state = { ...state, solution: { ...state.solution, data: { ...state.solution.data, solution: data } } };
             }
             return state;
