@@ -410,14 +410,18 @@ class ZFPage extends React.Component {
                                 <div>
                                     <table>
                                         <thead>
-                                            <tr><td>Index</td><td style={{ width: '300px' }}>Value</td><td style={{ width: '200px' }}>Image</td></tr>
+                                            <tr>
+                                                <td>Index</td>
+                                                <td style={{ width: '300px' }}>Value</td>
+                                                {/* <td style={{ width: '200px' }}>Image</td> */}
+                                            </tr>
                                         </thead>
                                         <tbody>
                                             {this.props.zf.solution.data.solution.map((sol, index) => {
                                                 return <tr key={index}>
                                                     <td><p>{sol.index}</p></td>
                                                     <td style={{ width: '300px' }}><p>{sol.value}</p></td>
-                                                    <td>{(!!sol.image_url) ? <img src={sol.image_url} style={{ maxWidth: '200px' }} /> : <p></p>}</td>
+                                                    {/* <td>{(!!sol.image_url) ? <img src={sol.image_url} style={{ maxWidth: '200px' }} /> : <p></p>}</td> */}
                                                 </tr>
                                             })}
                                         </tbody>
