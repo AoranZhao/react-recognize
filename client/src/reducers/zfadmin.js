@@ -45,7 +45,7 @@ const zfadmin = (state = {}, action) => {
                     }, []);
                 } else {
                     let temp_data = [];
-                    for (var i = 1; i <= 51; i++) {
+                    for (var i = 0; i <= 51; i++) {
                         temp_data.push({
                             index: i.toString(),
                             value: ''

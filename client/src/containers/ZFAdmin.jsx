@@ -278,7 +278,7 @@ class ZFAdminPage extends React.Component {
                 let temp_solution = this.props.zfadmin.solution.data.solution;
                 if (!Array.isArray(temp_solution) || temp_solution.length === 0) {
                     temp_solution = [];
-                    for (var i = 1; i <= 51; i++) {
+                    for (var i = 0; i <= 51; i++) {
                         temp_solution.push({
                             index: i,
                             value: ''
