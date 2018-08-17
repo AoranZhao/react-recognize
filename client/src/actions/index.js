@@ -396,6 +396,11 @@ export const zf_add_mission = (files) => ({
     files: files
 })
 
+export const zf_update_crop = (crop) => ({
+    type: 'ZF_UPDATE_CROP',
+    crop: crop
+})
+
 // zf admin
 // get missions
 export const zfadmin_get_missions_ing = () => ({

@@ -38,6 +38,9 @@ const zf = (state = {}, action) => {
         case 'ZF_ADD_MISSION':
             state = { ...state, new_mission: [...action.files] };
             return state;
+        case 'ZF_UPDATE_CROP':
+            state = { ...state, crop: { ...action.crop } };
+            return state;
         default:
             return state;
     }

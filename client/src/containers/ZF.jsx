@@ -6,7 +6,9 @@ import Dropzone from 'react-dropzone';
 import { Tab, Tabs, TabList, TabPanel } from 'react-tabs';
 import './ZF.scss';
 
-import { zf_add_mission, zf_switch_mission, zf_switch_tab, zf_add_mission_ing, zf_add_mission_done, zf_add_mission_err, zf_get_missions_ing, zf_get_missions_done, zf_get_missions_err, zf_get_solution_ing, zf_get_solution_done, zf_get_solution_err } from '../actions';
+import ReactCrop from 'react-image-crop';
+
+import { zf_update_crop, zf_add_mission, zf_switch_mission, zf_switch_tab, zf_add_mission_ing, zf_add_mission_done, zf_add_mission_err, zf_get_missions_ing, zf_get_missions_done, zf_get_missions_err, zf_get_solution_ing, zf_get_solution_done, zf_get_solution_err } from '../actions';
 import { Axios } from '../utils';
 
 const mapStateToProps = state => {
@@ -14,6 +16,9 @@ const mapStateToProps = state => {
 }
 
 const mapDispatchToProps = dispatch => ({
+    sync_zf_update_crop: (corp) => {
+        dispatch(zf_update_crop(corp));
+    },
     sync_zf_add_mission: (files) => {
         dispatch(zf_add_mission(files));
     },
@@ -61,6 +66,7 @@ class ZFPage extends React.Component {
         this.submit_mission = this.submit_mission.bind(this);
         this.add_mission = this.add_mission.bind(this);
         this.fetch_solution = this.fetch_solution.bind(this);
+        this.set_crop = this.set_crop.bind(this);
 
         this.generate_options = this.generate_options.bind(this);
         this.generate_tab = this.generate_tab.bind(this);
@@ -68,6 +74,9 @@ class ZFPage extends React.Component {
         this.generate_content = this.generate_content.bind(this);
         this.generate_new = this.generate_new.bind(this);
         this.generate_solution = this.generate_solution.bind(this);
+
+        this.onCropComplete = this.onCropComplete.bind(this);
+        this.onCropChange = this.onCropChange.bind(this);
     }
 
     componentWillMount() {
@@ -232,11 +241,17 @@ class ZFPage extends React.Component {
         })
     }
 
-    submit_mission() {
+    submit_mission(cropped) {
         this.props.promise_add_mission_ing();
         if (typeof this.props.zf.new_mission !== 'undefined' && Array.isArray(this.props.zf.new_mission) && this.props.zf.new_mission.length > 0) {
             let imgForm = new FormData();
             imgForm.append('images', this.props.zf.new_mission[0]);
+            if (!!cropped && typeof this.props.zf.crop !== 'undefined') {
+                imgForm.set('cord_x', this.props.zf.crop.x);
+                imgForm.set('cord_y', this.props.zf.crop.y);
+                imgForm.set('cord_w', this.props.zf.crop.width);
+                imgForm.set('cord_h', this.props.zf.crop.height);
+            }
             Axios.post('/api/zf/mission', imgForm, {
                 headers: {
                     "x-token": this.props.auth.data.token,
@@ -245,9 +260,11 @@ class ZFPage extends React.Component {
             }).then(response => {
                 this.props.promise_add_mission_done(response.data);
                 this.props.sync_zf_add_mission([]);
+                this.set_crop(10, 10, 80, 80);
             }).then(err => {
                 this.props.promise_add_mission_err(err.data);
                 this.props.sync_zf_add_mission([]);
+                this.set_crop(10, 10, 80, 80);
             })
         }
     }
@@ -257,16 +274,31 @@ class ZFPage extends React.Component {
             alert('only drop one image.');
         } else if (files.length === 0) {
             this.props.sync_zf_add_mission([]);
+            this.set_crop(10, 10, 80, 80);
         } else {
             this.props.sync_zf_add_mission(files);
+            this.set_crop(10, 10, 80, 80);
         }
+    }
+
+    set_crop(x, y, w, h) {
+        this.props.sync_zf_update_crop({ x: x, y: y, width: w, height: h });
+    }
+
+    onCropComplete(crop) {
+
+    }
+
+    onCropChange(crop) {
+        this.set_crop(crop.x, crop.y, crop.width, crop.height);
     }
 
     generate_new() {
         let content = <div>
             <p>New Page</p>
         </div>
-        if (typeof this.props.zf !== 'undefined' && typeof this.props.zf.new_mission !== 'undefined') {
+
+        if (typeof this.props.zf !== 'undefined' && typeof this.props.zf.new_mission !== 'undefined' && typeof this.props.zf.crop !== 'undefined') {
             if (typeof this.props.zf.add_mission !== 'undefined') {
                 if (this.props.zf.add_mission.status === 'ing') {
                     content = <div><p>Submitting.....</p></div>
@@ -281,12 +313,19 @@ class ZFPage extends React.Component {
                                     <p>Drop an image or click to select a image to upload.</p>
                                 </Dropzone>
                             </div>
-                            <input type="button" value="Submit"
-                                style={{ height: '30px', width: '80px', margin: '2px', color: 'white', backgroundColor: '#5394fc', fontSize: '15px', cursor: 'pointer' }}
+                            <input type="button" value="Submit for full image"
+                                style={{ height: '30px', width: '200px', margin: '2px', color: 'white', backgroundColor: '#5394fc', fontSize: '15px', cursor: 'pointer' }}
                                 disabled={(typeof this.props.zf.new_mission !== 'undefined' && Array.isArray(this.props.zf.new_mission) && this.props.zf.new_mission.length > 0) ? false : true}
                                 onClick={e => {
                                     e.preventDefault();
                                     this.submit_mission();
+                                }} /><br />
+                            <input type="button" value="Submit for cropped image"
+                                style={{ height: '30px', width: '200px', margin: '2px', color: 'white', backgroundColor: '#5394fc', fontSize: '15px', cursor: 'pointer' }}
+                                disabled={(typeof this.props.zf !== 'undefined' && typeof this.props.zf.new_mission !== 'undefined' && Array.isArray(this.props.zf.new_mission) && this.props.zf.new_mission.length > 0) ? false : true}
+                                onClick={e => {
+                                    e.preventDefault();
+                                    this.submit_mission(true);
                                 }} />
                             <div>
                                 <p>{`Error: ${this.props.zf.add_mission.err}`}</p>
@@ -296,7 +335,13 @@ class ZFPage extends React.Component {
                             <p>Preview:</p>
                             {(Array.isArray(this.props.zf.new_mission) && this.props.zf.new_mission.length > 0) ? <div>
                                 <p>{this.props.zf.new_mission[0].name}</p>
-                                <img src={this.props.zf.new_mission[0].preview} style={{ maxWidth: '550px' }} />
+                                {/* <img src={this.props.zf.new_mission[0].preview} style={{ maxWidth: '550px' }} /> */}
+                                <ReactCrop
+                                    src={this.props.zf.new_mission[0].preview}
+                                    crop={this.props.zf.crop}
+                                    // onImageLoaded={}
+                                    onComplete={this.onCropComplete}
+                                    onChange={this.onCropChange} />
                             </div> : <div></div>}
                         </div>
                     </div>
@@ -311,19 +356,32 @@ class ZFPage extends React.Component {
                                     <p>Drop an image or click to select a image to upload.</p>
                                 </Dropzone>
                             </div>
-                            <input type="button" value="Submit"
-                                style={{ height: '30px', width: '80px', margin: '2px', color: 'white', backgroundColor: '#5394fc', fontSize: '15px', cursor: 'pointer' }}
+                            <input type="button" value="Submit for full image"
+                                style={{ height: '30px', width: '200px', margin: '2px', color: 'white', backgroundColor: '#5394fc', fontSize: '15px', cursor: 'pointer' }}
                                 disabled={(typeof this.props.zf.new_mission !== 'undefined' && Array.isArray(this.props.zf.new_mission) && this.props.zf.new_mission.length > 0) ? false : true}
                                 onClick={e => {
                                     e.preventDefault();
                                     this.submit_mission();
+                                }} /><br />
+                            <input type="button" value="Submit for cropped image"
+                                style={{ height: '30px', width: '200px', margin: '2px', color: 'white', backgroundColor: '#5394fc', fontSize: '15px', cursor: 'pointer' }}
+                                disabled={(typeof this.props.zf !== 'undefined' && typeof this.props.zf.new_mission !== 'undefined' && Array.isArray(this.props.zf.new_mission) && this.props.zf.new_mission.length > 0) ? false : true}
+                                onClick={e => {
+                                    e.preventDefault();
+                                    this.submit_mission(true);
                                 }} />
                         </div>
                         <div style={{ width: '600px', display: 'inline-block', verticalAlign: 'top' }}>
                             <p>Preview:</p>
                             {(Array.isArray(this.props.zf.new_mission) && this.props.zf.new_mission.length > 0) ? <div>
                                 <p>{this.props.zf.new_mission[0].name}</p>
-                                <img src={this.props.zf.new_mission[0].preview} style={{ maxWidth: '550px' }} />
+                                {/* <img src={this.props.zf.new_mission[0].preview} style={{ maxWidth: '550px' }} /> */}
+                                <ReactCrop
+                                    src={this.props.zf.new_mission[0].preview}
+                                    crop={this.props.zf.crop}
+                                    // onImageLoaded={}
+                                    onComplete={this.onCropComplete}
+                                    onChange={this.onCropChange} />
                             </div> : <div></div>}
                         </div>
                     </div>
@@ -339,24 +397,38 @@ class ZFPage extends React.Component {
                                 <p>Drop an image or click to select a image to upload.</p>
                             </Dropzone>
                         </div>
-                        <input type="button" value="Submit"
-                            style={{ height: '30px', width: '80px', margin: '2px', color: 'white', backgroundColor: '#5394fc', fontSize: '15px', cursor: 'pointer' }}
+                        <input type="button" value="Submit for full image"
+                            style={{ height: '30px', width: '200px', margin: '2px', color: 'white', backgroundColor: '#5394fc', fontSize: '15px', cursor: 'pointer' }}
                             disabled={(typeof this.props.zf !== 'undefined' && typeof this.props.zf.new_mission !== 'undefined' && Array.isArray(this.props.zf.new_mission) && this.props.zf.new_mission.length > 0) ? false : true}
                             onClick={e => {
                                 e.preventDefault();
                                 this.submit_mission();
+                            }} /><br />
+                        <input type="button" value="Submit for cropped image"
+                            style={{ height: '30px', width: '200px', margin: '2px', color: 'white', backgroundColor: '#5394fc', fontSize: '15px', cursor: 'pointer' }}
+                            disabled={(typeof this.props.zf !== 'undefined' && typeof this.props.zf.new_mission !== 'undefined' && Array.isArray(this.props.zf.new_mission) && this.props.zf.new_mission.length > 0) ? false : true}
+                            onClick={e => {
+                                e.preventDefault();
+                                this.submit_mission(true);
                             }} />
                     </div>
                     <div style={{ width: '600px', display: 'inline-block', verticalAlign: 'top' }}>
                         <p>Preview:</p>
                         {(Array.isArray(this.props.zf.new_mission) && this.props.zf.new_mission.length > 0) ? <div>
                             <p>{this.props.zf.new_mission[0].name}</p>
-                            <img src={this.props.zf.new_mission[0].preview} style={{ maxWidth: '550px' }} />
+                            {/* <img src={this.props.zf.new_mission[0].preview} style={{ maxWidth: '550px' }} /> */}
+                            <ReactCrop
+                                src={this.props.zf.new_mission[0].preview}
+                                crop={this.props.zf.crop}
+                                // onImageLoaded={}
+                                onComplete={this.onCropComplete}
+                                onChange={this.onCropChange} />
                         </div> : <div></div>}
                     </div>
                 </div>
             }
         }
+
         return content;
     }
 
