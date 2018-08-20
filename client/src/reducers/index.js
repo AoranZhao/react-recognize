@@ -14,6 +14,7 @@ import ktyc from './ktyc';
 import video from './video';
 import zf from './zf';
 import zfadmin from './zfadmin';
+import ktph from './ktph';
 
 const AppReducers = combineReducers({
     auth,
@@ -27,7 +28,8 @@ const AppReducers = combineReducers({
     ktyc,
     video,
     zf,
-    zfadmin
+    zfadmin,
+    ktph
 })
 
 export default AppReducers;

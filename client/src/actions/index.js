@@ -458,3 +458,19 @@ export const zfadmin_change_solution = (index, value) => ({
     index: index,
     value: value
 })
+
+// kt physics
+export const kt_ph_upload_question_ing = (question) => ({
+    type: 'KT_PH_UPLOAD_QUESTION_ING',
+    question: question
+})
+
+export const kt_ph_upload_question_done = (data) => ({
+    type: 'KT_PH_UPLOAD_QUESTION_DONE',
+    data: data
+})
+
+export const kt_ph_upload_question_err = (err) => ({
+    type: 'KT_PH_UPLOAD_QUESTION_ERR',
+    err: err
+})

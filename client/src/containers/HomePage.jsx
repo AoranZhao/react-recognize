@@ -16,10 +16,11 @@ import KTYCPage from './KnowledgeTagging_yc.jsx';
 import VideoPage from './VideoPage.jsx';
 import ZFPage from './ZF.jsx';
 import ZFAdminPage from './ZFAdmin.jsx';
+import KTPHPage from './KnowledgeTagging_physics.jsx';
 
 const mapStateToProps = state => {
     var obj = {};
-    obj.entries = (typeof state.auth.data === 'undefined' || state.auth.data.type !== 'admin') ? [] : [{ text: 'ZFAdmin', url: '/zfadmin' }, { text: 'Admin', url: '/admin' }];
+    obj.entries = (typeof state.auth.data === 'undefined' || state.auth.data.type !== 'admin') ? [] : [{ text: 'Admin', url: '/admin' }];
     return obj;
 }
 
@@ -38,6 +39,7 @@ let HomePage = ({
         <Route path={`${match.url}/ktyc`} component={KTYCPage} />
         <Route path={`${match.url}/video`} component={VideoPage} />
         <Route path={`${match.url}/zf`} component={ZFPage} />
+        <Route path={`${match.url}/ktph`} component={KTPHPage} />
         <Route path={`${match.url}/zfadmin`} component={ZFAdminPage} />
     </div>
 }
