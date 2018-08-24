@@ -26,9 +26,9 @@ let SideBar = ({
             <div className="sidebar_item">
                 <TabEntry text="KT(Jixin)" to="/home/ktjx" />
             </div> */}
-            <div className="sidebar_item">
+            {/* <div className="sidebar_item">
                 <TabEntry text="KT(Math)" to="/home/ktyc" />
-            </div>
+            </div> */}
             {/* <div className="sidebar_item">
                 <TabEntry text="ZF" to="/home/zf" />
             </div> */}
