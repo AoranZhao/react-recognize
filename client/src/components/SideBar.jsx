@@ -32,9 +32,9 @@ let SideBar = ({
             {/* <div className="sidebar_item">
                 <TabEntry text="ZF" to="/home/zf" />
             </div> */}
-            <div className="sidebar_item">
+            {/* <div className="sidebar_item">
                 <TabEntry text="KT(Physics)" to="/home/ktph" />
-            </div>
+            </div> */}
             {/* <div className="sidebar_item">
                 <TabEntry text="Video" to="/home/video" />
             </div> */}
