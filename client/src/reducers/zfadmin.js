@@ -1,3 +1,5 @@
+import { SSL_OP_LEGACY_SERVER_CONNECT } from "constants";
+
 'use strict';
 
 const zfadmin = (state = {}, action) => {
@@ -33,33 +35,41 @@ const zfadmin = (state = {}, action) => {
             state = { ...state, mission: action.mission };
             return state;
         case 'ZFADMIN_CHANGE_SOLUTION':
-            if (typeof state.solution !== 'undefined' && typeof state.solution.data !== 'undefined') {
-                let data = [];
-                if (Array.isArray(state.solution.data.solution) && state.solution.data.solution.length > 0) {
-                    data = state.solution.data.solution.reduce((arr, val) => {
-                        if (val.index === action.index.toString())
-                            arr = [...arr, { ...val, value: action.value }];
-                        else
-                            arr = [...arr, { ...val }];
-                        return arr;
-                    }, []);
-                } else {
-                    let temp_data = [];
-                    for (var i = 0; i <= 51; i++) {
-                        temp_data.push({
-                            index: i.toString(),
-                            value: ''
-                        });
+            if (typeof state.solution !== 'undefined' && typeof state.solution.data !== 'undefined' && state.solution.data[action.sid] !== 'undefined') {
+                let solutions = state.solution.data.reduce((sol_arr, solution, index) => {
+                    if (index === action.sid) {
+                        let data = [];
+                        if (Array.isArray(solution.solution) && solution.solution.length > 0) {
+                            data = solution.solution.reduce((arr, val) => {
+                                if (val.index === action.index.toString())
+                                    arr = [...arr, { ...val, value: action.value }];
+                                else
+                                    arr = [...arr, { ...val }];
+                                return arr;
+                            }, []);
+                        } else {
+                            let temp_data = [];
+                            for (var i = 0; i <= 52; i++) {
+                                temp_data.push({
+                                    index: i.toString(),
+                                    value: ''
+                                });
+                            }
+                            data = temp_data.reduce((arr, val) => {
+                                if (val.index === action.index.toString())
+                                    arr = [...arr, { ...val, value: action.value }];
+                                else
+                                    arr = [...arr, { ...val }];
+                                return arr;
+                            }, []);
+                        }
+                        solution = { ...solution, solution: [...data] };
                     }
-                    data = temp_data.reduce((arr, val) => {
-                        if (val.index === action.index.toString())
-                            arr = [...arr, { ...val, value: action.value }];
-                        else
-                            arr = [...arr, { ...val }];
-                        return arr;
-                    }, []);
-                }
-                state = { ...state, solution: { ...state.solution, data: { ...state.solution.data, solution: data } } };
+                    sol_arr = [...sol_arr, solution];
+                    return sol_arr;
+                }, [])
+
+                state = { ...state, solution: { ...state.solution, data: [...solutions] } };
             }
             return state;
         default:

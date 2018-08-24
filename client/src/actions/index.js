@@ -401,6 +401,16 @@ export const zf_update_crop = (crop) => ({
     crop: crop
 })
 
+export const zf_add_crop = (crop) => ({
+    type: 'ZF_ADD_CROP',
+    crop: crop
+})
+
+export const zf_rm_crop = (index) => ({
+    type: 'ZF_RM_CROP',
+    index: index
+})
+
 // zf admin
 // get missions
 export const zfadmin_get_missions_ing = () => ({
@@ -453,8 +463,9 @@ export const zfadmin_switch_mission = (mission_id) => ({
     mission: mission_id
 })
 
-export const zfadmin_change_solution = (index, value) => ({
+export const zfadmin_change_solution = (sid, index, value) => ({
     type: 'ZFADMIN_CHANGE_SOLUTION',
+    sid: sid,
     index: index,
     value: value
 })

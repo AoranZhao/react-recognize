@@ -8,7 +8,7 @@ import './ZF.scss';
 
 import ReactCrop from 'react-image-crop';
 
-import { zf_update_crop, zf_add_mission, zf_switch_mission, zf_switch_tab, zf_add_mission_ing, zf_add_mission_done, zf_add_mission_err, zf_get_missions_ing, zf_get_missions_done, zf_get_missions_err, zf_get_solution_ing, zf_get_solution_done, zf_get_solution_err } from '../actions';
+import { zf_add_crop, zf_rm_crop, zf_update_crop, zf_add_mission, zf_switch_mission, zf_switch_tab, zf_add_mission_ing, zf_add_mission_done, zf_add_mission_err, zf_get_missions_ing, zf_get_missions_done, zf_get_missions_err, zf_get_solution_ing, zf_get_solution_done, zf_get_solution_err } from '../actions';
 import { Axios } from '../utils';
 
 const mapStateToProps = state => {
@@ -16,6 +16,12 @@ const mapStateToProps = state => {
 }
 
 const mapDispatchToProps = dispatch => ({
+    sync_zf_add_crop: (crop) => {
+        dispatch(zf_add_crop(crop));
+    },
+    sync_zf_rm_crop: (index) => {
+        dispatch(zf_rm_crop(index));
+    },
     sync_zf_update_crop: (corp) => {
         dispatch(zf_update_crop(corp));
     },
@@ -67,6 +73,8 @@ class ZFPage extends React.Component {
         this.add_mission = this.add_mission.bind(this);
         this.fetch_solution = this.fetch_solution.bind(this);
         this.set_crop = this.set_crop.bind(this);
+        this.add_crop = this.add_crop.bind(this);
+        this.rm_crop = this.rm_crop.bind(this);
 
         this.generate_options = this.generate_options.bind(this);
         this.generate_tab = this.generate_tab.bind(this);
@@ -246,11 +254,16 @@ class ZFPage extends React.Component {
         if (typeof this.props.zf.new_mission !== 'undefined' && Array.isArray(this.props.zf.new_mission) && this.props.zf.new_mission.length > 0) {
             let imgForm = new FormData();
             imgForm.append('images', this.props.zf.new_mission[0]);
-            if (!!cropped && typeof this.props.zf.crop !== 'undefined') {
-                imgForm.set('cord_x', this.props.zf.crop.x);
-                imgForm.set('cord_y', this.props.zf.crop.y);
-                imgForm.set('cord_w', this.props.zf.crop.width);
-                imgForm.set('cord_h', this.props.zf.crop.height);
+            if (!!cropped && Array.isArray(this.props.zf.crops)) {
+                this.props.zf.crops.forEach(crop => {
+                    let cord = {
+                        x: crop.x,
+                        y: crop.y,
+                        width: crop.width,
+                        height: crop.height
+                    }
+                    imgForm.append('cords[]', JSON.stringify(cord))
+                })
             }
             Axios.post('/api/zf/mission', imgForm, {
                 headers: {
@@ -283,6 +296,14 @@ class ZFPage extends React.Component {
 
     set_crop(x, y, w, h) {
         this.props.sync_zf_update_crop({ x: x, y: y, width: w, height: h });
+    }
+
+    add_crop(crop) {
+        this.props.sync_zf_add_crop(crop);
+    }
+
+    rm_crop(index) {
+        this.props.sync_zf_rm_crop(index);
     }
 
     onCropComplete(crop) {
@@ -320,6 +341,12 @@ class ZFPage extends React.Component {
                                     e.preventDefault();
                                     this.submit_mission();
                                 }} /><br />
+                            <input type="button" value="Crop Image"
+                                style={{ height: '30px', width: '200px', margin: '2px', color: 'white', backgroundColor: '#5394fc', fontSize: '15px', cursor: 'pointer' }}
+                                onClick={e => {
+                                    e.preventDefault();
+                                    this.add_crop(this.props.zf.crop);
+                                }} /><br />
                             <input type="button" value="Submit for cropped image"
                                 style={{ height: '30px', width: '200px', margin: '2px', color: 'white', backgroundColor: '#5394fc', fontSize: '15px', cursor: 'pointer' }}
                                 disabled={(typeof this.props.zf !== 'undefined' && typeof this.props.zf.new_mission !== 'undefined' && Array.isArray(this.props.zf.new_mission) && this.props.zf.new_mission.length > 0) ? false : true}
@@ -332,17 +359,39 @@ class ZFPage extends React.Component {
                             </div>
                         </div>
                         <div style={{ width: '600px', display: 'inline-block', verticalAlign: 'top' }}>
-                            <p>Preview:</p>
-                            {(Array.isArray(this.props.zf.new_mission) && this.props.zf.new_mission.length > 0) ? <div>
-                                <p>{this.props.zf.new_mission[0].name}</p>
-                                {/* <img src={this.props.zf.new_mission[0].preview} style={{ maxWidth: '550px' }} /> */}
-                                <ReactCrop
-                                    src={this.props.zf.new_mission[0].preview}
-                                    crop={this.props.zf.crop}
-                                    // onImageLoaded={}
-                                    onComplete={this.onCropComplete}
-                                    onChange={this.onCropChange} />
-                            </div> : <div></div>}
+                            <Tabs>
+                                <TabList>
+                                    <Tab>Preview</Tab>
+                                    <Tab>Cropped</Tab>
+                                </TabList>
+                                <TabPanel>
+                                    <p>Preview:</p>
+                                    {(Array.isArray(this.props.zf.new_mission) && this.props.zf.new_mission.length > 0) ? <div>
+                                        <p>{this.props.zf.new_mission[0].name}</p>
+                                        {/* <img src={this.props.zf.new_mission[0].preview} style={{ maxWidth: '550px' }} /> */}
+                                        <ReactCrop
+                                            src={this.props.zf.new_mission[0].preview}
+                                            crop={this.props.zf.crop}
+                                            // onImageLoaded={}
+                                            onComplete={this.onCropComplete}
+                                            onChange={this.onCropChange} />
+                                    </div> : <div></div>}
+                                </TabPanel>
+                                <TabPanel>
+                                    <p>Cropped</p>
+                                    {(Array.isArray(this.props.zf.crops)) ? <div>
+                                        {this.props.zf.crops.map((crop, index) => {
+                                            return <div key={index}>
+                                                <a onClick={e => {
+                                                    e.preventDefault();
+                                                    this.rm_crop(index);
+                                                }}>delete</a>
+                                                <p>{index + 1}: {JSON.stringify(crop)}</p>
+                                            </div>
+                                        })}
+                                    </div> : <div></div>}
+                                </TabPanel>
+                            </Tabs>
                         </div>
                     </div>
                 } else {
@@ -363,6 +412,12 @@ class ZFPage extends React.Component {
                                     e.preventDefault();
                                     this.submit_mission();
                                 }} /><br />
+                            <input type="button" value="Crop Image"
+                                style={{ height: '30px', width: '200px', margin: '2px', color: 'white', backgroundColor: '#5394fc', fontSize: '15px', cursor: 'pointer' }}
+                                onClick={e => {
+                                    e.preventDefault();
+                                    this.add_crop(this.props.zf.crop);
+                                }} /><br />
                             <input type="button" value="Submit for cropped image"
                                 style={{ height: '30px', width: '200px', margin: '2px', color: 'white', backgroundColor: '#5394fc', fontSize: '15px', cursor: 'pointer' }}
                                 disabled={(typeof this.props.zf !== 'undefined' && typeof this.props.zf.new_mission !== 'undefined' && Array.isArray(this.props.zf.new_mission) && this.props.zf.new_mission.length > 0) ? false : true}
@@ -372,17 +427,39 @@ class ZFPage extends React.Component {
                                 }} />
                         </div>
                         <div style={{ width: '600px', display: 'inline-block', verticalAlign: 'top' }}>
-                            <p>Preview:</p>
-                            {(Array.isArray(this.props.zf.new_mission) && this.props.zf.new_mission.length > 0) ? <div>
-                                <p>{this.props.zf.new_mission[0].name}</p>
-                                {/* <img src={this.props.zf.new_mission[0].preview} style={{ maxWidth: '550px' }} /> */}
-                                <ReactCrop
-                                    src={this.props.zf.new_mission[0].preview}
-                                    crop={this.props.zf.crop}
-                                    // onImageLoaded={}
-                                    onComplete={this.onCropComplete}
-                                    onChange={this.onCropChange} />
-                            </div> : <div></div>}
+                            <Tabs>
+                                <TabList>
+                                    <Tab>Preview</Tab>
+                                    <Tab>Cropped</Tab>
+                                </TabList>
+                                <TabPanel>
+                                    <p>Preview:</p>
+                                    {(Array.isArray(this.props.zf.new_mission) && this.props.zf.new_mission.length > 0) ? <div>
+                                        <p>{this.props.zf.new_mission[0].name}</p>
+                                        {/* <img src={this.props.zf.new_mission[0].preview} style={{ maxWidth: '550px' }} /> */}
+                                        <ReactCrop
+                                            src={this.props.zf.new_mission[0].preview}
+                                            crop={this.props.zf.crop}
+                                            // onImageLoaded={}
+                                            onComplete={this.onCropComplete}
+                                            onChange={this.onCropChange} />
+                                    </div> : <div></div>}
+                                </TabPanel>
+                                <TabPanel>
+                                    <p>Cropped</p>
+                                    {(Array.isArray(this.props.zf.crops)) ? <div>
+                                        {this.props.zf.crops.map((crop, index) => {
+                                            return <div key={index}>
+                                                <a onClick={e => {
+                                                    e.preventDefault();
+                                                    this.rm_crop(index);
+                                                }}>delete</a>
+                                                <p>{index + 1}: {JSON.stringify(crop)}</p>
+                                            </div>
+                                        })}
+                                    </div> : <div></div>}
+                                </TabPanel>
+                            </Tabs>
                         </div>
                     </div>
                 }
@@ -404,6 +481,12 @@ class ZFPage extends React.Component {
                                 e.preventDefault();
                                 this.submit_mission();
                             }} /><br />
+                        <input type="button" value="Crop Image"
+                            style={{ height: '30px', width: '200px', margin: '2px', color: 'white', backgroundColor: '#5394fc', fontSize: '15px', cursor: 'pointer' }}
+                            onClick={e => {
+                                e.preventDefault();
+                                this.add_crop(this.props.zf.crop);
+                            }} /><br />
                         <input type="button" value="Submit for cropped image"
                             style={{ height: '30px', width: '200px', margin: '2px', color: 'white', backgroundColor: '#5394fc', fontSize: '15px', cursor: 'pointer' }}
                             disabled={(typeof this.props.zf !== 'undefined' && typeof this.props.zf.new_mission !== 'undefined' && Array.isArray(this.props.zf.new_mission) && this.props.zf.new_mission.length > 0) ? false : true}
@@ -413,17 +496,39 @@ class ZFPage extends React.Component {
                             }} />
                     </div>
                     <div style={{ width: '600px', display: 'inline-block', verticalAlign: 'top' }}>
-                        <p>Preview:</p>
-                        {(Array.isArray(this.props.zf.new_mission) && this.props.zf.new_mission.length > 0) ? <div>
-                            <p>{this.props.zf.new_mission[0].name}</p>
-                            {/* <img src={this.props.zf.new_mission[0].preview} style={{ maxWidth: '550px' }} /> */}
-                            <ReactCrop
-                                src={this.props.zf.new_mission[0].preview}
-                                crop={this.props.zf.crop}
-                                // onImageLoaded={}
-                                onComplete={this.onCropComplete}
-                                onChange={this.onCropChange} />
-                        </div> : <div></div>}
+                        <Tabs>
+                            <TabList>
+                                <Tab>Preview</Tab>
+                                <Tab>Cropped</Tab>
+                            </TabList>
+                            <TabPanel>
+                                <p>Preview:</p>
+                                {(Array.isArray(this.props.zf.new_mission) && this.props.zf.new_mission.length > 0) ? <div>
+                                    <p>{this.props.zf.new_mission[0].name}</p>
+                                    {/* <img src={this.props.zf.new_mission[0].preview} style={{ maxWidth: '550px' }} /> */}
+                                    <ReactCrop
+                                        src={this.props.zf.new_mission[0].preview}
+                                        crop={this.props.zf.crop}
+                                        // onImageLoaded={}
+                                        onComplete={this.onCropComplete}
+                                        onChange={this.onCropChange} />
+                                </div> : <div></div>}
+                            </TabPanel>
+                            <TabPanel>
+                                <p>Cropped</p>
+                                {(Array.isArray(this.props.zf.crops)) ? <div>
+                                    {this.props.zf.crops.map((crop, index) => {
+                                        return <div key={index}>
+                                            <a onClick={e => {
+                                                e.preventDefault();
+                                                this.rm_crop(index);
+                                            }}>delete</a>
+                                            <p>{index + 1}: {JSON.stringify(crop)}</p>
+                                        </div>
+                                    })}
+                                </div> : <div></div>}
+                            </TabPanel>
+                        </Tabs>
                     </div>
                 </div>
             }
@@ -456,7 +561,7 @@ class ZFPage extends React.Component {
                 <p>Solution: Coming soon....</p>
             </div>
         } else {
-            if (typeof this.props.zf !== 'undefined' && typeof this.props.zf.solution !== 'undefined' && typeof this.props.zf.solution.data !== 'undefined' && Object.keys(this.props.zf.solution.data).length > 0) {
+            if (typeof this.props.zf !== 'undefined' && typeof this.props.zf.solution !== 'undefined' && typeof this.props.zf.solution.data !== 'undefined') {
                 content = <div style={{ width: '600px' }}>
                     <p>Solution: </p>
                     <input type="button" value="Get Solution" style={{ height: '30px', width: '120px', margin: '2px', color: 'white', backgroundColor: '#5394fc', fontSize: '15px', cursor: 'pointer' }}
@@ -464,44 +569,54 @@ class ZFPage extends React.Component {
                             e.preventDefault();
                             this.fetch_solution()
                         }} />
-                    <div>
-                        <p>{`Solution id: ${this.props.zf.solution.data.id}`}</p>
-                        <p>{`created at ${this.props.zf.solution.data.created_date}`}</p>
+                    {(Array.isArray(this.props.zf.solution.data)) ? <div>
                         <Tabs>
                             <TabList>
-                                <Tab>Image</Tab>
-                                <Tab>List</Tab>
+                                {this.props.zf.solution.data.map((solution, index) => {
+                                    return <Tab key={index}>{index + 1}</Tab>;
+                                })}
                             </TabList>
-                            <TabPanel>
-                                <div>
-                                    <p>Image: </p>
-                                    <img src={this.props.zf.solution.data.image} style={{ maxWidth: '550px' }} />
-                                </div>
-                            </TabPanel>
-                            <TabPanel>
-                                <div>
-                                    <table>
-                                        <thead>
-                                            <tr>
-                                                <td>Index</td>
-                                                <td style={{ width: '300px' }}>Value</td>
-                                                {/* <td style={{ width: '200px' }}>Image</td> */}
-                                            </tr>
-                                        </thead>
-                                        <tbody>
-                                            {this.props.zf.solution.data.solution.map((sol, index) => {
-                                                return <tr key={index}>
-                                                    <td><p>{sol.index}</p></td>
-                                                    <td style={{ width: '300px' }}><p>{sol.value}</p></td>
-                                                    {/* <td>{(!!sol.image_url) ? <img src={sol.image_url} style={{ maxWidth: '200px' }} /> : <p></p>}</td> */}
-                                                </tr>
-                                            })}
-                                        </tbody>
-                                    </table>
-                                </div>
-                            </TabPanel>
-                        </Tabs>
-                    </div>
+                            {this.props.zf.solution.data.map((solution, index) => {
+                                return <TabPanel key={index}>
+                                    <p>{`Solution id: ${solution.id}`}</p>
+                                    <p>{`created at ${solution.created_date}`}</p>
+                                    <Tabs>
+                                        <TabList>
+                                            <Tab>Image</Tab>
+                                            <Tab>List</Tab>
+                                        </TabList>
+                                        <TabPanel>
+                                            <div>
+                                                <p>Image: </p>
+                                                <img src={solution.image} style={{ maxWidth: '550px' }} />
+                                            </div>
+                                        </TabPanel>
+                                        <TabPanel>
+                                            <div>
+                                                <table>
+                                                    <thead>
+                                                        <tr>
+                                                            <td>Index</td>
+                                                            <td style={{ width: '300px' }}>Value</td>
+                                                            {/* <td style={{ width: '200px' }}>Image</td> */}
+                                                        </tr>
+                                                    </thead>
+                                                    <tbody>
+                                                        {solution.solution.map((sol, index) => {
+                                                            return <tr key={index}>
+                                                                <td><p>{sol.index}</p></td>
+                                                                <td style={{ width: '300px' }}><p>{sol.value}</p></td>
+                                                                {/* <td>{(!!sol.image_url) ? <img src={sol.image_url} style={{ maxWidth: '200px' }} /> : <p></p>}</td> */}
+                                                            </tr>
+                                                        })}
+                                                    </tbody>
+                                                </table>
+                                            </div>
+                                        </TabPanel>
+                                    </Tabs>
+                                </TabPanel>
+                            })}
+                        </Tabs></div> : <div></div>}
                 </div>
             } else {
                 content = <div>

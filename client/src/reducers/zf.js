@@ -41,6 +41,26 @@ const zf = (state = {}, action) => {
         case 'ZF_UPDATE_CROP':
             state = { ...state, crop: { ...action.crop } };
             return state;
+        case 'ZF_ADD_CROP':
+            if (Array.isArray(state.crops)) {
+                state = { ...state, crops: [...state.crops, action.crop] };
+            } else {
+                state = { ...state, crops: [action.crop] };
+            }
+            return state;
+        case 'ZF_RM_CROP':
+            let crops = [];
+            if (Array.isArray(state.crops)) {
+                state.crops.forEach((crop, index) => {
+                    if (index !== action.index) {
+                        crops = [...crops, crop];
+                    }
+                })
+                state = { ...state, crops: crops };
+            } else {
+                state = { ...state, crops: [] };
+            }
+            return state;
         default:
             return state;
     }
