@@ -66,7 +66,7 @@ class KTPHPage extends React.Component {
     generate_question_image() {
         let el = <div></div>;
         if (typeof this.props.ktph.output === 'object') {
-            el = <div style={{ height: '600px', width: '800px' }}><Tree translate={{ x: 100, y: 250 }} data={this.props.ktph.output} orientation='vertical' /></div>
+            el = <div style={{ height: '600px', width: '800px' }}><Tree translate={{ x: 100, y: 250 }} data={this.output_convert(this.props.ktph.output)} orientation='horizontal' /></div>
         }
         return <div>
             {/* <p>{JSON.stringify(this.props.ktjx.output)}</p> */}
@@ -95,15 +95,8 @@ class KTPHPage extends React.Component {
     }
 
     output_convert(output) {
-        let result = '';
-        if (Array.isArray(output)) {
-            output.forEach((out, index) => {
-                console.log(index, out);
-                result += `Section - ${index + 1}: ${Array.isArray(out) ? out.join(',') : out.toString()}\n`;
-            })
-        } else {
-            result = output;
-        }
+        let result = [];
+        result.push(output);
         return result;
     }
 
