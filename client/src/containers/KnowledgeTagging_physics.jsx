@@ -66,7 +66,7 @@ class KTPHPage extends React.Component {
     generate_question_image() {
         let el = <div></div>;
         if (typeof this.props.ktph.output === 'object') {
-            el = <div style={{ height: '600px', width: '800px' }}><pre>{this.output_convert(this.props.ktph.output)}</pre></div>
+            el = <div style={{ height: '600px', width: '800px' }}><Tree translate={{ x: 100, y: 250 }} data={this.props.ktph.output} orientation='vertical' /></div>
         }
         return <div>
             {/* <p>{JSON.stringify(this.props.ktjx.output)}</p> */}
