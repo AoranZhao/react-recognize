@@ -280,6 +280,48 @@ class DataLabelPage extends React.Component {
                         }}>
                         <p>Refresh</p>
                     </a>
+                    <div style={{ width: '250px', height: '40px', display: 'inline-block', margin: '2px' }}>
+                        <a style={{ color: (typeof this.props.datalabel.page !== 'undefined' && this.props.datalabel.page > 1) ? 'black' : '#DDDDDD', cursor: 'pointer', width: '60px', height: '36px', display: 'inline-block', marginRight: '2px', border: '1px solid #AAAAAA' }}
+                            onClick={e => {
+                                e.preventDefault();
+                                if (typeof this.props.datalabel.page !== 'undefined' && this.props.datalabel.page > 1) {
+                                    let page = this.props.datalabel.page - 1;
+                                    this.props.sync_dl_update_page(page);
+                                    this.fetch_missions();
+                                }
+                            }}>
+                            Previous
+                        </a>
+                        <input type="text" style={{ width: '50px', height: '36px', margin: '0', padding: '0', display: 'inline-block', verticalAlign: 'top', border: '1px solid #AAAAAA' }} value={(typeof this.props.datalabel.page !== 'undefined') ? this.props.datalabel.page : 1} onClick={e => {
+                            e.preventDefault();
+                            try {
+                                let page = parseInt(e.target.value);
+                                this.props.sync_dl_update_page(page);
+                            } catch (e) {
+
+                            }
+                        }} />
+                        <a style={{ color: (typeof this.props.datalabel.missions !== 'undefined' && Array.isArray(this.props.datalabel.missions.data) && this.props.datalabel.missions.data.length >= this.amount_per_page) ? 'black' : '#DDDDDD', cursor: 'pointer', width: '60px', height: '36px', display: 'inline-block', marginLeft: '2px', border: '1px solid #AAAAAA' }}
+                            onClick={e => {
+                                e.preventDefault();
+                                if (typeof this.props.datalabel.missions !== 'undefined' && Array.isArray(this.props.datalabel.missions.data) && this.props.datalabel.missions.data.length >= this.amount_per_page) {
+                                    this.fetch_missions();
+                                }
+                            }}>
+                            Jump
+                        </a>
+                        <a style={{ color: (typeof this.props.datalabel.missions !== 'undefined' && Array.isArray(this.props.datalabel.missions.data) && this.props.datalabel.missions.data.length >= this.amount_per_page) ? 'black' : '#DDDDDD', cursor: 'pointer', width: '60px', height: '36px', display: 'inline-block', marginLeft: '2px', border: '1px solid #AAAAAA' }}
+                            onClick={e => {
+                                e.preventDefault();
+                                if (typeof this.props.datalabel.missions !== 'undefined' && Array.isArray(this.props.datalabel.missions.data) && this.props.datalabel.missions.data.length >= this.amount_per_page) {
+                                    let page = this.props.datalabel.page + 1;
+                                    this.props.sync_dl_update_page(page);
+                                    this.fetch_missions();
+                                }
+                            }}>
+                            Next
+                        </a>
+                    </div>
                 </div>
                 <div>
                     {(this.props.datalabel.missions.data.length > 0) ? this.props.datalabel.missions.data.map((mission, index) => {
