@@ -16,10 +16,12 @@ import KTYCPage from './KnowledgeTagging_yc.jsx';
 import VideoPage from './VideoPage.jsx';
 import ZFPage from './ZF.jsx';
 import ZFAdminPage from './ZFAdmin.jsx';
+import DataLabelPage from './DataLabelPage.jsx';
+import DataLabelAdmPage from './DataLabelAdmPage.jsx';
 
 const mapStateToProps = state => {
     var obj = {};
-    obj.entries = (typeof state.auth.data === 'undefined' || state.auth.data.type !== 'admin') ? [] : [{ text: 'ZFAdmin', url: '/zfadmin' }, { text: 'Admin', url: '/admin' }];
+    obj.entries = (typeof state.auth.data === 'undefined' || state.auth.data.type !== 'admin') ? [] : [{ text: 'DataLabelAdm', url: '/datalabeladm' }, { text: 'Admin', url: '/admin' }];
     return obj;
 }
 
@@ -39,6 +41,8 @@ let HomePage = ({
         <Route path={`${match.url}/video`} component={VideoPage} />
         <Route path={`${match.url}/zf`} component={ZFPage} />
         <Route path={`${match.url}/zfadmin`} component={ZFAdminPage} />
+        <Route path={`${match.url}/datalabel`} component={DataLabelPage} />
+        <Route path={`${match.url}/datalabeladm`} component={DataLabelAdmPage} />
     </div>
 }
 

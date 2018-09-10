@@ -469,3 +469,149 @@ export const zfadmin_change_solution = (sid, index, value) => ({
     index: index,
     value: value
 })
+
+// ====== DataLabel ==========
+// get missions
+export const dl_get_missions_ing = () => ({
+    type: 'DL_GET_MISSIONS_ING'
+})
+
+export const dl_get_missions_done = (data) => ({
+    type: 'DL_GET_MISSIONS_DONE',
+    data: data
+})
+
+export const dl_get_missions_err = (err) => ({
+    type: 'DL_GET_MISSIONS_ERR',
+    err: err
+})
+
+// add mission
+export const dl_add_mission_ing = () => ({
+    type: 'DL_ADD_MISSION_ING'
+})
+
+export const dl_add_mission_done = () => ({
+    type: 'DL_ADD_MISSION_DONE'
+})
+
+export const dl_add_mission_err = (err) => ({
+    type: 'DL_ADD_MISSION_ERR',
+    err: err
+})
+
+// update mission
+export const dl_update_mission_ing = () => ({
+    type: 'DL_UPDATE_MISSION_ING'
+})
+
+export const dl_update_mission_done = () => ({
+    type: 'DL_UPDATE_MISSION_DONE'
+})
+
+export const dl_update_mission_err = (err) => ({
+    type: 'DL_UPDATE_MISSION_ERR',
+    err: err
+})
+
+// other ops
+export const dl_switch_tab = (tab) => ({
+    type: 'DL_SWITCH_TAB',
+    tab: tab
+})
+
+export const dl_switch_mission = (id) => ({
+    type: 'DL_SWITCH_MISSION',
+    id: id
+})
+
+export const dl_update_new_mission = (mission) => ({
+    type: 'DL_UPDATE_NEW_MISSION',
+    new: mission
+})
+
+export const dl_update_page = (page) => ({
+    type: 'DL_UPDATE_PAGE',
+    page: page
+})
+
+export const dl_update_mission = (mission) => ({
+    type: 'DL_UPDATE_MISSION',
+    mission: mission
+})
+
+export const dl_reset_mission_image = () => ({
+    type: 'DL_RESET_MISSION_IMAGE'
+})
+
+export const dl_add_mission_image = (index, image) => ({
+    type: 'DL_ADD_MISSION_IMAGE',
+    index: index,
+    image: image
+})
+
+export const dl_remove_mission_image = (index) => ({
+    type: 'DL_REMOVE_MISSION_IMAGE',
+    index: index
+})
+
+// ====== DataLabelAdm ==========
+// get missions
+export const dladm_get_missions_ing = () => ({
+    type: 'DLADM_GET_MISSIONS_ING'
+})
+
+export const dladm_get_missions_done = (data) => ({
+    type: 'DLADM_GET_MISSIONS_DONE',
+    data: data
+})
+
+export const dladm_get_missions_err = (err) => ({
+    type: 'DLADM_GET_MISSIONS_ERR',
+    err: err
+})
+
+// update mission
+export const dladm_update_mission_ing = () => ({
+    type: 'DLADM_UPDATE_MISSION_ING'
+})
+
+export const dladm_update_mission_done = () => ({
+    type: 'DLADM_UPDATE_MISSION_DONE'
+})
+
+export const dladm_update_mission_err = (err) => ({
+    type: 'DLADM_UPDATE_MISSION_ERR',
+    err: err
+})
+
+// other ops
+export const dladm_switch_mission = (id) => ({
+    type: 'DLADM_SWITCH_MISSION',
+    id: id
+})
+
+export const dladm_update_page = (page) => ({
+    type: 'DLADM_UPDATE_PAGE',
+    page: page
+})
+
+export const dladm_update_mission = (mission) => ({
+    type: 'DLADM_UPDATE_MISSION',
+    mission: mission
+})
+
+export const dladm_reset_mission_image = () => ({
+    type: 'DLADM_RESET_MISSION_IMAGE'
+})
+
+export const dladm_add_mission_image = (index, image) => ({
+    type: 'DLADM_ADD_MISSION_IMAGE',
+    index: index,
+    image: image
+})
+
+export const dladm_remove_mission_image = (index) => ({
+    type: 'DLADM_REMOVE_MISSION_IMAGE',
+    index: index
+})
