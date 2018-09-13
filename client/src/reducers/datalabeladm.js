@@ -24,7 +24,10 @@ const datalabeladm = (state = {}, action) => {
             state = { ...state, missionId: action.id };
             return state;
         case 'DLADM_UPDATE_PAGE':
-            state = { ...state, page: action.page };
+            state = { ...state, page: action.page, jumpto: action.page };
+            return state;
+        case 'DLADM_UPDATE_JUMPTO':
+            state = { ...state, jumpto: action.page };
             return state;
         case 'DLADM_UPDATE_MISSION':
             state = { ...state, mission: { ...action.mission } };

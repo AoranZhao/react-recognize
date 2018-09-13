@@ -10,7 +10,7 @@ import uuidv1 from 'uuid/v1';
 import ReactCrop from 'react-image-crop';
 
 import {
-    dl_switch_tab, dl_switch_mission, dl_update_new_mission, dl_update_page, dl_update_mission,
+    dl_switch_tab, dl_switch_mission, dl_update_new_mission, dl_update_page, dl_update_jumpto, dl_update_mission,
     dl_reset_mission_image, dl_add_mission_image, dl_remove_mission_image,
     dl_get_missions_ing, dl_get_missions_done, dl_get_missions_err,
     dl_add_mission_ing, dl_add_mission_done, dl_add_mission_err,
@@ -38,6 +38,9 @@ const mapDispatchToProps = dispatch => ({
     },
     sync_dl_update_page: (page) => {
         dispatch(dl_update_page(page));
+    },
+    sync_dl_update_jumpto: (page) => {
+        dispatch(dl_update_jumpto(page));
     },
     sync_dl_update_new_mission: (mission) => {
         dispatch(dl_update_new_mission(mission));
@@ -98,29 +101,36 @@ class DataLabelPage extends React.Component {
 
     componentWillMount() {
         this.props.sync_dl_update_page(1);
-        this.fetch_missions();
+        this.fetch_missions(1);
         this.update_new_mission({ status: 'done', crop: { x: 10, y: 10, width: 80, height: 80 }, crops: [], data: {} });
         this.switchTab('missions');
     }
 
-    fetch_missions() {
+    fetch_missions(page) {
         this.props.promise_dl_get_missions_ing();
-        Axios.get(`/api/datalabels?page=${this.props.datalabel.page || 1}&amount=${this.amount_per_page}`, {
+        Axios.get(`/api/datalabels?page=${page}&amount=${this.amount_per_page}`, {
             headers: {
                 'x-token': this.props.auth.data.token,
                 'Content-Type': 'application/json'
             }
         }).then(response => {
-            this.props.promise_dl_get_missions_done(response.data);
-            let objs = response.data.reduce((obj, mission) => {
-                obj[mission.id] = mission;
-                return obj;
-            }, {})
-            if (Object.keys(objs).length > 0) {
-                if (Object.keys(objs).indexOf(this.props.datalabel.missionId) === -1) {
-                    this.switchMission(objs[Object.keys(objs)[0]]);
-                } else {
-                    this.switchMission(objs[this.props.datalabel.missionId]);
+            let page = this.props.datalabel.page;
+            if (page > 1 && Array.isArray(response.data) && response.data.length === 0) {
+                page--;
+                this.props.sync_dl_update_page(page);
+                this.fetch_missions(page);
+            } else {
+                this.props.promise_dl_get_missions_done(response.data);
+                let objs = response.data.reduce((obj, mission) => {
+                    obj[mission.id] = mission;
+                    return obj;
+                }, {})
+                if (Object.keys(objs).length > 0) {
+                    if (Object.keys(objs).indexOf(this.props.datalabel.missionId) === -1) {
+                        this.switchMission(objs[Object.keys(objs)[0]]);
+                    } else {
+                        this.switchMission(objs[this.props.datalabel.missionId]);
+                    }
                 }
             }
         }).catch(err => {
@@ -215,7 +225,7 @@ class DataLabelPage extends React.Component {
         this.props.sync_dl_switch_tab(tab);
         switch (tab) {
             case 'missions':
-                this.fetch_missions();
+                this.fetch_missions(this.props.datalabel.page || 1);
                 break;
             case 'new':
                 break;
@@ -276,7 +286,7 @@ class DataLabelPage extends React.Component {
                         onClick={e => {
                             e.preventDefault();
                             this.props.sync_dl_update_page(1);
-                            this.fetch_missions();
+                            this.fetch_missions(1);
                         }}>
                         <p>Refresh</p>
                     </a>
@@ -287,36 +297,35 @@ class DataLabelPage extends React.Component {
                                 if (typeof this.props.datalabel.page !== 'undefined' && this.props.datalabel.page > 1) {
                                     let page = this.props.datalabel.page - 1;
                                     this.props.sync_dl_update_page(page);
-                                    this.fetch_missions();
+                                    this.fetch_missions(page);
                                 }
                             }}>
                             Previous
                         </a>
-                        <input type="text" style={{ width: '50px', height: '36px', margin: '0', padding: '0', display: 'inline-block', verticalAlign: 'top', border: '1px solid #AAAAAA' }} value={(typeof this.props.datalabel.page !== 'undefined') ? this.props.datalabel.page : 1} onClick={e => {
+                        <form style={{ width: '50px', height: '36px', margin: '0 2px 0 0', padding: '0', display: 'inline-block', verticalAlign: 'top' }} onSubmit={e => {
                             e.preventDefault();
                             try {
-                                let page = parseInt(e.target.value);
-                                this.props.sync_dl_update_page(page);
-                            } catch (e) {
-
-                            }
-                        }} />
-                        <a style={{ color: (typeof this.props.datalabel.missions !== 'undefined' && Array.isArray(this.props.datalabel.missions.data) && this.props.datalabel.missions.data.length >= this.amount_per_page) ? 'black' : '#DDDDDD', cursor: 'pointer', width: '60px', height: '36px', display: 'inline-block', marginLeft: '2px', border: '1px solid #AAAAAA' }}
-                            onClick={e => {
-                                e.preventDefault();
-                                if (typeof this.props.datalabel.missions !== 'undefined' && Array.isArray(this.props.datalabel.missions.data) && this.props.datalabel.missions.data.length >= this.amount_per_page) {
-                                    this.fetch_missions();
+                                let page = parseInt(this.props.datalabel.jumpto.replace(/(^\s*)|(\s*$)/g, ''));
+                                if (page !== this.props.datalabel.page) {
+                                    this.props.sync_dl_update_page(page);
+                                    this.fetch_missions(page);
                                 }
-                            }}>
-                            Jump
-                        </a>
+                            } catch (e) {
+                                alert('please input valid page number.');
+                            }
+                        }}>
+                            <input type="text" style={{ border: 'none', width: '48px', height: '34px', border: '1px solid #AAAAAA' }} value={(typeof this.props.datalabel.jumpto !== 'undefined') ? this.props.datalabel.jumpto : 1} onChange={e => {
+                                e.preventDefault();
+                                this.props.sync_dl_update_jumpto(e.target.value);
+                            }} />
+                        </form>
                         <a style={{ color: (typeof this.props.datalabel.missions !== 'undefined' && Array.isArray(this.props.datalabel.missions.data) && this.props.datalabel.missions.data.length >= this.amount_per_page) ? 'black' : '#DDDDDD', cursor: 'pointer', width: '60px', height: '36px', display: 'inline-block', marginLeft: '2px', border: '1px solid #AAAAAA' }}
                             onClick={e => {
                                 e.preventDefault();
                                 if (typeof this.props.datalabel.missions !== 'undefined' && Array.isArray(this.props.datalabel.missions.data) && this.props.datalabel.missions.data.length >= this.amount_per_page) {
                                     let page = this.props.datalabel.page + 1;
                                     this.props.sync_dl_update_page(page);
-                                    this.fetch_missions();
+                                    this.fetch_missions(page);
                                 }
                             }}>
                             Next
@@ -345,7 +354,8 @@ class DataLabelPage extends React.Component {
                     <a style={{ cursor: 'pointer', width: '250px', display: 'inline-block', margin: '2px', border: '1px solid #AAAAAA' }}
                         onClick={e => {
                             e.preventDefault();
-                            this.fetch_missions();
+                            this.props.sync_dl_update_page(1);
+                            this.fetch_missions(1);
                         }}>
                         <p>Refresh</p>
                     </a>

@@ -9,7 +9,7 @@ import './DataLabelAdmPage.scss';
 import ReactCrop from 'react-image-crop';
 
 import {
-    dladm_switch_mission, dladm_update_page, dladm_update_mission,
+    dladm_switch_mission, dladm_update_page, dladm_update_jumpto, dladm_update_mission,
     dladm_reset_mission_image, dladm_add_mission_image, dladm_remove_mission_image,
     dladm_get_missions_ing, dladm_get_missions_done, dladm_get_missions_err,
     dladm_update_mission_ing, dladm_update_mission_done, dladm_update_mission_err
@@ -36,6 +36,9 @@ const mapDispatchToProps = dispatch => ({
     },
     sync_dladm_update_page: (page) => {
         dispatch(dladm_update_page(page));
+    },
+    sync_dladm_update_jumpto: (page) => {
+        dispatch(dladm_update_jumpto(page));
     },
     sync_dladm_switch_mission: (id) => {
         dispatch(dladm_switch_mission(id));
@@ -64,7 +67,7 @@ class DataLabelAdmPage extends React.Component {
     constructor(props) {
         super(props);
         this.fetch_missions = this.fetch_missions.bind(this);
-        this.amount_per_page = 100;
+        this.amount_per_page = 2;
 
         this.generate_missions = this.generate_missions.bind(this);
         this.generate_missions_list = this.generate_missions_list.bind(this);
@@ -76,27 +79,34 @@ class DataLabelAdmPage extends React.Component {
 
     componentWillMount() {
         this.props.sync_dladm_update_page(1);
-        this.fetch_missions();
+        this.fetch_missions(1);
     }
 
-    fetch_missions() {
+    fetch_missions(page) {
         this.props.promise_dladm_get_missions_ing();
-        Axios.get(`/api/datalabels?page=${this.props.datalabeladm.page || 1}&amount=${this.amount_per_page}&admin=yes`, {
+        Axios.get(`/api/datalabels?page=${page}&amount=${this.amount_per_page}&admin=yes`, {
             headers: {
                 'x-token': this.props.auth.data.token,
                 'Content-Type': 'application/json'
             }
         }).then(response => {
-            this.props.promise_dladm_get_missions_done(response.data);
-            let objs = response.data.reduce((obj, mission) => {
-                obj[mission.id] = mission;
-                return obj;
-            }, {})
-            if (Object.keys(objs).length > 0) {
-                if (Object.keys(objs).indexOf(this.props.datalabeladm.missionId) === -1) {
-                    this.switchMission(objs[Object.keys(objs)[0]]);
-                } else {
-                    this.switchMission(objs[this.props.datalabeladm.missionId]);
+            let page = this.props.datalabeladm.page;
+            if (page > 1 && Array.isArray(response.data) && response.data.length === 0) {
+                page--;
+                this.props.sync_dladm_update_page(page);
+                this.fetch_missions(page);
+            } else {
+                this.props.promise_dladm_get_missions_done(response.data);
+                let objs = response.data.reduce((obj, mission) => {
+                    obj[mission.id] = mission;
+                    return obj;
+                }, {})
+                if (Object.keys(objs).length > 0) {
+                    if (Object.keys(objs).indexOf(this.props.datalabeladm.missionId) === -1) {
+                        this.switchMission(objs[Object.keys(objs)[0]]);
+                    } else {
+                        this.switchMission(objs[this.props.datalabeladm.missionId]);
+                    }
                 }
             }
         }).catch(err => {
@@ -194,10 +204,51 @@ class DataLabelAdmPage extends React.Component {
                         onClick={e => {
                             e.preventDefault();
                             this.props.sync_dladm_update_page(1);
-                            this.fetch_missions();
+                            this.fetch_missions(1);
                         }}>
                         <p>Refresh</p>
                     </a>
+                    <div style={{ width: '250px', height: '40px', display: 'inline-block', margin: '2px' }}>
+                        <a style={{ color: (typeof this.props.datalabeladm.page !== 'undefined' && this.props.datalabeladm.page > 1) ? 'black' : '#DDDDDD', cursor: 'pointer', width: '60px', height: '36px', display: 'inline-block', marginRight: '2px', border: '1px solid #AAAAAA' }}
+                            onClick={e => {
+                                e.preventDefault();
+                                if (typeof this.props.datalabeladm.page !== 'undefined' && this.props.datalabeladm.page > 1) {
+                                    let page = this.props.datalabeladm.page - 1;
+                                    this.props.sync_dladm_update_page(page);
+                                    this.fetch_missions(page);
+                                }
+                            }}>
+                            Previous
+                        </a>
+                        <form style={{ width: '50px', height: '36px', margin: '0 2px 0 0', padding: '0', display: 'inline-block', verticalAlign: 'top' }} onSubmit={e => {
+                            e.preventDefault();
+                            try {
+                                let page = parseInt(this.props.datalabeladm.jumpto.replace(/(^\s*)|(\s*$)/g, ''));
+                                if (page !== this.props.datalabeladm.page) {
+                                    this.props.sync_dladm_update_page(page);
+                                    this.fetch_missions(page);
+                                }
+                            } catch (e) {
+                                alert('please input valid page number.');
+                            }
+                        }}>
+                            <input type="text" style={{ border: 'none', width: '48px', height: '34px', border: '1px solid #AAAAAA' }} value={(typeof this.props.datalabeladm.jumpto !== 'undefined') ? this.props.datalabeladm.jumpto : 1} onChange={e => {
+                                e.preventDefault();
+                                this.props.sync_dladm_update_jumpto(e.target.value);
+                            }} />
+                        </form>
+                        <a style={{ color: (typeof this.props.datalabeladm.missions !== 'undefined' && Array.isArray(this.props.datalabeladm.missions.data) && this.props.datalabeladm.missions.data.length >= this.amount_per_page) ? 'black' : '#DDDDDD', cursor: 'pointer', width: '60px', height: '36px', display: 'inline-block', marginLeft: '2px', border: '1px solid #AAAAAA' }}
+                            onClick={e => {
+                                e.preventDefault();
+                                if (typeof this.props.datalabeladm.missions !== 'undefined' && Array.isArray(this.props.datalabeladm.missions.data) && this.props.datalabeladm.missions.data.length >= this.amount_per_page) {
+                                    let page = this.props.datalabeladm.page + 1;
+                                    this.props.sync_dladm_update_page(page);
+                                    this.fetch_missions(page);
+                                }
+                            }}>
+                            Next
+                        </a>
+                    </div>
                 </div>
                 <div>
                     {(this.props.datalabeladm.missions.data.length > 0) ? this.props.datalabeladm.missions.data.map((mission, index) => {
@@ -221,7 +272,8 @@ class DataLabelAdmPage extends React.Component {
                     <a style={{ cursor: 'pointer', width: '250px', display: 'inline-block', margin: '2px', border: '1px solid #AAAAAA' }}
                         onClick={e => {
                             e.preventDefault();
-                            this.fetch_missions();
+                            this.props.sync_dladm_update_page(1);
+                            this.fetch_missions(1);
                         }}>
                         <p>Refresh</p>
                     </a>

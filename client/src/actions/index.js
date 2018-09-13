@@ -535,6 +535,11 @@ export const dl_update_page = (page) => ({
     page: page
 })
 
+export const dl_update_jumpto = (page) => ({
+    type: 'DL_UPDATE_JUMPTO',
+    page: page
+})
+
 export const dl_update_mission = (mission) => ({
     type: 'DL_UPDATE_MISSION',
     mission: mission
@@ -593,6 +598,11 @@ export const dladm_switch_mission = (id) => ({
 
 export const dladm_update_page = (page) => ({
     type: 'DLADM_UPDATE_PAGE',
+    page: page
+})
+
+export const dladm_update_jumpto = (page) => ({
+    type: 'DLADM_UPDATE_JUMPTO',
     page: page
 })
 

@@ -39,7 +39,10 @@ const datalabel = (state = {}, action) => {
             state = { ...state, new: action.new };
             return state;
         case 'DL_UPDATE_PAGE':
-            state = { ...state, page: action.page };
+            state = { ...state, page: action.page, jumpto: action.page };
+            return state;
+        case 'DL_UPDATE_JUMPTO':
+            state = { ...state, jumpto: action.page };
             return state;
         case 'DL_UPDATE_MISSION':
             state = { ...state, mission: { ...action.mission } };
