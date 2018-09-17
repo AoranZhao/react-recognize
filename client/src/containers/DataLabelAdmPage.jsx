@@ -67,6 +67,7 @@ class DataLabelAdmPage extends React.Component {
     constructor(props) {
         super(props);
         this.fetch_missions = this.fetch_missions.bind(this);
+        this.delete_mission = this.delete_mission.bind(this);
         this.amount_per_page = 100;
 
         this.generate_missions = this.generate_missions.bind(this);
@@ -111,6 +112,23 @@ class DataLabelAdmPage extends React.Component {
             }
         }).catch(err => {
             this.props.promise_dladm_get_missions_err(err.data);
+        })
+    }
+
+    delete_mission(id) {
+        console.log('delete mission')
+        this.props.promise_dladm_get_missions_ing();
+        Axios.delete(`/api/datalabel/${id}`, {
+            headers: {
+                "x-token": this.props.auth.data.token,
+                "Content-Type": "application/json"
+            }
+        }).then(response => {
+            this.fetch_missions(this.props.datalabeladm.page || 1);
+        }).catch(err => {
+            console.log(err);
+            alert(err.data);
+            this.fetch_missions(this.props.datalabeladm.page || 1);
         })
     }
 
@@ -327,6 +345,16 @@ class DataLabelAdmPage extends React.Component {
                                 this.props.sync_dladm_update_mission(missions[0]);
                             }
                         }} />
+                        <input type="button" value="Delete" style={{ color: 'red' }} onClick={e => {
+                            e.preventDefault();
+                            if (typeof this.props.datalabeladm.missionId !== 'undefined' && typeof this.props.datalabeladm.mission !== 'undefined') {
+                                if (confirm(`Are you sure for deleting missions with id \<${this.props.datalabeladm.mission.mission}\> ?`)) {
+                                    this.delete_mission(this.props.datalabeladm.missionId);
+                                }
+                            } else {
+                                alert('not found mission id');
+                            }
+                        }} />
                     </div>
                     {(Array.isArray(mission.result) && mission.result.length > 0) ?
                         <Tabs>
@@ -346,7 +374,7 @@ class DataLabelAdmPage extends React.Component {
                                             <Tab>查看原图</Tab>
                                         </TabList>
                                         <TabPanel>
-                                            <textarea value={result.question} rows="3" style={{ width: '250px', resize: 'none' }} onChange={e => {
+                                            <textarea value={result.question} rows="10" style={{ width: '600px', resize: 'none' }} onChange={e => {
                                                 e.preventDefault();
                                                 mission.result[index].question = e.target.value;
                                                 this.props.sync_dladm_update_mission(mission);
@@ -354,7 +382,7 @@ class DataLabelAdmPage extends React.Component {
                                             </textarea>
                                         </TabPanel>
                                         <TabPanel>
-                                            <textarea value={result.answer} rows="3" style={{ width: '250px', resize: 'none' }} onChange={e => {
+                                            <textarea value={result.answer} rows="10" style={{ width: '600px', resize: 'none' }} onChange={e => {
                                                 e.preventDefault();
                                                 mission.result[index].answer = e.target.value;
                                                 this.props.sync_dladm_update_mission(mission);
@@ -397,7 +425,7 @@ class DataLabelAdmPage extends React.Component {
                                             }} />
                                         </TabPanel>
                                         <TabPanel>
-                                            <textarea value={result.text} rows="3" style={{ width: '250px', resize: 'none' }} onChange={e => {
+                                            <textarea value={result.text} rows="10" style={{ width: '600px', resize: 'none' }} onChange={e => {
                                                 e.preventDefault();
                                                 mission.result[index].text = e.target.value;
                                                 this.props.sync_dladm_update_mission(mission);
