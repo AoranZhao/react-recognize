@@ -6,6 +6,7 @@ import Dropzone from 'react-dropzone';
 import { Tab, Tabs, TabList, TabPanel } from 'react-tabs';
 import './DataLabelAdmPage.scss';
 import uuidv1 from 'uuid/v1';
+// import sizeOf from 'image-size';
 
 import ReactCrop from 'react-image-crop';
 
@@ -257,6 +258,7 @@ class DataLabelPage extends React.Component {
         this.props.sync_dl_update_mission(mission);
         this.props.sync_dl_reset_mission_image();
         this.props.promise_dl_update_mission_done();
+        // console.log(sizeOf(this.props.datalabel.mission))
     }
 
     generate_options() {
@@ -516,7 +518,13 @@ class DataLabelPage extends React.Component {
                                         </TabPanel>
                                         <TabPanel>
                                             <p>Corp: left - {result.cord.left}, right - {result.cord.right}, up - {result.cord.up}, down - {result.cord.down}</p>
-                                            <img src={mission.image_url} style={{ maxWidth: '550px' }} />
+                                            {(typeof result.corp !== 'undefined') ? <ReactCrop
+                                                src={mission.image_url}
+                                                crop={result.corp}
+                                                style={{ maxWidth: '550px' }}
+                                                // onImageLoaded={}
+                                                onComplete={(crop) => { }}
+                                                onChange={(crop) => { }} /> : <img src={mission.image_url} style={{ maxWidth: '550px' }} />}
                                         </TabPanel>
                                     </Tabs>
                                 </TabPanel>
