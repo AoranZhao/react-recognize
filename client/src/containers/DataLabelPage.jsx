@@ -87,7 +87,7 @@ class DataLabelPage extends React.Component {
         this.fetch_missions = this.fetch_missions.bind(this);
         this.delete_mission = this.delete_mission.bind(this);
         this.submit_mission = this.submit_mission.bind(this);
-        this.amount_per_page = 100;
+        this.amount_per_page = 10;
 
         this.generate_options = this.generate_options.bind(this);
         this.generate_missions = this.generate_missions.bind(this);

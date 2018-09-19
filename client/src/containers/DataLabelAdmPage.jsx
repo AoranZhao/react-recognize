@@ -68,7 +68,7 @@ class DataLabelAdmPage extends React.Component {
         super(props);
         this.fetch_missions = this.fetch_missions.bind(this);
         this.delete_mission = this.delete_mission.bind(this);
-        this.amount_per_page = 100;
+        this.amount_per_page = 10;
 
         this.generate_missions = this.generate_missions.bind(this);
         this.generate_missions_list = this.generate_missions_list.bind(this);
