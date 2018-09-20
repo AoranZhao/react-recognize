@@ -12,17 +12,17 @@ import logo3 from '../static/logo3.png';
 import './LoginPage.scss';
 
 const mapStateToProps = state => {
-    return {auth: state.auth};
+    return { auth: state.auth };
 }
 
-let LoginPage = ({auth, dispatch, history}) => {
+let LoginPage = ({ auth, dispatch, history }) => {
 
     let onSubmit = (email, password) => {
         dispatch(login_ing());
-        Axios.post('/api/signin', {email: email, password: password})
+        Axios.post('/api/signin', { email: email, password: password })
             .then(response => {
                 dispatch(login_done(response));
-                history.push('/');
+                history.push('/dashboard');
             })
             .catch(error => {
                 dispatch(login_err(error))
@@ -30,8 +30,8 @@ let LoginPage = ({auth, dispatch, history}) => {
     }
 
     let status = 0, statusText = '';
-    if(auth) {
-        switch(auth.status) {
+    if (auth) {
+        switch (auth.status) {
             case 'login_ing':
                 status = 1;
                 statusText = 'login...';
