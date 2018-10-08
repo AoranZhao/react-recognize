@@ -1,0 +1,29 @@
+.selectionBtn {
+    width: 100px;
+    height: 30px;
+    display: inline-block;
+    vertical-align: top;
+    font-size: 15px;
+    position: relative;
+
+    a {
+        text-decoration: none;
+        text-align: center;
+        line-height: 30px;
+        display: block;
+        margin-right: auto;
+        margin-left: auto;
+    }
+
+    a:hover {
+        text-decoration: none;
+    }
+
+    a:visited {
+        text-decoration: none;   
+    }
+
+    .hiddenFrame {
+        position: 'absolute';
+    }
+}

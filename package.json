@@ -41,6 +41,7 @@
     "react": "^15.6.1",
     "react-d3-tree": "^1.7.0",
     "react-datepicker": "^0.54.0",
+    "react-device-detect": "^1.6.1",
     "react-dom": "^15.6.1",
     "react-dropzone": "^4.1.2",
     "react-fa": "^4.2.0",
