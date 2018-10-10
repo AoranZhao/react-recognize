@@ -4,8 +4,11 @@ import React from 'react';
 import { connect } from 'react-redux';
 import { BrowserView, MobileView, isBrowser, isMobile } from 'react-device-detect';
 import OfficialPageFrame from './OfficialPageFrame.jsx';
+import ImageItem from './ImageItem.jsx';
 
 import { } from '../actions';
+
+import NewYorkerImage from '../static/images/newYorker.jpg';
 
 import './HeadPage.scss';
 
@@ -44,7 +47,9 @@ class HeadPage extends React.Component {
                 <p>Learnable has developed a constellation of technologies - from task learning to natural language processing - that allows AI engine to sense, comprehend, act, and learn.</p>
             </div>
             <div className="images">
-
+                <ImageItem src={NewYorkerImage} style={{ width: '33%', height: '300px', display: 'inline-block', verticalAlign: 'top' }} text="Teachable Artificial Intelligence Engine" />
+                <ImageItem src={NewYorkerImage} style={{ width: '33%', height: '300px', display: 'inline-block', verticalAlign: 'top' }} text="Explainable Artificial Intelligence Engine" />
+                <ImageItem src={NewYorkerImage} style={{ width: '33%', height: '300px', display: 'inline-block', verticalAlign: 'top' }} text="Deep Reinforce Learning" />
             </div>
         </div>
     }
@@ -60,7 +65,9 @@ class HeadPage extends React.Component {
                 <p>Learnable, Inc. is fueling the movement to empower the user of AI Technology for our generation. We provide piercing, practical, and personalized solutions depending on your demand.</p>
             </div>
             <div className="images">
-
+                <ImageItem src={NewYorkerImage} style={{ width: '33%', height: '300px', display: 'inline-block', verticalAlign: 'top' }} text="Education" />
+                <ImageItem src={NewYorkerImage} style={{ width: '33%', height: '300px', display: 'inline-block', verticalAlign: 'top' }} text="New Retail" />
+                <ImageItem src={NewYorkerImage} style={{ width: '33%', height: '300px', display: 'inline-block', verticalAlign: 'top' }} text="Other" />
             </div>
         </div>
     }
@@ -76,7 +83,14 @@ class HeadPage extends React.Component {
                 <p>Like a tech pro. Unlike any other tech pro.</p>
             </div>
             <div className="images">
-
+                <ImageItem src={NewYorkerImage} style={{ width: '25%', height: '250px', display: 'inline-block', verticalAlign: 'top' }} />
+                <ImageItem src={NewYorkerImage} style={{ width: '25%', height: '250px', display: 'inline-block', verticalAlign: 'top' }} />
+                <ImageItem src={NewYorkerImage} style={{ width: '25%', height: '250px', display: 'inline-block', verticalAlign: 'top' }} />
+                <ImageItem src={NewYorkerImage} style={{ width: '25%', height: '250px', display: 'inline-block', verticalAlign: 'top' }} />
+                <ImageItem src={NewYorkerImage} style={{ width: '25%', height: '250px', display: 'inline-block', verticalAlign: 'top' }} />
+                <ImageItem src={NewYorkerImage} style={{ width: '25%', height: '250px', display: 'inline-block', verticalAlign: 'top' }} />
+                <ImageItem src={NewYorkerImage} style={{ width: '25%', height: '250px', display: 'inline-block', verticalAlign: 'top' }} />
+                <ImageItem src={NewYorkerImage} style={{ width: '25%', height: '250px', display: 'inline-block', verticalAlign: 'top' }} />
             </div>
         </div>
     }

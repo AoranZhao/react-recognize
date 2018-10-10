@@ -1,0 +1,40 @@
+.ImageItemFrame {
+    margin-bottom: 20px;
+}
+
+.ImageItem {
+    width: 80%;
+    max-height: 80%;
+    margin-left: auto;
+    margin-right: auto;
+    margin-top: 10%;
+    z-index: 5;
+    position: relative;
+    transition-property: width, max-height, margin-top;
+    transition-duration: 0.5s;
+
+    &:hover {
+        width: 100%;
+        max-height: 100%;
+        margin-top: 0;
+        transition-property: width, max-height, margin-top;
+        transition-duration: 0.5s;
+    }
+
+    img {
+        width: 100%;
+        max-height: 100%;
+    }
+
+    p.title {
+        position: absolute;
+        z-index: 10;
+        width: 100%;
+        margin-left: auto;
+        margin-right: auto;
+        display: block;
+        text-align: center;
+        color: greenyellow;
+        margin-top: -40%;
+    }
+}
