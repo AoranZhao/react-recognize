@@ -3,6 +3,7 @@
 import React from 'react';
 import { connect } from 'react-redux';
 import OfficialPageFrame from './OfficialPageFrame.jsx';
+import AboutSection from './AboutSection.jsx';
 
 import { } from '../actions';
 
@@ -32,7 +33,7 @@ class AboutPage extends React.Component {
     }
 
     render() {
-        return <OfficialPageFrame browserChildren={[this.sectionOne()]} mobileChildren={[]} />
+        return <OfficialPageFrame browserChildren={[<AboutSection key="about" />]} mobileChildren={[]} />
     }
 }
 

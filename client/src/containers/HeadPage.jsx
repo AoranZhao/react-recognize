@@ -6,6 +6,10 @@ import { BrowserView, MobileView, isBrowser, isMobile } from 'react-device-detec
 import OfficialPageFrame from './OfficialPageFrame.jsx';
 import ImageItem from './ImageItem.jsx';
 
+import TechnologySection from './TechnologySection.jsx';
+import SolutionSection from './SolutionSection.jsx';
+import AboutSection from './AboutSection.jsx';
+
 import { } from '../actions';
 
 import NewYorkerImage from '../static/images/newYorker.jpg';
@@ -24,10 +28,6 @@ class HeadPage extends React.Component {
     constructor(props) {
         super(props);
 
-        this.sectionTech = this.sectionTech.bind(this);
-        this.sectionSolution = this.sectionSolution.bind(this);
-        this.sectionAbout = this.sectionAbout.bind(this);
-
         this.sectionOneMobile = this.sectionOneMobile.bind(this);
         this.sectionTwoMobile = this.sectionTwoMobile.bind(this);
     }
@@ -35,66 +35,6 @@ class HeadPage extends React.Component {
     componentWillMount() {
 
     }
-
-    sectionTech() {
-        return <div className="sectionTech" key="tech">
-            <div className="title">
-                <span></span>
-                <h3>Same world. Different levels of AI technology</h3>
-                <span></span>
-            </div>
-            <div className="description">
-                <p>Learnable has developed a constellation of technologies - from task learning to natural language processing - that allows AI engine to sense, comprehend, act, and learn.</p>
-            </div>
-            <div className="images">
-                <ImageItem src={NewYorkerImage} style={{ width: '33%', height: '300px', display: 'inline-block', verticalAlign: 'top' }} text="Teachable Artificial Intelligence Engine" />
-                <ImageItem src={NewYorkerImage} style={{ width: '33%', height: '300px', display: 'inline-block', verticalAlign: 'top' }} text="Explainable Artificial Intelligence Engine" />
-                <ImageItem src={NewYorkerImage} style={{ width: '33%', height: '300px', display: 'inline-block', verticalAlign: 'top' }} text="Deep Reinforce Learning" />
-            </div>
-        </div>
-    }
-
-    sectionSolution() {
-        return <div className="sectionSolu" key="solu">
-            <div className="title">
-                <span></span>
-                <h3>Personalized solutions at your service</h3>
-                <span></span>
-            </div>
-            <div className="description">
-                <p>Learnable, Inc. is fueling the movement to empower the user of AI Technology for our generation. We provide piercing, practical, and personalized solutions depending on your demand.</p>
-            </div>
-            <div className="images">
-                <ImageItem src={NewYorkerImage} style={{ width: '33%', height: '300px', display: 'inline-block', verticalAlign: 'top' }} text="Education" />
-                <ImageItem src={NewYorkerImage} style={{ width: '33%', height: '300px', display: 'inline-block', verticalAlign: 'top' }} text="New Retail" />
-                <ImageItem src={NewYorkerImage} style={{ width: '33%', height: '300px', display: 'inline-block', verticalAlign: 'top' }} text="Other" />
-            </div>
-        </div>
-    }
-
-    sectionAbout() {
-        return <div className="sectionAbout" key="about">
-            <div className="title">
-                <span></span>
-                <h3>About us</h3>
-                <span></span>
-            </div>
-            <div className="description">
-                <p>Like a tech pro. Unlike any other tech pro.</p>
-            </div>
-            <div className="images">
-                <ImageItem src={NewYorkerImage} style={{ width: '25%', height: '250px', display: 'inline-block', verticalAlign: 'top' }} />
-                <ImageItem src={NewYorkerImage} style={{ width: '25%', height: '250px', display: 'inline-block', verticalAlign: 'top' }} />
-                <ImageItem src={NewYorkerImage} style={{ width: '25%', height: '250px', display: 'inline-block', verticalAlign: 'top' }} />
-                <ImageItem src={NewYorkerImage} style={{ width: '25%', height: '250px', display: 'inline-block', verticalAlign: 'top' }} />
-                <ImageItem src={NewYorkerImage} style={{ width: '25%', height: '250px', display: 'inline-block', verticalAlign: 'top' }} />
-                <ImageItem src={NewYorkerImage} style={{ width: '25%', height: '250px', display: 'inline-block', verticalAlign: 'top' }} />
-                <ImageItem src={NewYorkerImage} style={{ width: '25%', height: '250px', display: 'inline-block', verticalAlign: 'top' }} />
-                <ImageItem src={NewYorkerImage} style={{ width: '25%', height: '250px', display: 'inline-block', verticalAlign: 'top' }} />
-            </div>
-        </div>
-    }
-
 
     sectionOneMobile() {
         return <div className="sectionFlyMobile">
@@ -109,7 +49,7 @@ class HeadPage extends React.Component {
     }
 
     render() {
-        return <OfficialPageFrame browserChildren={[this.sectionTech(), this.sectionSolution(), this.sectionAbout()]} mobileChildren={[]} />
+        return <OfficialPageFrame browserChildren={[<TechnologySection key="tech" />, <SolutionSection key="solu" />, <AboutSection key="about" />]} mobileChildren={[]} />
     }
 }
 

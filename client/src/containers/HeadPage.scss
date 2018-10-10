@@ -88,71 +88,71 @@
     margin-right: auto;
 }
 
-.sectionTech {
-    width: 100%;
-    margin-top: 20px;
-    margin-bottom: 20px;
+// .sectionTech {
+//     width: 100%;
+//     margin-top: 20px;
+//     margin-bottom: 20px;
 
-    .title {
-        @extend .title !optional;
+//     .title {
+//         @extend .title !optional;
         
-        span {
-            width: calc((100% - 462px) / 2);
-        }
-    }
+//         span {
+//             width: calc((100% - 462px) / 2);
+//         }
+//     }
 
-    .description {
-        @extend .description !optional;
-    }
+//     .description {
+//         @extend .description !optional;
+//     }
 
-    .images {
-        @extend .images !optional;
-    }
-}
+//     .images {
+//         @extend .images !optional;
+//     }
+// }
 
-.sectionSolu {
-    width: 100%;
-    margin-top: 20px;
-    margin-bottom: 20px;
+// .sectionSolu {
+//     width: 100%;
+//     margin-top: 20px;
+//     margin-bottom: 20px;
 
-    .title {
-        @extend .title !optional;
+//     .title {
+//         @extend .title !optional;
 
-        span {
-            width: calc((100% - 400px) / 2);
-        }
-    }
+//         span {
+//             width: calc((100% - 400px) / 2);
+//         }
+//     }
 
-    .description {
-        @extend .description !optional;
-    }
+//     .description {
+//         @extend .description !optional;
+//     }
 
-    .images {
-        @extend .images !optional;
-    }
-}
+//     .images {
+//         @extend .images !optional;
+//     }
+// }
 
-.sectionAbout {
-    width: 100%;
-    margin-top: 20px;
-    margin-bottom: 20px;
+// .sectionAbout {
+//     width: 100%;
+//     margin-top: 20px;
+//     margin-bottom: 20px;
 
-    .title {
-        @extend .title !optional;
+//     .title {
+//         @extend .title !optional;
 
-        span {
-            width: calc((100% - 173px) / 2);
-        }
-    }
+//         span {
+//             width: calc((100% - 173px) / 2);
+//         }
+//     }
 
-    .description {
-        @extend .description !optional;
-    }
+//     .description {
+//         @extend .description !optional;
+//     }
 
-    .images {
-        @extend .images !optional;
-    }
-}
+//     .images {
+//         @extend .images !optional;
+//     }
+// }
 
 .sectionFoot {
     width: 100%;

@@ -4,6 +4,8 @@ import React from 'react';
 import { connect } from 'react-redux';
 import OfficialPageFrame from './OfficialPageFrame.jsx';
 
+import TechnologySection from './TechnologySection.jsx';
+
 import { } from '../actions';
 
 const mapStateToProps = state => {
@@ -32,7 +34,7 @@ class TechnologyPage extends React.Component {
     }
 
     render() {
-        return <OfficialPageFrame browserChildren={[this.sectionOne()]} mobileChildren={[]} />
+        return <OfficialPageFrame browserChildren={[<TechnologySection key="tech" />]} mobileChildren={[]} />
     }
 }
 
