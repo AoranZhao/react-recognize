@@ -5,9 +5,9 @@ import React from 'react';
 import ImageItem from './ImageItem.jsx';
 import ImageItemMobile from './ImageItemMobile.jsx';
 import NewYorkerImage from '../static/images/newYorker.jpg';
-import './TechnologySection.scss';
+import './TechnologyMobileSection.scss';
 
-class TechnologySection extends React.Component {
+class TechnologyMobileSection extends React.Component {
     constructor(props) {
         super(props)
 
@@ -28,9 +28,11 @@ class TechnologySection extends React.Component {
                 <ImageItem src={NewYorkerImage} style={{ width: '33%', height: '300px', display: 'inline-block', verticalAlign: 'top' }} text="Teachable Artificial Intelligence Engine" />
                 <ImageItem src={NewYorkerImage} style={{ width: '33%', height: '300px', display: 'inline-block', verticalAlign: 'top' }} text="Explainable Artificial Intelligence Engine" />
                 <ImageItem src={NewYorkerImage} style={{ width: '33%', height: '300px', display: 'inline-block', verticalAlign: 'top' }} text="Deep Reinforce Learning" />
-                {/* <ImageItemMobile src={NewYorkerImage} style={{ width: '100%', height: '100px', display: 'block', marginLeft: 'auto', marginRight: 'auto' }} text="" />
+            </div>
+            <div className="imagesMobile">
                 <ImageItemMobile src={NewYorkerImage} style={{ width: '100%', height: '100px', display: 'block', marginLeft: 'auto', marginRight: 'auto' }} text="" />
-                <ImageItemMobile src={NewYorkerImage} style={{ width: '100%', height: '100px', display: 'block', marginLeft: 'auto', marginRight: 'auto' }} text="" /> */}
+                <ImageItemMobile src={NewYorkerImage} style={{ width: '100%', height: '100px', display: 'block', marginLeft: 'auto', marginRight: 'auto' }} text="" />
+                <ImageItemMobile src={NewYorkerImage} style={{ width: '100%', height: '100px', display: 'block', marginLeft: 'auto', marginRight: 'auto' }} text="" />
             </div>
         </div>
     }
@@ -40,4 +42,4 @@ class TechnologySection extends React.Component {
     }
 }
 
-export default TechnologySection;
+export default TechnologyMobileSection;

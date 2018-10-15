@@ -1,0 +1,51 @@
+@import './HeadPage.scss';
+
+.sectionTech {
+    width: 100%;
+    margin-top: 20px;
+    margin-bottom: 20px;
+
+    .title {
+        @extend .title !optional;
+        
+        span {
+            width: calc((100% - 470px) / 2);
+        }
+    }
+
+    .description {
+        @extend .description !optional;
+    }
+
+    .images {
+        @extend .images !optional;
+    }
+
+    .imagesMobile {
+        @extend .images !optional;
+    }
+}
+
+@media only screen and (max-width: 760px) {
+    .sectionTech {
+        .images {
+            display: none;
+        }
+
+        .imagesMobile {
+            display: block;
+        }
+    }
+}
+
+@media only screen and (min-width: 761px) {
+    .sectionTech {
+        .images {
+            display: block;
+        }
+
+        .imagesMobile {
+            display: none;
+        }
+    }
+}

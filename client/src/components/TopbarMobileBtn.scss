@@ -1,0 +1,30 @@
+.topbarMobileBtn {
+    width: 100%;
+
+    a {
+        display: block;
+        height: 40px;
+        text-align: left;
+        line-height: 40px;
+        padding-left: 10px;
+        border-bottom: 1px solid #b4b4b4;
+        text-decoration: none;
+
+        &:hover {
+            text-decoration: none;
+        }
+
+        &:visited {
+            text-decoration: none;
+        }
+    }
+
+    a.main {
+        width: 100%;
+    }
+
+    a.sub {
+        padding-left: 20px;
+        width: 100%;
+    }
+}

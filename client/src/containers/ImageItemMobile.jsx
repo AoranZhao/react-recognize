@@ -2,7 +2,7 @@
 
 import React from 'react';
 
-import './ImageItem.scss';
+import './ImageItemMobile.scss';
 
 class ImageItem extends React.Component {
     constructor(props) {
@@ -11,14 +11,14 @@ class ImageItem extends React.Component {
         this.text = props.text || "";
         this.style = props.style || {};
         if (props.width != undefined)
-            this.style = Object.assign(this.style, { width: props.width + 'px', height: props.width * 1.5 + "px" });
+            this.style = Object.assign(this.style, { width: props.width + 'px', height: props.width * 0.3 + "px" });
     }
 
     render() {
-        return <div className="ImageItemFrame" style={this.style}>
-            <div className="ImageItem" >
+        return <div className="ImageItemMobileFrame" style={this.style}>
+            <div className="ImageItemMobile" >
                 <img src={this.imageSrc} />
-                <p className="title">{this.text}</p>
+                {/* <p className="title">{this.text}</p> */}
             </div>
         </div>
     }

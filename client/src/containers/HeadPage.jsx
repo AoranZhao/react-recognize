@@ -10,6 +10,8 @@ import TechnologySection from './TechnologySection.jsx';
 import SolutionSection from './SolutionSection.jsx';
 import AboutSection from './AboutSection.jsx';
 
+import TechnologyMobileSection from './TechnologyMobileSection.jsx';
+
 import { } from '../actions';
 
 import NewYorkerImage from '../static/images/newYorker.jpg';
@@ -37,19 +39,19 @@ class HeadPage extends React.Component {
     }
 
     sectionOneMobile() {
-        return <div className="sectionFlyMobile">
+        return <div className="sectionFlyMobile" key="oneMobile">
             <p>Section One for mobile</p>
         </div>
     }
 
     sectionTwoMobile() {
-        return <div className="sectionTwoMobile">
+        return <div className="sectionTwoMobile" key="twoMobile">
             <p>Section Two for mobile</p>
         </div>
     }
 
     render() {
-        return <OfficialPageFrame browserChildren={[<TechnologySection key="tech" />, <SolutionSection key="solu" />, <AboutSection key="about" />]} mobileChildren={[]} />
+        return <OfficialPageFrame browserChildren={[<TechnologySection key="tech" />, <SolutionSection key="solu" />, <AboutSection key="about" />]} mobileChildren={[<TechnologyMobileSection key="techMobile" />]} />
     }
 }
 
