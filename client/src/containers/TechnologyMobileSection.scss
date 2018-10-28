@@ -1,6 +1,6 @@
 @import './HeadPage.scss';
 
-.sectionTech {
+.sectionMobileTech {
     width: 100%;
     margin-top: 20px;
     margin-bottom: 20px;
@@ -27,7 +27,7 @@
 }
 
 @media only screen and (max-width: 760px) {
-    .sectionTech {
+    .sectionMobileTech {
         .images {
             display: none;
         }
@@ -39,9 +39,9 @@
 }
 
 @media only screen and (min-width: 761px) {
-    .sectionTech {
+    .sectionMobileTech {
         .images {
-            display: block;
+            display: table;
         }
 
         .imagesMobile {

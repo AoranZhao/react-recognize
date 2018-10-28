@@ -34,7 +34,7 @@ class TechnologyPage extends React.Component {
     }
 
     render() {
-        return <OfficialPageFrame browserChildren={[<TechnologySection key="tech" />]} mobileChildren={[]} />
+        return <OfficialPageFrame highlightTitle="Technology" browserChildren={[<TechnologySection key="tech" />]} mobileChildren={[]} />
     }
 }
 

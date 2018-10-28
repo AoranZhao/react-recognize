@@ -15,7 +15,7 @@ class TechnologyMobileSection extends React.Component {
     }
 
     sectionTech() {
-        return <div className="sectionTech">
+        return <div className="sectionMobileTech">
             <div className="title">
                 <span></span>
                 <h3>Same world. Different levels of AI technology</h3>

@@ -3,7 +3,7 @@
 import React from 'react';
 
 import ImageItem from './ImageItem.jsx';
-import NewYorkerImage from '../static/images/newYorker.jpg';
+import HandImage from '../static/images/hand_large.png';
 import './SolutionSection.scss';
 
 class SolutionSection extends React.Component {
@@ -24,9 +24,9 @@ class SolutionSection extends React.Component {
                 <p>Learnable, Inc. is fueling the movement to empower the user of AI Technology for our generation. We provide piercing, practical, and personalized solutions depending on your demand.</p>
             </div>
             <div className="images">
-                <ImageItem src={NewYorkerImage} style={{ width: '33%', height: '300px', display: 'inline-block', verticalAlign: 'top' }} text="Education" />
-                <ImageItem src={NewYorkerImage} style={{ width: '33%', height: '300px', display: 'inline-block', verticalAlign: 'top' }} text="New Retail" />
-                <ImageItem src={NewYorkerImage} style={{ width: '33%', height: '300px', display: 'inline-block', verticalAlign: 'top' }} text="Other" />
+                <ImageItem src={HandImage} style={{ width: '33%' }} />
+                <ImageItem src={HandImage} style={{ width: '33%' }} />
+                <ImageItem src={HandImage} style={{ width: '33%' }} />
             </div>
         </div>
     }

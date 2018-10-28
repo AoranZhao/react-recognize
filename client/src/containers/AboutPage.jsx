@@ -33,7 +33,7 @@ class AboutPage extends React.Component {
     }
 
     render() {
-        return <OfficialPageFrame browserChildren={[<AboutSection key="about" />]} mobileChildren={[]} />
+        return <OfficialPageFrame highlightTitle="About" browserChildren={[<AboutSection key="about" />]} mobileChildren={[]} />
     }
 }
 

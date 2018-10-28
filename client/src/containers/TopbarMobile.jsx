@@ -38,6 +38,7 @@ class TopbarMobile extends React.Component {
                 ]} />
             <TopbarMobileBtn click={() => { }} to="/about" text="About" />
             <TopbarMobileBtn click={() => { }} to="/career" text="Career" />
+            <TopbarMobileBtn click={() => { }} to="/requestdemo" text="Request Demo" />
         </div>
     }
 

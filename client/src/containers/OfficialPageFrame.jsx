@@ -9,7 +9,7 @@ import TopbarMobile from './TopbarMobile.jsx';
 import { } from '../actions';
 
 import './OfficialPageFrame.scss';
-import profileImage from '../static/images/kangourou.jpeg';
+import profileImage from '../static/images/face_large.png';
 import alIcon from '../static/images/angellist-icon.png';
 import cbIcon from '../static/images/cb-icon.png';
 import inIcon from '../static/images/linkedin-icon.png';
@@ -85,8 +85,8 @@ class OfficialPageFrame extends React.Component {
 
     sectionFlyMobile() {
         return <div className="sectionFlyMobile">
-            <TopbarMobile className="sectionTopbarMobile" />
-            <Topbar className="sectionTopbar" highlight={this.highlightTitle} />
+            <TopbarMobile className="sectionTopbarMobileNarrow" />
+            <Topbar className="sectionTopbarMobileWide" highlight={this.highlightTitle} />
             <div className="sectionFlyMobileBody">
                 <div className="sectionFlyMobileBodyText">
                     <h3>Customize artificial intelligence with the human touch</h3>

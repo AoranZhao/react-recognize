@@ -19,5 +19,6 @@
 
     .images {
         @extend .images !optional;
+        display: table;
     }
 }

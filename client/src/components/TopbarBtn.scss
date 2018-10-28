@@ -1,5 +1,5 @@
 .selectionBtn {
-    width: 100px;
+    width: 96px;
     height: 30px;
     display: inline-block;
     vertical-align: top;
@@ -8,7 +8,7 @@
 
     a {
         text-decoration: none;
-        text-align: center;
+        // text-align: center;
         line-height: 30px;
         display: block;
         margin-right: auto;
@@ -23,7 +23,24 @@
         text-decoration: none;   
     }
 
+    .titleFrame {
+        text-align: center;
+
+        .root {
+            display: inline-block;
+        }
+    }
+
     .hiddenFrame {
         position: 'absolute';
+        text-align: center;
+
+        a.subTitle {
+            display: inline-block;
+
+            &:hover {
+                border-bottom: 1px solid rgba(30, 67, 118, 0.81);
+            }
+        }
     }
 }

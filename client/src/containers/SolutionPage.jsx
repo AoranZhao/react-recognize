@@ -33,7 +33,7 @@ class SolutionPage extends React.Component {
     }
 
     render() {
-        return <OfficialPageFrame browserChildren={[<SolutionSection key="solu" />]} mobileChildren={[]} />;
+        return <OfficialPageFrame highlightTitle="Solutions" browserChildren={[<SolutionSection key="solu" />]} mobileChildren={[]} />;
     }
 }
 

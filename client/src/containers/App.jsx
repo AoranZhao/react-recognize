@@ -17,6 +17,7 @@ import TechnologyPage from './TechnologyPage.jsx';
 import SolutionPage from './SolutionPage.jsx';
 import AboutPage from './AboutPage.jsx';
 import CareerPage from './CareerPage.jsx';
+import RequestDemoPage from './RequestDemoPage.jsx';
 
 import './App.scss';
 
@@ -29,6 +30,7 @@ const App = () => {
                 <Route path="/solution" component={SolutionPage} />
                 <Route path="/about" component={AboutPage} />
                 <Route path="/career" component={CareerPage} />
+                <Route path="/requestdemo" component={RequestDemoPage} />
                 <Route path="/admin" render={() => (
                     <Redirect to="/dashboard" />
                 )} />

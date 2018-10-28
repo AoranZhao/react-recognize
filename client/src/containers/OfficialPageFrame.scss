@@ -225,21 +225,21 @@
 }
 
 @media only screen and (max-width: 760px) {
-    .sectionTopbar {
+    .sectionTopbarMobileWide {
         display: none;
     }
 
-    .sectionTopbarMobile {
+    .sectionTopbarMobileNarrow {
         display: block;
     }
 }
 
 @media only screen and (min-width: 761px) {
-    .sectionTopbar {
+    .sectionTopbarMobileWide {
         display: block;
     }
 
-    .sectionTopbarMobile {
+    .sectionTopbarMobileNarrow {
         display: none;
     }
 }

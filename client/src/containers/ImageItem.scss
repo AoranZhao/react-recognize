@@ -1,17 +1,18 @@
 .ImageItemFrame {
     margin-bottom: 20px;
+    display: table-cell;
+    vertical-align: top;
 }
 
 .ImageItem {
-    width: 80%;
-    max-height: 80%;
+    width: 90%;
     margin-left: auto;
     margin-right: auto;
     margin-top: 10%;
+    display: inline-block;
 
     img {
         width: 100%;
-        max-height: 100%;
     }
 
     p.title {

@@ -135,7 +135,7 @@ class CareerPage extends React.Component {
     }
 
     render() {
-        return <OfficialPageFrame browserChildren={[this.sectionIntro(), this.sectionJobs()]} mobileChildren={[]} />
+        return <OfficialPageFrame highlightTitle="Career" browserChildren={[this.sectionIntro(), this.sectionJobs()]} mobileChildren={[]} />
     }
 }
 

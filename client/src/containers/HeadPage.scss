@@ -1,3 +1,5 @@
+$blue-color: rgba(30, 67, 118, 0.81);
+
 .headPageFrame {
     min-width: 760px;
     max-width: 1024px;
@@ -81,76 +83,10 @@
 }
 
 .images {
-    width: 70%;
+    width: 80%;
     margin-left: auto;
     margin-right: auto;
 }
-
-// .sectionTech {
-//     width: 100%;
-//     margin-top: 20px;
-//     margin-bottom: 20px;
-
-//     .title {
-//         @extend .title !optional;
-        
-//         span {
-//             width: calc((100% - 462px) / 2);
-//         }
-//     }
-
-//     .description {
-//         @extend .description !optional;
-//     }
-
-//     .images {
-//         @extend .images !optional;
-//     }
-// }
-
-// .sectionSolu {
-//     width: 100%;
-//     margin-top: 20px;
-//     margin-bottom: 20px;
-
-//     .title {
-//         @extend .title !optional;
-
-//         span {
-//             width: calc((100% - 400px) / 2);
-//         }
-//     }
-
-//     .description {
-//         @extend .description !optional;
-//     }
-
-//     .images {
-//         @extend .images !optional;
-//     }
-// }
-
-// .sectionAbout {
-//     width: 100%;
-//     margin-top: 20px;
-//     margin-bottom: 20px;
-
-//     .title {
-//         @extend .title !optional;
-
-//         span {
-//             width: calc((100% - 173px) / 2);
-//         }
-//     }
-
-//     .description {
-//         @extend .description !optional;
-//     }
-
-//     .images {
-//         @extend .images !optional;
-//     }
-// }
 
 .sectionFoot {
     width: 100%;

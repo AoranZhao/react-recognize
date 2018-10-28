@@ -26,7 +26,8 @@ class Topbar extends React.Component {
                         { text: 'Other', to: '/solution' }
                     ]} />
                 <TopbarBtn text="About" isHighlight={this.highlightTitle == "About" ? true : false} to="/about" />
-                <TopbarBtn text="Career" isHighlight={this.highlightTitle == "Career" ? true : false} to="/career" />
+                {/* <TopbarBtn text="Career" isHighlight={this.highlightTitle == "Career" ? true : false} to="/career" /> */}
+                <TopbarBtn text="Request Demo" isHighlight={this.highlightTitle == "Request Demo" ? true : false} to="/requestdemo" />
             </div>
         </div>
     }

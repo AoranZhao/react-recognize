@@ -51,7 +51,7 @@ class HeadPage extends React.Component {
     }
 
     render() {
-        return <OfficialPageFrame browserChildren={[<TechnologySection key="tech" />, <SolutionSection key="solu" />, <AboutSection key="about" />]} mobileChildren={[<TechnologyMobileSection key="techMobile" />]} />
+        return <OfficialPageFrame highlightTitle="Home" browserChildren={[<TechnologySection key="tech" />, <SolutionSection key="solu" />, <AboutSection key="about" />]} mobileChildren={[<TechnologyMobileSection key="techMobile" />]} />
     }
 }
 
