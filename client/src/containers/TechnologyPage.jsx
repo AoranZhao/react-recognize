@@ -2,7 +2,7 @@
 
 import React from 'react';
 import { connect } from 'react-redux';
-import OfficialPageFrame from './OfficialPageFrame.jsx';
+import OfficialPageReverseFrame from './OfficialPageReverseFrame.jsx';
 
 import TechnologySection from './TechnologySection.jsx';
 
@@ -34,7 +34,8 @@ class TechnologyPage extends React.Component {
     }
 
     render() {
-        return <OfficialPageFrame highlightTitle="Technology" browserChildren={[<TechnologySection key="tech" />]} mobileChildren={[]} />
+        let description = "Self-developed AI engines bridge the gap between industry and academia.";
+        return <OfficialPageReverseFrame title="Technology" description={description} highlightTitle="Technology" browserChildren={[<TechnologySection key="tech" />]} mobileChildren={[]} />
     }
 }
 

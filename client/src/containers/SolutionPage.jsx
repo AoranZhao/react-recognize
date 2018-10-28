@@ -2,7 +2,7 @@
 
 import React from 'react';
 import { connect } from 'react-redux';
-import OfficialPageFrame from './OfficialPageFrame.jsx';
+import OfficialPageReverseFrame from './OfficialPageReverseFrame.jsx';
 import SolutionSection from './SolutionSection.jsx';
 
 import { } from '../actions';
@@ -33,7 +33,8 @@ class SolutionPage extends React.Component {
     }
 
     render() {
-        return <OfficialPageFrame highlightTitle="Solutions" browserChildren={[<SolutionSection key="solu" />]} mobileChildren={[]} />;
+        let description = "description";
+        return <OfficialPageReverseFrame title="Products" description={description} highlightTitle="Solutions" browserChildren={[<SolutionSection key="solu" />]} mobileChildren={[]} />;
     }
 }
 

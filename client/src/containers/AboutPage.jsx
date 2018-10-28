@@ -2,7 +2,7 @@
 
 import React from 'react';
 import { connect } from 'react-redux';
-import OfficialPageFrame from './OfficialPageFrame.jsx';
+import OfficialPageReverseFrame from './OfficialPageReverseFrame.jsx';
 import AboutSection from './AboutSection.jsx';
 
 import { } from '../actions';
@@ -33,7 +33,8 @@ class AboutPage extends React.Component {
     }
 
     render() {
-        return <OfficialPageFrame highlightTitle="About" browserChildren={[<AboutSection key="about" />]} mobileChildren={[]} />
+        let description = "company description";
+        return <OfficialPageReverseFrame title="Company" highlightTitle="About" browserChildren={[<AboutSection key="about" />]} mobileChildren={[]} />
     }
 }
 

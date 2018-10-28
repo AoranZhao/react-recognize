@@ -3,6 +3,7 @@
 import React from 'react';
 import { connect } from 'react-redux';
 import OfficialPageFrame from './OfficialPageFrame.jsx';
+import OfficialPageReverseFrame from './OfficialPageReverseFrame.jsx';
 
 import { } from '../actions';
 
@@ -135,7 +136,8 @@ class CareerPage extends React.Component {
     }
 
     render() {
-        return <OfficialPageFrame highlightTitle="Career" browserChildren={[this.sectionIntro(), this.sectionJobs()]} mobileChildren={[]} />
+        let description = "welcome";
+        return <OfficialPageReverseFrame title="Career" description={description} highlightTitle="Career" browserChildren={[this.sectionIntro(), this.sectionJobs()]} mobileChildren={[]} />
     }
 }
 

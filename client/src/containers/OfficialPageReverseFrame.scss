@@ -1,0 +1,27 @@
+@import './App.scss';
+@import './OfficialPageFrame.scss';
+
+.officialRevPageFrame {
+    @extend .officialPageFrame !optional;
+}
+
+.officialRevPage {
+    .sectionFlyRev {
+        @extend .sectionFly !optional;
+        background-color: $blue-color;
+        color: white;
+
+        .sectionFlyRevBody {
+            @extend .sectionFlyBody !optional;
+            margin-top: 100px;
+
+            .sectionFlyRevBodyText {
+                @extend .sectionFlyBodyText !optional;
+            }
+        }
+    }
+}
+
+.officialRevPageMobile {
+
+}

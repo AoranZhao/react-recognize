@@ -11,23 +11,24 @@ class Topbar extends React.Component {
     constructor(props) {
         super(props);
         this.highlightTitle = props.highlight;
+        this.isRev = props.isRev || false;
     }
 
     render() {
         return <div className="sectionTopbar">
             <img src={logoImage} className="logo" />
             <div className="selection">
-                <TopbarBtn text="Home" isHighlight={this.highlightTitle == "Home" ? true : false} to="/" />
-                <TopbarBtn text="Technology" isHighlight={this.highlightTitle == "Technology" ? true : false} to="/technology" />
-                <TopbarBtn text="Solutions" isHighlight={this.highlightTitle == "Solutions" ? true : false} to="/solution"
+                <TopbarBtn text="Home" isRev={this.isRev} isHighlight={this.highlightTitle == "Home" ? true : false} to="/" />
+                <TopbarBtn text="Technology" isRev={this.isRev} isHighlight={this.highlightTitle == "Technology" ? true : false} to="/technology" />
+                <TopbarBtn text="Solutions" isRev={this.isRev} isHighlight={this.highlightTitle == "Solutions" ? true : false} to="/solution"
                     subSelections={[
                         { text: 'Education', to: '/solution' },
                         { text: 'New Retail', to: '/solution' },
                         { text: 'Other', to: '/solution' }
                     ]} />
-                <TopbarBtn text="About" isHighlight={this.highlightTitle == "About" ? true : false} to="/about" />
+                <TopbarBtn text="About" isRev={this.isRev} isHighlight={this.highlightTitle == "About" ? true : false} to="/about" />
                 {/* <TopbarBtn text="Career" isHighlight={this.highlightTitle == "Career" ? true : false} to="/career" /> */}
-                <TopbarBtn text="Request Demo" isHighlight={this.highlightTitle == "Request Demo" ? true : false} to="/requestdemo" />
+                <TopbarBtn text="Demo" isRev={this.isRev} isHighlight={this.highlightTitle == "Demo" ? true : false} to="/requestdemo" />
             </div>
         </div>
     }

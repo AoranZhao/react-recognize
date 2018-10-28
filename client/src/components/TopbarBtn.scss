@@ -20,7 +20,7 @@
     }
 
     a:visited {
-        text-decoration: none;   
+        text-decoration: none;  
     }
 
     .titleFrame {
@@ -40,6 +40,14 @@
 
             &:hover {
                 border-bottom: 1px solid rgba(30, 67, 118, 0.81);
+            }
+        }
+
+        a.subTitleRev {
+            display: inline-block;
+
+            &:hover {
+                border-bottom: 1px solid white;
             }
         }
     }

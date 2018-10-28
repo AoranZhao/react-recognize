@@ -4,27 +4,28 @@ import React from 'react';
 
 import './TopbarBtn.scss';
 
-let isCurrentStyle = {
-    borderBottom: "1px solid rgba(30, 67, 118, 0.81)"
-}
+let blue = "rgba(30, 67, 118, 0.81)",
+    white = "white";
 
-let hightlightStyle = {
-    borderBottom: "1px solid rgba(30, 67, 118, 0.81)"
-};
+let isCurrentStyle = (color) => ({
+    borderBottom: `1px solid ${color}`
+})
 
-let showStyle = {
-    borderTop: "1px solid rgba(30, 67, 118, 0.81)",
-    borderLeft: "1px solid rgba(30, 67, 118, 0.81)",
-    borderRight: "1px solid rgba(30, 67, 118, 0.81)",
-}
+let hightlightStyle = (color) => ({
+    borderBottom: `1px solid ${color}`
+})
 
-let subShowStyle = {
-    borderLeft: "1px solid rgba(30, 67, 118, 0.81)",
-    borderRight: "1px solid rgba(30, 67, 118, 0.81)",
-    borderBottom: "1px solid rgba(30, 67, 118, 0.81)",
-}
-// let highlight_color = '#005ae0';
-// let background_color = '#d3d3d3';
+let showStyle = (color) => ({
+    borderTop: `1px solid ${color}`,
+    borderLeft: `1px solid ${color}`,
+    borderRight: `1px solid ${color}`,
+})
+
+let subShowStyle = (color) => ({
+    borderLeft: `1px solid ${color}`,
+    borderRight: `1px solid ${color}`,
+    borderBottom: `1px solid ${color}`,
+})
 
 class TopbarBtn extends React.Component {
     constructor(props) {
@@ -36,6 +37,14 @@ class TopbarBtn extends React.Component {
         this.click = props.click ? props.click : () => { };
         this.to = props.to || "#";
         this.subSelections = props.subSelections || [];
+        this.isRev = props.isRev || false;
+        this.color = this.isRev ? white : blue;
+        this.fontColor = {
+            color: this.color
+        }
+        this.frameColor = {
+            borderColor: this.color
+        }
 
         this.subSelections.map((val, index) => {
             let key = `subHighlight${index}`;
@@ -46,13 +55,14 @@ class TopbarBtn extends React.Component {
     }
 
     render() {
-        let titleFrameStyle = {}, titleStyle = {};
+        let titleFrameStyle = Object.assign({}, this.fontColor), titleStyle = Object.assign({}, this.fontColor);
         if (this.state.show)
-            titleFrameStyle = Object.assign(titleFrameStyle, showStyle);
+            titleFrameStyle = Object.assign(titleFrameStyle, showStyle(this.color), this.frameColor);
         else if (this.isCurrent)
-            titleStyle = Object.assign(titleStyle, isCurrentStyle);
+            titleStyle = Object.assign(titleStyle, isCurrentStyle(this.color), this.frameColor);
 
-        return <div className="selectionBtn" onMouseEnter={e => {
+
+        return <div className="selectionBtn" style={Object.assign({}, this.fontColor)} onMouseEnter={e => {
             e.preventDefault();
             this.setState({ show: true });
         }} onMouseLeave={e => {
@@ -62,8 +72,8 @@ class TopbarBtn extends React.Component {
             <div className="titleFrame" style={titleFrameStyle}>
                 <a href={this.to} className="root" style={titleStyle} >{this.text}</a>
             </div>
-            <div className="hiddenFrame" style={Object.assign({ zIndex: '1', display: this.state.show ? 'block' : 'none' }, subShowStyle)} >
-                {this.subSelections.map((sub, index) => (<a key={index} href={sub.to} className="subTitle" style={sub.highlight ? hightlightStyle : {}} onClick={e => {
+            <div className="hiddenFrame" style={Object.assign({ zIndex: '1', display: this.state.show ? 'block' : 'none' }, subShowStyle(this.color), this.frameColor, this.fontColor)} >
+                {this.subSelections.map((sub, index) => (<a key={index} href={sub.to} className={this.isRev ? "subTitleRev" : "subTitle"} style={sub.highlight ? Object.assign({}, hightlightStyle(this.color), this.frameColor, this.fontColor) : Object.assign({}, this.fontColor)} onClick={e => {
                     // this.setState({ show: false });
                 }} onMouseEnter={e => {
                     e.preventDefault();

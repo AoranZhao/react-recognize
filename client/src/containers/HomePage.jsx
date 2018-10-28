@@ -9,6 +9,8 @@ import GreetingPage from './GreetingPage.jsx';
 import UserPage from './UserPage.jsx';
 import AdminPage from './AdminPage.jsx';
 
+import './HomePage.scss';
+
 const mapStateToProps = state => {
     var obj = {};
     obj.entries = (typeof state.auth.data === 'undefined' || state.auth.data.type !== 'admin') ? [] : [{ text: 'Admin', url: '/admin' }];
@@ -19,7 +21,7 @@ let HomePage = ({
     match,
     entries
 }) => {
-    return <div style={{ width: '100%' }}>
+    return <div className="homeFrame" style={{ width: '100%' }}>
         <SideBar entries={entries} base={match.url} />
         <Route exact path={`${match.url}`} component={GreetingPage} />
         <Route path={`${match.url}/admin`} component={AdminPage} />

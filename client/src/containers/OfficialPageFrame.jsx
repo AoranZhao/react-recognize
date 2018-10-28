@@ -10,10 +10,9 @@ import { } from '../actions';
 
 import './OfficialPageFrame.scss';
 import profileImage from '../static/images/face_large.png';
-import alIcon from '../static/images/angellist-icon.png';
-import cbIcon from '../static/images/cb-icon.png';
-import inIcon from '../static/images/linkedin-icon.png';
-import wechatIcon from '../static/images/wechat-icon.jpg';
+
+import FootSection from './FootSection.jsx';
+import FootMobileSection from './FootMobileSection.jsx';
 
 const mapStateToProps = state => {
     return {}
@@ -44,7 +43,6 @@ class OfficialPageFrame extends React.Component {
     sectionFly() {
         return <div className="sectionFly">
             <Topbar highlight={this.highlightTitle} />
-            {/* <TopbarMobile style={{ display: 'block' }} /> */}
             <div className="sectionFlyBody">
                 <div className="sectionFlyBodyText">
                     <h3>Customize artificial intelligence with the human touch</h3>
@@ -56,31 +54,7 @@ class OfficialPageFrame extends React.Component {
     }
 
     sectionFoot() {
-        return <div className="sectionFoot">
-            <div className="contact">
-                <div className="contact_us">
-                    <p>U.S. Office:</p>
-                    <p>59 Brainerd Rd, Allston02134, MA</p>
-                    <p>+1 4018370759</p>
-                    <p>contact@learnable.ai</p>
-                </div>
-                <div className="contact_cn">
-                    <p>China Office:</p>
-                    <p>辽宁省大连市高新技术产业园区火炬路32A号B座1904室</p>
-                    <p>+86 18616763883</p>
-                    <p>contact@learnable.ai</p>
-                </div>
-                <div className="contact_media">
-                    <img src={wechatIcon} />
-                    <img src={cbIcon} />
-                    <img src={alIcon} />
-                    <img src={inIcon} />
-                </div>
-            </div>
-            <div className="declare">
-                <p>&copy; 2018 Learnable, Inc. All rights reserved.</p>
-            </div>
-        </div>
+        return <FootSection />
     }
 
     sectionFlyMobile() {
@@ -98,31 +72,7 @@ class OfficialPageFrame extends React.Component {
     }
 
     sectionFootMobile() {
-        return <div className="sectionFootMobile">
-            <div className="contact">
-                <div className="contact_us">
-                    <p>U.S. Office:</p>
-                    <p>59 Brainerd Rd, Allston02134, MA</p>
-                    <p>+1 4018370759</p>
-                    <p>contact@learnable.ai</p>
-                </div>
-                <div className="contact_cn">
-                    <p>China Office:</p>
-                    <p>辽宁省大连市高新技术产业园区火炬路32A号B座1904室</p>
-                    <p>+86 18616763883</p>
-                    <p>contact@learnable.ai</p>
-                </div>
-                <div className="contact_media">
-                    <img src={wechatIcon} />
-                    <img src={cbIcon} />
-                    <img src={alIcon} />
-                    <img src={inIcon} />
-                </div>
-            </div>
-            <div className="declare">
-                <p>&copy; 2018 Learnable, Inc. All rights reserved.</p>
-            </div>
-        </div>
+        return <FootMobileSection />
     }
 
     render() {
