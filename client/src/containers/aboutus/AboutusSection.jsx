@@ -3,12 +3,12 @@
 import React from 'react';
 
 import ImageItem from '../ImageItem.jsx';
-import BerkleeImage from '../../static/images/media/Berklee.jpg';
-import CESImage from '../../static/images/media/CES.jpg';
-import DavosImage from '../../static/images/media/Davos2018.jpg';
-import MicrosoftImage from '../../static/images/media/MicrosoftBuild.jpg';
+import BerkleeImage from '../../static/images/media/Berklee_small.png';
+import CESImage from '../../static/images/media/ces_small.png';
+import DavosImage from '../../static/images/media/Davos_small.png';
+import MicrosoftImage from '../../static/images/media/MicrosoftBuild_small.png';
 import NewYorkerImage from '../../static/images/media/NewYorker.jpg';
-import TedImage from '../../static/images/media/TedXBoston.jpg';
+import TedImage from '../../static/images/media/TedXBoston_small.png';
 
 import './AboutusSection.scss';
 

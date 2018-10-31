@@ -4,7 +4,7 @@ import React from 'react';
 
 import ImageItem from '../ImageItem.jsx';
 import QrcodeImage from '../../static/images/qr_code.png';
-import MallImage from '../../static/images/mall.png';
+import MallImage from '../../static/images/mall_large.png';
 
 import './NewretailSection.scss';
 

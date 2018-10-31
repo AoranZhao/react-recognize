@@ -17,17 +17,17 @@ class ImageItem extends React.Component {
     }
 
     render() {
-        return <div className="ImageItemFrame" style={this.style}>
-            <div className="ImageItem" >
+        return <div className="imageItemFrame" style={this.style}>
+            <div className="imageItem" >
                 <img src={this.imageSrc} onClick={e => {
                     this.onClick(e);
                 }} />
             </div>
             {(!this.title && !this.description) ?
                 <div></div>
-                : <div className="ImageDetail">
-                    <p style={{ fontWeight: 'blod' }}>{this.title}</p>
-                    <p>{this.description}</p>
+                : <div className="imageInfo">
+                    <p className="imageInfoTitle">{this.title}</p>
+                    <p className="imageInfoTescription">{this.description}</p>
                 </div>}
         </div>
     }
