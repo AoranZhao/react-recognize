@@ -9,7 +9,7 @@ import BrainImage from '../../static/images/brain_large.png';
 import './ProductSection.scss';
 
 class ProductSection extends React.Component {
-    constructor() {
+    constructor(props) {
         super(props);
 
         this.title = props.title || "";

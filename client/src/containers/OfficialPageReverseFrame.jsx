@@ -87,10 +87,10 @@ class OfficialPageReverseFrame extends React.Component {
         </div>
         return <div className="officialRevPageFrame">
             <BrowserView>
-                {mobilePage}
+                {browserPage}
             </BrowserView>
             <MobileView>
-                {browserPage}
+                {mobilePage}
             </MobileView>
         </div>
     }

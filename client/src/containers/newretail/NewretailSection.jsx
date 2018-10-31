@@ -9,7 +9,7 @@ import MallImage from '../../static/images/mall.png';
 import './NewretailSection.scss';
 
 class NewretailSection extends React.Component {
-    constructor() {
+    constructor(props) {
         super(props);
 
         this.title = props.title || "";

@@ -9,7 +9,7 @@ import ClassroomImage from '../../static/images/classroom_large.png';
 import './EducationSection.scss';
 
 class EducationSection extends React.Component {
-    constructor() {
+    constructor(props) {
         super(props);
 
         this.title = props.title || "";

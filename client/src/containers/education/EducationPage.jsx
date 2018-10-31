@@ -4,7 +4,7 @@ import React from 'react';
 import { connect } from 'react-redux';
 import OfficialPageReverseFrame from '../OfficialPageReverseFrame.jsx';
 
-import EducationSection from './EducationMobileSection.jsx';
+import EducationSection from './EducationSection.jsx';
 import EducationMobileSection from './EducationMobileSection.jsx';
 
 import { } from '../../actions';

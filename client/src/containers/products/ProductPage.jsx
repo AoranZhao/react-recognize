@@ -4,7 +4,7 @@ import React from 'react';
 import { connect } from 'react-redux';
 import OfficialPageReverseFrame from '../OfficialPageReverseFrame.jsx';
 
-import ProductSection from './ProductMobileSection.jsx';
+import ProductSection from './ProductSection.jsx';
 import ProductMobileSection from './ProductMobileSection.jsx';
 
 import { } from '../../actions';
