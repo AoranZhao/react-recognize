@@ -23,6 +23,10 @@
         .content {
             @extend .description !optional;
             text-align: left;
+
+            p {
+                margin-bottom: 0;
+            }
         }
     }
 }
