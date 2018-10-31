@@ -2,12 +2,12 @@
 
 import React from 'react';
 
-import ImageItem from './ImageItem.jsx';
-import ImageItemMobile from './ImageItemMobile.jsx';
+import ImageItem from '../ImageItem.jsx';
+import ImageItemMobile from '../ImageItemMobile.jsx';
 
-import DRLGif from '../static/images/DRL.gif';
-import DroneGif from '../static/images/Drone.gif';
-import ExplainGif from '../static/images/Explain.gif';
+import DRLGif from '../../static/images/DRL.gif';
+import DroneGif from '../../static/images/Drone.gif';
+import ExplainGif from '../../static/images/Explain.gif';
 
 import './TechnologyMobileSection.scss';
 

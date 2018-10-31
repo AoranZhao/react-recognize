@@ -2,15 +2,12 @@
 
 import React from 'react';
 import { connect } from 'react-redux';
-import { BrowserView, MobileView, isBrowser, isMobile } from 'react-device-detect';
 import OfficialPageFrame from './OfficialPageFrame.jsx';
-import ImageItem from './ImageItem.jsx';
 
-import TechnologySection from './TechnologySection.jsx';
-import SolutionSection from './SolutionSection.jsx';
-import AboutSection from './AboutSection.jsx';
-
-import TechnologyMobileSection from './TechnologyMobileSection.jsx';
+import TechnologySection from './technology/TechnologySection.jsx';
+import TechnologyMobileSection from './technology/TechnologyMobileSection.jsx';
+import ProductsSection from './products/ProductSection.jsx';
+import ProductsMobileSection from './products/ProductMobileSection.jsx';
 
 import { } from '../actions';
 
@@ -49,8 +46,15 @@ class HeadPage extends React.Component {
     }
 
     render() {
-        let sectionDescription = "Our self-developed engines aim to integrate cutting-edge artificial intelligence technologies with traditional industries and existing ecosystems.";
-        return <OfficialPageFrame highlightTitle="Home" browserChildren={[<TechnologySection key="tech" title="Technology" description={sectionDescription} />, <SolutionSection key="solu" />]} mobileChildren={[<TechnologyMobileSection key="techMobile" title="Technology" description={sectionDescription} />]} />
+        let techDescription = "Our self-developed engines aim to integrate cutting-edge artificial intelligence technologies with traditional industries and existing ecosystems.";
+        let proDescription = "Our products and services have demonstrated their huge potentials and impressive values in many traditional industries, including education, new-retail, etc.";
+        return <OfficialPageFrame highlightTitle="Home" browserChildren={[
+            <TechnologySection key="tech" title="Technology" description={techDescription} />,
+            <ProductsSection key="pro" title="Products" description={proDescription} />
+        ]} mobileChildren={[
+            <TechnologyMobileSection key="techMobile" title="Technology" description={techDescription} />,
+            <ProductsMobileSection key="proMobile" title="Products" description={proDescription} />
+        ]} />
     }
 }
 

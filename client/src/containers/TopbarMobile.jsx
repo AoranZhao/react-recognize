@@ -40,14 +40,17 @@ class TopbarMobile extends React.Component {
         }}>
             <TopbarMobileBtn click={() => { this.siderbarOpen(false); }} to="/" text="Home" />
             <TopbarMobileBtn click={() => { this.siderbarOpen(false); }} to="/technology" text="Technology" />
-            <TopbarMobileBtn click={() => { this.siderbarOpen(false); }} to="/solution" text="Solution"
+            <TopbarMobileBtn click={() => { this.siderbarOpen(false); }} text="Solution"
                 subSelections={[
-                    { text: 'Education', to: '/solution' },
-                    { text: 'New Retail', to: '/solution' },
-                    { text: 'Other', to: '/solution' }
+                    { text: 'Education', to: '/education' },
+                    { text: 'New Retail', to: '/newretail' },
+                    { text: 'Other', to: '/products' }
                 ]} />
-            <TopbarMobileBtn click={() => { }} to="/about" text="About" />
-            {/* <TopbarMobileBtn click={() => { }} to="/career" text="Career" /> */}
+            <TopbarMobileBtn click={() => { }} text="About"
+                subSelections={[
+                    { text: 'About Us', to: '/about' },
+                    { text: 'Join Us', to: '/career' }
+                ]} />
             <TopbarMobileBtn click={() => { }} to="/requestdemo" text="Request Demo" />
         </div>
     }
@@ -62,16 +65,15 @@ class TopbarMobile extends React.Component {
                 <TopbarBtn text="Technology" isRev={this.isRev} isHighlight={this.highlightTitle == "Technology" ? true : false} to="/technology" />
                 <TopbarBtn text="Products" isRev={this.isRev} isHighlight={this.highlightTitle == "Products" ? true : false}
                     subSelections={[
-                        { text: 'Education', to: '/solution' },
-                        { text: 'New Retail', to: '/solution' },
-                        { text: 'Other', to: '/solution' }
+                        { text: 'Education', to: '/education' },
+                        { text: 'New Retail', to: '/newretail' },
+                        { text: 'Other', to: '/products' }
                     ]} />
                 <TopbarBtn text="About" isRev={this.isRev} isHighlight={this.highlightTitle == "About" ? true : false}
                     subSelections={[
                         { text: 'About Us', to: '/about' },
                         { text: 'Join Us', to: '/career' }
                     ]} />
-                {/* <TopbarBtn text="Career" isHighlight={this.highlightTitle == "Career" ? true : false} to="/career" /> */}
                 <TopbarBtn text="Demo" isRev={this.isRev} isHighlight={this.highlightTitle == "Demo" ? true : false} to="/requestdemo" />
             </div>
         </div>

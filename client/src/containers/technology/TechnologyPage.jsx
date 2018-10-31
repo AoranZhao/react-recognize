@@ -2,12 +2,12 @@
 
 import React from 'react';
 import { connect } from 'react-redux';
-import OfficialPageReverseFrame from './OfficialPageReverseFrame.jsx';
+import OfficialPageReverseFrame from '../OfficialPageReverseFrame.jsx';
 
 import TechnologySection from './TechnologySection.jsx';
 import TechnologyMobileSection from './TechnologyMobileSection.jsx';
 
-import { } from '../actions';
+import { } from '../../actions';
 
 const mapStateToProps = state => {
     return {}
@@ -20,18 +20,10 @@ const mapDispatchToProps = dispatch => ({
 class TechnologyPage extends React.Component {
     constructor(props) {
         super(props);
-
-        this.sectionOne = this.sectionOne.bind(this);
     }
 
     componentWillMount() {
 
-    }
-
-    sectionOne() {
-        return <div key="one">
-            <p>Technology Page</p>
-        </div>
     }
 
     render() {

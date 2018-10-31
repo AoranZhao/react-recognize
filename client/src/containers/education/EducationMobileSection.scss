@@ -1,0 +1,89 @@
+@import '../HeadPage.scss';
+
+.sectionMobileEdu {
+    width: 100%;
+    margin-top: 20px;
+    margin-bottom: 20px;
+
+    .title {
+        width: calc(70% - 10px);
+        margin-right: auto;
+        margin-left: auto;
+
+        span {
+            display: inline-block;
+            vertical-align: middle;
+            border-top: 1px solid #747474;
+        }
+
+        h3 {
+            display: inline-block;
+            vertical-align: middle;
+            margin-right: 50px;
+            margin-left: 50px;
+            margin-bottom: 20px;
+        }
+        
+        span {
+            width: calc((100% - 205px) / 2);
+        }
+    }
+
+    .description {
+        width: calc(70% - 10px);
+        margin-left: auto;
+        margin-right: auto;
+        text-align: center;
+        line-height: 25px;
+
+        p {
+            margin-top: 0;
+        }
+    }
+
+    .imagesMobileLarge {
+        width: 100%;
+
+        .imagesLarge {
+            width: 80%;
+            margin-left: auto;
+            margin-right: auto;
+        }
+
+        .imagesDetail {
+            width: 80%;
+            margin-left: auto;
+            margin-right: auto;
+        }
+    }
+
+    .imagesMobileSmall {
+        width: 80%;
+        margin-left: auto;
+        margin-right: auto;
+    }
+}
+
+@media only screen and (max-width: 760px) {
+    .sectionMobileEdu {
+        .imagesMobileLarge {
+            display: none;
+        }
+
+        .imagesMobileSmall {
+            display: block;
+        }
+    }
+}
+
+@media only screen and (min-width: 761px) {
+    .sectionMobileEdu {
+        .imagesMobileLarge {
+            display: table;
+        }
+
+        .imagesMobileSmall {
+            display: none;
+        }
+    }
+}

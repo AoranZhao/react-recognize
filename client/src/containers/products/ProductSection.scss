@@ -1,6 +1,6 @@
-@import './HeadPage.scss';
+@import '../HeadPage.scss';
 
-.sectionTech {
+.sectionPro {
     width: 100%;
     margin-top: 20px;
     margin-bottom: 20px;
@@ -9,7 +9,7 @@
         @extend .title !optional;
         
         span {
-            width: calc((100% - 204px) / 2);
+            width: calc((100% - 179px) / 2);
         }
     }
 
