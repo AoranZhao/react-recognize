@@ -2,14 +2,14 @@
 @import './OfficialPageFrame.scss';
 
 .officialRevPageFrame {
+    
+}
+
+.officialRevPage {
     min-width: 760px;
     max-width: 1024px;
     margin-left: auto;
     margin-right: auto;
-}
-
-.officialRevPage {
-    width: 100%;
 
     .sectionFlyRev {
         width: 100%;

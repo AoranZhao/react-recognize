@@ -1,51 +1,55 @@
 @import './App.scss';
 
 .officialPageFrame {
+    
+}
+
+.officialPage {
     min-width: 760px;
     max-width: 1024px;
     margin-left: auto;
     margin-right: auto;
-}
 
-.sectionFly {
-    width: 100%;
-
-    .sectionFlyBody {
+    .sectionFly {
         width: 100%;
-        
-        .sectionFlyBodyText {
-            display: inline-block;
-            vertical-align: bottom;
-            margin-left: 70px;
-            width: calc(60% - 70px);
-
-            h3 {
-                font-size: 22px;
-                display: block;
-                width: 70%;
-                margin-left: auto;
-                margin-right: auto;
-                margin-bottom: 30px;
-                text-align: center;
-                line-height: 40px;
+    
+        .sectionFlyBody {
+            width: 100%;
+            
+            .sectionFlyBodyText {
+                display: inline-block;
+                vertical-align: bottom;
+                margin-left: 70px;
+                width: calc(60% - 70px);
+    
+                h3 {
+                    font-size: 22px;
+                    display: block;
+                    width: 70%;
+                    margin-left: auto;
+                    margin-right: auto;
+                    margin-bottom: 30px;
+                    text-align: center;
+                    line-height: 40px;
+                }
+    
+                p {
+                    font-size: 14px;
+                    display: block;
+                    width: 80%;
+                    margin-left: auto;
+                    margin-right: auto;
+                    margin-bottom: 100px;
+                    text-align: center;
+                    line-height: 30px;
+                }
             }
-
-            p {
-                font-size: 14px;
-                display: block;
-                width: 80%;
-                margin-left: auto;
-                margin-right: auto;
-                margin-bottom: 100px;
-                text-align: center;
-                line-height: 30px;
+    
+            img.profile {
+                display: inline-block;
+                vertical-align: bottom;
+                width: 40%;
             }
-        }
-
-        img.profile {
-            display: inline-block;
-            vertical-align: bottom;
-            width: 40%;
         }
     }
 }
