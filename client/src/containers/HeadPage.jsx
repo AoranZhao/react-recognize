@@ -14,8 +14,6 @@ import TechnologyMobileSection from './TechnologyMobileSection.jsx';
 
 import { } from '../actions';
 
-import NewYorkerImage from '../static/images/newYorker.jpg';
-
 import './HeadPage.scss';
 
 const mapStateToProps = state => {
@@ -51,7 +49,8 @@ class HeadPage extends React.Component {
     }
 
     render() {
-        return <OfficialPageFrame highlightTitle="Home" browserChildren={[<TechnologySection key="tech" />, <SolutionSection key="solu" />, <AboutSection key="about" />]} mobileChildren={[<TechnologyMobileSection key="techMobile" />]} />
+        let sectionDescription = "Our self-developed engines aim to integrate cutting-edge artificial intelligence technologies with traditional industries and existing ecosystems.";
+        return <OfficialPageFrame highlightTitle="Home" browserChildren={[<TechnologySection key="tech" title="Technology" description={sectionDescription} />, <SolutionSection key="solu" />]} mobileChildren={[<TechnologyMobileSection key="techMobile" title="Technology" description={sectionDescription} />]} />
     }
 }
 

@@ -4,24 +4,39 @@ import React from 'react';
 
 import './ImageItemMobile.scss';
 
-class ImageItem extends React.Component {
+class ImageItemMobile extends React.Component {
     constructor(props) {
         super(props);
         this.imageSrc = props.src;
-        this.text = props.text || "";
-        this.style = props.style || {};
-        if (props.width != undefined)
-            this.style = Object.assign(this.style, { width: props.width + 'px', height: props.width * 0.3 + "px" });
+        this.showDetail = props.showDetail;
+        this.onClick = (typeof props.onClick == 'function') ? props.onClick : e => { };
+        this.title = props.title || "";
+        this.description = props.description || "";
+        this.basicStyle = { zIndex: 5 };
+        this.style = Object.assign(this.basicStyle, props.style) || this.basicStyle;
+    }
+
+    componentWillReceiveProps(props) {
+        this.showDetail = props.showDetail;
     }
 
     render() {
         return <div className="ImageItemMobileFrame" style={this.style}>
             <div className="ImageItemMobile" >
-                <img src={this.imageSrc} />
-                {/* <p className="title">{this.text}</p> */}
+                <img src={this.imageSrc} onClick={e => {
+                    this.onClick();
+                }} />
             </div>
+            {
+                (!this.title && !this.description) ?
+                    <div></div>
+                    : <div className="ImageItemMobileDetail" style={this.showDetail ? { display: 'block' } : { display: 'none' }}>
+                        <p style={{ fontWeight: 'blod' }}>{this.title}</p>
+                        <p>{this.description}</p>
+                    </div>
+            }
         </div>
     }
 }
 
-export default ImageItem;
+export default ImageItemMobile;

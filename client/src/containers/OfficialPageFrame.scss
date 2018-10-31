@@ -56,7 +56,7 @@
     .sectionFlyMobile {
         width: 100%;
     
-        .sectionFlyMobileBody {
+        .sectionFlyMobileBodySmall {
             width: 100%;
             
             .sectionFlyMobileBodyText {
@@ -95,25 +95,64 @@
             //     width: 40%;
             // }
         }
+
+        .sectionFlyMobileBodyLarge {
+            width: 100%;
+        
+            .sectionFlyMobileBodyText {
+                display: inline-block;
+                vertical-align: bottom;
+                margin-left: 70px;
+                width: calc(60% - 70px);
+
+                h3 {
+                    font-size: 22px;
+                    display: block;
+                    width: 70%;
+                    margin-left: auto;
+                    margin-right: auto;
+                    margin-bottom: 30px;
+                    text-align: center;
+                    line-height: 40px;
+                }
+
+                p {
+                    font-size: 14px;
+                    display: block;
+                    width: 80%;
+                    margin-left: auto;
+                    margin-right: auto;
+                    margin-bottom: 100px;
+                    text-align: center;
+                    line-height: 30px;
+                }
+            }
+
+            img.profile {
+                display: inline-block;
+                vertical-align: bottom;
+                width: 40%;
+            }
+        }
     }
 }
 
 @media only screen and (max-width: 760px) {
-    .sectionTopbarMobileWide {
+    .sectionFlyMobileBodyLarge {
         display: none;
     }
 
-    .sectionTopbarMobileNarrow {
+    .sectionFlyMobileBodySmall {
         display: block;
     }
 }
 
 @media only screen and (min-width: 761px) {
-    .sectionTopbarMobileWide {
+    .sectionFlyMobileBodyLarge {
         display: block;
     }
 
-    .sectionTopbarMobileNarrow {
+    .sectionFlyMobileBodySmall {
         display: none;
     }
 }

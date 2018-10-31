@@ -2,26 +2,149 @@
 @import './OfficialPageFrame.scss';
 
 .officialRevPageFrame {
-    @extend .officialPageFrame !optional;
+    min-width: 760px;
+    max-width: 1024px;
+    margin-left: auto;
+    margin-right: auto;
 }
 
 .officialRevPage {
+    width: 100%;
+
     .sectionFlyRev {
-        @extend .sectionFly !optional;
+        width: 100%;
         background-color: $blue-color;
         color: white;
 
         .sectionFlyRevBody {
-            @extend .sectionFlyBody !optional;
+            width: 100%;
             margin-top: 100px;
 
             .sectionFlyRevBodyText {
-                @extend .sectionFlyBodyText !optional;
+                display: inline-block;
+                vertical-align: bottom;
+                margin-left: 70px;
+                width: calc(60% - 70px);
+
+                h3 {
+                    font-size: 22px;
+                    display: block;
+                    width: 70%;
+                    margin-left: auto;
+                    margin-right: auto;
+                    margin-bottom: 30px;
+                    text-align: center;
+                    line-height: 40px;
+                }
+
+                p {
+                    font-size: 14px;
+                    display: block;
+                    width: 80%;
+                    margin-left: auto;
+                    margin-right: auto;
+                    margin-bottom: 100px;
+                    text-align: center;
+                    line-height: 30px;
+                }
             }
         }
     }
 }
 
 .officialRevPageMobile {
+    width: 100vw;
 
+    .sectionFlyRevMobile {
+        width: 100%;
+        background-color: $blue-color;
+        color: white;
+
+        .sectionFlyRevMobileBodySmall {
+            width: 100%;
+
+            .sectionFlyRevMobileBodyText {
+                display: block;
+                // vertical-align: bottom;
+                margin-left: auto;
+                margin-right: auto;
+                width: 80%;
+    
+                h3 {
+                    font-size: 22px;
+                    display: block;
+                    width: 70%;
+                    margin-left: auto;
+                    margin-right: auto;
+                    margin-bottom: 30px;
+                    text-align: center;
+                    line-height: 40px;
+                }
+    
+                p {
+                    font-size: 14px;
+                    display: block;
+                    width: 80%;
+                    margin-left: auto;
+                    margin-right: auto;
+                    margin-bottom: 100px;
+                    text-align: center;
+                    line-height: 30px;
+                }
+            }
+        }
+
+        .sectionFlyRevMobileBodyLarge {
+            width: 100%;
+
+            .sectionFlyRevMobileBodyText {
+                display: inline-block;
+                vertical-align: bottom;
+                margin-left: 70px;
+                width: calc(60% - 70px);
+
+                h3 {
+                    font-size: 22px;
+                    display: block;
+                    width: 70%;
+                    margin-left: auto;
+                    margin-right: auto;
+                    margin-bottom: 30px;
+                    text-align: center;
+                    line-height: 40px;
+                }
+
+                p {
+                    font-size: 14px;
+                    display: block;
+                    width: 80%;
+                    margin-left: auto;
+                    margin-right: auto;
+                    margin-bottom: 100px;
+                    text-align: center;
+                    line-height: 30px;
+                }
+            }
+        }
+    }
+}
+
+@media only screen and (max-width: 760px) {
+    .sectionFlyRevMobileBodyLarge {
+        display: none;
+    }
+
+    .sectionFlyRevMobileBodySmall {
+        display: block;
+    }
+}
+
+@media only screen and (min-width: 761px) {
+    .sectionFlyRevMobileBodyLarge {
+        display: block;
+    }
+
+    .sectionFlyRevMobileBodySmall {
+        display: none;
+    }
 }

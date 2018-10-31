@@ -24,7 +24,7 @@ module.exports = {
             include: [path.join(__dirname, '/client/src'), path.resolve(__dirname, "node_modules/react-datepicker/dist/")],
             loaders: ['style-loader', 'css-loader', 'sass-loader']
         }, {
-            test: /\.(jpe?g|gif|png|svg|woff|ttf|ttc|wav|mp3)$/,
+            test: /\.(jpe?g|gif|png|svg|woff|ttf|ico|ttc|wav|mp3)$/,
             loader: "url-loader?limit=8192&name=images/[name]-[hash].[ext]"
         }]
     },

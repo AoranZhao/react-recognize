@@ -2,11 +2,15 @@
 
 import React from 'react';
 
-import logoImage from '../static/images/Learnable_logo.png';
-import sidebarBtn from '../static/images/sidebarBtn.png';
+import menuIconRev from '../static/images/menu-icon-white.png';
+import menuIcon from '../static/images/menu-icon-gray.png';
 
 import Sidebar from 'react-sidebar';
 import TopbarMobileBtn from '../components/TopbarMobileBtn.jsx';
+import TopbarBtn from '../components/TopbarBtn.jsx';
+
+import logoImage from '../static/images/logo_large_purple.png';
+import logoImageRev from '../static/images/logo_large_white.png';
 
 import './TopbarMobile.scss';
 
@@ -18,6 +22,12 @@ class TopbarMobile extends React.Component {
         }
         this.siderbarOpen = this.siderbarOpen.bind(this);
         this.sidebarContent = this.sidebarContent.bind(this);
+
+        this.highlightTitle = props.highlight;
+        this.isRev = props.isRev || false;
+
+        this.renderTopbarSmall = this.renderTopbarSmall.bind(this);
+        this.renderTopbarLarge = this.renderTopbarLarge.bind(this);
     }
 
     siderbarOpen(open) {
@@ -37,13 +47,38 @@ class TopbarMobile extends React.Component {
                     { text: 'Other', to: '/solution' }
                 ]} />
             <TopbarMobileBtn click={() => { }} to="/about" text="About" />
-            <TopbarMobileBtn click={() => { }} to="/career" text="Career" />
+            {/* <TopbarMobileBtn click={() => { }} to="/career" text="Career" /> */}
             <TopbarMobileBtn click={() => { }} to="/requestdemo" text="Request Demo" />
         </div>
     }
 
-    render() {
-        return <div className="sectionTopbarMobile">
+    renderTopbarLarge() {
+        return <div className="sectionTopbarLarge">
+            <a href="/">
+                <img src={this.isRev ? logoImageRev : logoImage} className="logo" />
+            </a>
+            <div className="selection">
+                <TopbarBtn text="Home" isRev={this.isRev} isHighlight={this.highlightTitle == "Home" ? true : false} to="/" />
+                <TopbarBtn text="Technology" isRev={this.isRev} isHighlight={this.highlightTitle == "Technology" ? true : false} to="/technology" />
+                <TopbarBtn text="Products" isRev={this.isRev} isHighlight={this.highlightTitle == "Products" ? true : false}
+                    subSelections={[
+                        { text: 'Education', to: '/solution' },
+                        { text: 'New Retail', to: '/solution' },
+                        { text: 'Other', to: '/solution' }
+                    ]} />
+                <TopbarBtn text="About" isRev={this.isRev} isHighlight={this.highlightTitle == "About" ? true : false}
+                    subSelections={[
+                        { text: 'About Us', to: '/about' },
+                        { text: 'Join Us', to: '/career' }
+                    ]} />
+                {/* <TopbarBtn text="Career" isHighlight={this.highlightTitle == "Career" ? true : false} to="/career" /> */}
+                <TopbarBtn text="Demo" isRev={this.isRev} isHighlight={this.highlightTitle == "Demo" ? true : false} to="/requestdemo" />
+            </div>
+        </div>
+    }
+
+    renderTopbarSmall() {
+        return <div className="sectionTopbarSmall">
             <div className="sectionTopbarMobileSidebar">
                 <Sidebar
                     sidebar={this.sidebarContent()}
@@ -51,10 +86,17 @@ class TopbarMobile extends React.Component {
                     onSetOpen={this.siderbarOpen}
                     styles={{ sidebar: { background: 'while' } }}
                     sidebarClassName="sidebarContent">
-                    <img src={sidebarBtn} onClick={e => { this.siderbarOpen(true); }} style={{ cursor: 'pointer' }} />
+                    <img src={this.isRev ? menuIconRev : menuIcon} onClick={e => { this.siderbarOpen(true); }} style={{ cursor: 'pointer' }} />
                 </Sidebar>
             </div>
-            <img src={logoImage} className="logo" />
+            <img src={this.isRev ? logoImageRev : logoImage} className="logo" />
+        </div>
+    }
+
+    render() {
+        return <div className="sectionTopbarFrame">
+            {this.renderTopbarSmall()}
+            {this.renderTopbarLarge()}
         </div>
     }
 }

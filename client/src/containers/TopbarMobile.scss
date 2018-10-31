@@ -1,4 +1,8 @@
-.sectionTopbarMobile {
+.sectionTopbarFrame {
+    width: 100%;
+}
+
+.sectionTopbarSmall {
     width: 100%;
     height: 50px;
 
@@ -9,8 +13,9 @@
         vertical-align: top;
 
         img {
-            height: 40px;
-            width: 40px;
+            height: 34px;
+            width: 34px;
+            margin: 8px;
         }
     }
 
@@ -24,8 +29,47 @@
     img.logo {
         height: 40px;
         padding-top: 5px;
-        margin-left: calc(50vw - 100px);
+        margin-left: calc(50vw - 130px);
         display: inline-block;
         vertical-align: top;
+    }
+    
+}
+
+.sectionTopbarLarge {
+    width: 100%;
+    height: 60px;
+    padding-top: 10px;
+
+    img.logo {
+        height: 50px;
+        margin-left: 60px;
+    }
+
+    div.selection {
+        width: 500px;
+        height: 30px;
+        margin-top: 15px;
+        float: right;
+    }
+}
+
+@media only screen and (max-width: 760px) {
+    .sectionTopbarLarge {
+        display: none;
+    }
+
+    .sectionTopbarSmall {
+        display: block;
+    }
+}
+
+@media only screen and (min-width: 761px) {
+    .sectionTopbarLarge {
+        display: block;
+    }
+
+    .sectionTopbarSmall {
+        display: none;
     }
 }

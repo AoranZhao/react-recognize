@@ -6,13 +6,13 @@ import { logout } from '../actions';
 
 import './LogoutButton.scss';
 
-let LogoutButton = ({dispatch}) => (
+let LogoutButton = ({ dispatch }) => (
     <form
         onSubmit={e => {
             e.preventDefault();
             dispatch(logout());
         }}
-        >
+    >
         <input type="submit" value="Logout" className="logout_btn" />
     </form>
 )

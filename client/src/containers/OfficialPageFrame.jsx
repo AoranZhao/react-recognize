@@ -59,14 +59,19 @@ class OfficialPageFrame extends React.Component {
 
     sectionFlyMobile() {
         return <div className="sectionFlyMobile">
-            <TopbarMobile className="sectionTopbarMobileNarrow" />
-            <Topbar className="sectionTopbarMobileWide" highlight={this.highlightTitle} />
-            <div className="sectionFlyMobileBody">
+            <TopbarMobile highlight={this.highlightTitle} />
+            <div className="sectionFlyMobileBodySmall">
                 <div className="sectionFlyMobileBodyText">
                     <h3>Customize artificial intelligence with the human touch</h3>
                     <p>Learnable optimizes the manual process with our human-centered Artificial Intelligence technologies that can be taught, trusted, and operated by all generation.</p>
                 </div>
-                {/* <img className="profile" src={profileImage} /> */}
+            </div>
+            <div className="sectionFlyMobileBodyLarge">
+                <div className="sectionFlyMobileBodyText">
+                    <h3>Customize artificial intelligence with the human touch</h3>
+                    <p>Learnable optimizes the manual process with our human-centered Artificial Intelligence technologies that can be taught, trusted, and operated by all generation.</p>
+                </div>
+                <img className="profile" src={profileImage} />
             </div>
         </div>
     }
@@ -88,10 +93,10 @@ class OfficialPageFrame extends React.Component {
         </div>
         return <div className="officialPageFrame">
             <BrowserView>
-                {browserPage}
+                {mobilePage}
             </BrowserView>
             <MobileView>
-                {mobilePage}
+                {browserPage}
             </MobileView>
         </div>
     }

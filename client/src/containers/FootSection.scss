@@ -3,63 +3,103 @@
 .sectionFoot {
     width: 100%;
     background-color: $blue-color;
-    color: white;
-    padding-top: 30px;
-    padding-bottom: 10px;
 
-    .contact {
-        width: 760px;
-        margin-left: auto;
-        margin-right: auto;
+    .sectionFootInfo {
+        color: white;
+        padding-top: 30px;
+        padding-bottom: 10px;
+        display: inline-block;
 
-        .contact_us {
-            width: 270px;
-            display: inline-block;
-            vertical-align: top;
-
+        .contact {
+            width: 400px;
+            margin-left: 100px;
+    
             p {
-                display: block;
-                text-align: center;
+                font-family: Arial, Helvetica, sans-serif;
+                font-weight: bold;
+                margin: 0;
+                font-size: 14px;
             }
         }
-
-        .contact_cn {
-            width: 440px;
-            display: inline-block;
-            vertical-align: top;
-
-            p {
-                display: block;
-                text-align: center;
+    
+        .media {
+            width: 400px;
+            height: 25px;
+            margin-left: 100px;
+            margin-top: 30px;
+    
+            img.media-icon {
+                width: 20px;
+                height: 20px;
+            }
+    
+            .wechat {
+                display: inline-block;
+                vertical-align: top;
+                position: relative;
+    
+                img.media-icon {
+                    width: 25px;
+                    height: 25px;
+                }
+    
+                div.hidden {
+                    position: absolute;
+                    display: none;
+                    top: -200px;
+    
+                    img {
+                        height: 200px;
+                        width: 200px;
+                    }
+                }
+    
+                &:hover div.hidden {
+                    display: block;
+                }
+            }
+    
+            .linkedin {
+                display: inline-block;
+                vertical-align: top;
             }
         }
-
-        .contact_media {
-            width: 50px;
-            display: inline-block;
-            vertical-align: top;
-            margin-top: 10px;
-
-            img {
-                height: 25px;
-                width: 25px;
-                margin-top: 8px;
-                margin-bottom: 8px;
-                margin-right: auto;
-                margin-left: auto;
-                display: block;
+    
+        .declare {
+            width: 400px;
+            margin-left: 100px;
+    
+            a {
+                color: white;
+                // text-decoration: none;
+    
+                &:hover {
+                    color: white;
+                    // text-decoration: none;
+                }
+    
+                &:visited {
+                    color: white;
+                    // text-decoration: none;
+                }
+            }
+    
+            p {
+                font-size: 12px;
+                margin: 0;
             }
         }
     }
 
-    .declare {
-        width: 760px;
-        margin-left: auto;
-        margin-right: auto;
+    .sectionFootLogo {
+        float: right;
+        display: inline-block;
+        vertical-align: top;
+        margin-top: 100px;
+        margin-right: 30px;
 
-        p {
-            font-size: 8px;
-            margin-left: 50px;
+        img {
+            width: 200px;
         }
     }
 }

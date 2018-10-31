@@ -8,14 +8,16 @@ const tz_str = 'Asia/Shanghai';
 import DatePicker from 'react-datepicker';
 import 'react-datepicker/dist/react-datepicker.css';
 
-import { get_users_ing, get_users_done, get_users_err, local_update_user,
-        update_user_ing, update_user_done, update_user_err,
-        delete_user_ing, delete_user_done, delete_user_err,
-        add_user_ing, add_user_done, add_user_err} from '../actions';
+import {
+    get_users_ing, get_users_done, get_users_err, local_update_user,
+    update_user_ing, update_user_done, update_user_err,
+    delete_user_ing, delete_user_done, delete_user_err,
+    add_user_ing, add_user_done, add_user_err
+} from '../actions';
 import { Axios } from '../utils';
 
 const mapStateToProps = state => {
-    return {auth: state.auth, users: state.users};
+    return { auth: state.auth, users: state.users };
 }
 
 const mapDispatchToProps = dispatch => ({
@@ -78,7 +80,7 @@ class AdminPage extends React.Component {
 
     fetchUsers() {
         this.props.promise_get_users_ing();
-        Axios.get('/api/users', {headers: {"x-token": this.props.auth.data.token}})
+        Axios.get('/api/users', { headers: { "x-token": this.props.auth.data.token } })
             .then(response => {
                 this.props.promise_get_users_done(response);
             }).catch(err => {
@@ -87,9 +89,9 @@ class AdminPage extends React.Component {
     }
 
     handleDatePicker_onChange(time, user) {
-        var temp_user = {...user, expire: this.convertTime(time)};
+        var temp_user = { ...user, expire: this.convertTime(time) };
         this.props.promise_update_user_ing();
-        Axios.put('/api/user/' + user._id, temp_user, {headers: {"x-token": this.props.auth.data.token}})
+        Axios.put('/api/user/' + user._id, temp_user, { headers: { "x-token": this.props.auth.data.token } })
             .then(response => {
                 this.props.promise_update_user_done(response);
             }).catch(err => {
@@ -103,7 +105,7 @@ class AdminPage extends React.Component {
 
     deleteUser(id) {
         this.props.promise_delete_user_ing();
-        Axios.delete('/api/user/' + id, {headers: {"x-token": this.props.auth.data.token}})
+        Axios.delete('/api/user/' + id, { headers: { "x-token": this.props.auth.data.token } })
             .then(response => {
                 this.props.promise_delete_user_done(response);
             }).catch(err => {
@@ -113,51 +115,52 @@ class AdminPage extends React.Component {
 
     generateUserTable(arr) {
         return <table>
-                    <thead>
-                        <tr><th>Account</th><th>Password</th><th>validation</th><th>expire date(GTM+8)</th><th>options</th></tr>
-                    </thead>
-                    <tbody>
-                    {arr.map((user, index) => {
-                        return (
-                            <tr key={index}>
-                                <td><p>{user.email}</p></td>
-                                <td><p>{user.password}</p></td>
-                                    <td>{user.disable ? <p>Disabled</p> : <p>Enabled</p>}</td>
-                                    <td><DatePicker
-                                            selected={moment(user.expire).tz(tz_str)}
-                                            onChange={param => this.handleDatePicker_onChange(param, user)}
-                                            showTimeSelect
-                                            dateFormat="DD-MMM-YYYY HH:mm"
-                                        /></td>
-                                    <td><input type="button" value="delete" onClick={e => {
-                                        e.preventDefault();
-                                        if(confirm('are you sure?')) {
-                                            this.deleteUser(user._id);
-                                        }
-                                    }} /></td>
-                                </tr>
-                        )})}
-                    </tbody>
-                </table>
+            <thead>
+                <tr><th>Account</th><th>Password</th><th>validation</th><th>expire date(GTM+8)</th><th>options</th></tr>
+            </thead>
+            <tbody>
+                {arr.map((user, index) => {
+                    return (
+                        <tr key={index}>
+                            <td><p>{user.email}</p></td>
+                            <td><p>{user.password}</p></td>
+                            <td>{user.disable ? <p>Disabled</p> : <p>Enabled</p>}</td>
+                            <td><DatePicker
+                                selected={moment(user.expire).tz(tz_str)}
+                                onChange={param => this.handleDatePicker_onChange(param, user)}
+                                showTimeSelect
+                                dateFormat="DD-MMM-YYYY HH:mm"
+                            /></td>
+                            <td><input type="button" value="delete" onClick={e => {
+                                e.preventDefault();
+                                if (confirm('are you sure?')) {
+                                    this.deleteUser(user._id);
+                                }
+                            }} /></td>
+                        </tr>
+                    )
+                })}
+            </tbody>
+        </table>
     }
 
     generateAddUserFrame() {
         return <form onSubmit={e => {
-                e.preventDefault();
-                var email = this.ref_email.value.trim();
-                var passwd = this.ref_password.value.trim();
-                var passwd_c = this.ref_password_c.value.trim();
-                {/* var expire = this.ref_expire.valueOf.trim(); */}
-                if(email && passwd && passwd_c) {
-                    if(passwd === passwd_c) {
-                        this.saveNewUser(email, passwd);
-                    } else {
-                        alert('password shold be same.');
-                    }
+            e.preventDefault();
+            var email = this.ref_email.value.trim();
+            var passwd = this.ref_password.value.trim();
+            var passwd_c = this.ref_password_c.value.trim();
+            {/* var expire = this.ref_expire.valueOf.trim(); */ }
+            if (email && passwd && passwd_c) {
+                if (passwd === passwd_c) {
+                    this.saveNewUser(email, passwd);
                 } else {
-                    alert('uncomplete information');
+                    alert('password shold be same.');
                 }
-            }}>
+            } else {
+                alert('uncomplete information');
+            }
+        }}>
             User ID: <input type="text" placeholder="User ID" ref={node => this.ref_email = node} /><br />
             Password: <input type="password" placeholder="Password" ref={node => this.ref_password = node} />
             <input type="password" placeholder="Password Confirm" ref={node => this.ref_password_c = node} /><br />
@@ -167,7 +170,7 @@ class AdminPage extends React.Component {
 
     saveNewUser(email, password) {
         this.props.promise_add_user_ing();
-        Axios.post('/api/user', {email: email, password: password}, {headers: {"x-token": this.props.auth.data.token}})
+        Axios.post('/api/user', { email: email, password: password }, { headers: { "x-token": this.props.auth.data.token } })
             .then(response => {
                 this.ref_email.value = this.ref_password.value = this.ref_password_c.value = '';
                 this.fetchUsers();
@@ -179,20 +182,20 @@ class AdminPage extends React.Component {
     render() {
         var frame_admin = <div><p>not load</p></div>;
         var frame_adduser = this.generateAddUserFrame();
-        if(this.props.users) {
-            switch(this.props.users.status) {
+        if (this.props.users) {
+            switch (this.props.users.status) {
                 case 'get_users_ing':
                     frame_admin = <div><p>loading user info</p></div>;
                     break;
                 case 'update_user_ing':
                     frame_admin = <div><p>updating user info</p></div>;
-                    break;  
+                    break;
                 case 'delete_user_ing':
                     frame_admin = <div><p>deleting user info</p></div>;
-                    break;   
+                    break;
                 case 'add_user_ing':
                     frame_admin = <div><p>adding user info</p></div>;
-                    break;         
+                    break;
                 case 'get_users_done':
                 case 'update_user_done':
                 case 'delete_user_done':

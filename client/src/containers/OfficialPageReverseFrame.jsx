@@ -53,7 +53,21 @@ class OfficialPageReverseFrame extends React.Component {
     }
 
     sectionFlyMobile() {
-        return <div></div>
+        return <div className="sectionFlyRevMobile">
+            <TopbarMobile highlight={this.highlightTitle} isRev={true} />
+            <div className="sectionFlyRevMobileBodySmall">
+                <div className="sectionFlyRevMobileBodyText">
+                    <h3>{this.title}</h3>
+                    <p>{this.description}</p>
+                </div>
+            </div>
+            <div className="sectionFlyRevMobileBodyLarge">
+                <div className="sectionFlyRevMobileBodyText">
+                    <h3>{this.title}</h3>
+                    <p>{this.description}</p>
+                </div>
+            </div>
+        </div>
     }
 
     sectionFootMobile() {
@@ -66,17 +80,17 @@ class OfficialPageReverseFrame extends React.Component {
             {this.browserChildren}
             {this.sectionFoot()}
         </div>
-        let mobilePage = <div classname="officialRevPageMobile">
+        let mobilePage = <div className="officialRevPageMobile">
             {this.sectionFlyMobile()}
             {this.mobileChildren}
             {this.sectionFootMobile()}
         </div>
         return <div className="officialRevPageFrame">
             <BrowserView>
-                {browserPage}
+                {mobilePage}
             </BrowserView>
             <MobileView>
-                {mobilePage}
+                {browserPage}
             </MobileView>
         </div>
     }

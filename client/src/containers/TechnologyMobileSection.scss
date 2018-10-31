@@ -6,33 +6,71 @@
     margin-bottom: 20px;
 
     .title {
-        @extend .title !optional;
+        width: calc(70% - 10px);
+        margin-right: auto;
+        margin-left: auto;
+
+        span {
+            display: inline-block;
+            vertical-align: middle;
+            border-top: 1px solid #747474;
+        }
+
+        h3 {
+            display: inline-block;
+            vertical-align: middle;
+            margin-right: 50px;
+            margin-left: 50px;
+            margin-bottom: 20px;
+        }
         
         span {
-            width: calc((100% - 470px) / 2);
+            width: calc((100% - 205px) / 2);
         }
     }
 
     .description {
-        @extend .description !optional;
+        width: calc(70% - 10px);
+        margin-left: auto;
+        margin-right: auto;
+        text-align: center;
+        line-height: 25px;
+
+        p {
+            margin-top: 0;
+        }
     }
 
-    .images {
-        @extend .images !optional;
+    .imagesMobileLarge {
+        width: 100%;
+
+        .imagesLarge {
+            width: 80%;
+            margin-left: auto;
+            margin-right: auto;
+        }
+
+        .imagesDetail {
+            width: 80%;
+            margin-left: auto;
+            margin-right: auto;
+        }
     }
 
-    .imagesMobile {
-        @extend .images !optional;
+    .imagesMobileSmall {
+        width: 80%;
+        margin-left: auto;
+        margin-right: auto;
     }
 }
 
 @media only screen and (max-width: 760px) {
     .sectionMobileTech {
-        .images {
+        .imagesMobileLarge {
             display: none;
         }
 
-        .imagesMobile {
+        .imagesMobileSmall {
             display: block;
         }
     }
@@ -40,11 +78,11 @@
 
 @media only screen and (min-width: 761px) {
     .sectionMobileTech {
-        .images {
+        .imagesMobileLarge {
             display: table;
         }
 
-        .imagesMobile {
+        .imagesMobileSmall {
             display: none;
         }
     }

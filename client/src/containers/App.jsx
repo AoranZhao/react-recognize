@@ -27,7 +27,7 @@ const App = () => {
             <div style={{ width: '100%' }}>
                 <Route exact path="/" component={HeadPage} />
                 <Route path="/technology" component={TechnologyPage} />
-                <Route path="/solution" component={SolutionPage} />
+                <Route path="/products" component={SolutionPage} />
                 <Route path="/about" component={AboutPage} />
                 <Route path="/career" component={CareerPage} />
                 <Route path="/requestdemo" component={RequestDemoPage} />
