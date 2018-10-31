@@ -27,8 +27,8 @@ class FootMobileSection extends React.Component {
                 <div className="contact">
                     <p>contact@learnable.ai</p>
                     <p>59 Brainerd Rd., Allston, MA 02134</p>
-                    <p>(+1)401-837-0759</p>
-                    <p>(+86)18616763883</p>
+                    {/* <p>(+1)401-837-0759</p> */}
+                    {/* <p>(+86)18616763883</p> */}
                 </div>
                 <div className="media">
                     <div className="wechat">
@@ -65,8 +65,8 @@ class FootMobileSection extends React.Component {
                 <div className="contact">
                     <p>contact@learnable.ai</p>
                     <p>59 Brainerd Rd., Allston, MA 02134</p>
-                    <p>(+1)401-837-0759</p>
-                    <p>(+86)18616763883</p>
+                    {/* <p>(+1)401-837-0759</p> */}
+                    {/* <p>(+86)18616763883</p> */}
                 </div>
                 <div className="media">
                     <div className="wechat">

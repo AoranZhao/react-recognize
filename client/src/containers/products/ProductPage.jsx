@@ -6,6 +6,7 @@ import OfficialPageReverseFrame from '../OfficialPageReverseFrame.jsx';
 
 import ProductSection from './ProductSection.jsx';
 import ProductMobileSection from './ProductMobileSection.jsx';
+import ProductDetailSection from './ProductDetailSection.jsx';
 
 import { } from '../../actions';
 
@@ -23,8 +24,7 @@ class ProductsPage extends React.Component {
 
     render() {
         let description = "Our products and services have demonstrated their huge potentials and impressive values in many traditional industries, including education, new-retail, etc.";
-        let sectionDescription = "Our products and services have demonstrated their huge potentials and impressive values in many traditional industries, including education, new-retail, etc.";
-        return <OfficialPageReverseFrame title="Products" description={description} highlightTitle="Products" browserChildren={[<ProductSection key="pro" title="Products" description={sectionDescription} />]} mobileChildren={[<ProductMobileSection key="pro" title="Products" description={sectionDescription} />]} />
+        return <OfficialPageReverseFrame title="Products" description={description} highlightTitle="Products" browserChildren={[<ProductDetailSection key="pro" />]} mobileChildren={[<ProductDetailSection key="pro" />]} />
     }
 }
 

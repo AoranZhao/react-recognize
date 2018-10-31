@@ -27,6 +27,7 @@ class OfficialPageReverseFrame extends React.Component {
         this.mobileChildren = props.mobileChildren || [];
 
         this.sectionFly = this.sectionFly.bind(this);
+        this.sectionBrowserChildren = this.sectionBrowserChildren.bind(this);
         this.sectionFoot = this.sectionFoot.bind(this);
         this.sectionFlyMobile = this.sectionFlyMobile.bind(this);
         this.sectionFootMobile = this.sectionFootMobile.bind(this);
@@ -37,19 +38,31 @@ class OfficialPageReverseFrame extends React.Component {
     }
 
     sectionFly() {
-        return <div className="sectionFlyRev">
-            <Topbar highlight={this.highlightTitle} isRev={true} />
-            <div className="sectionFlyRevBody">
-                <div className="sectionFlyRevBodyText">
-                    <h3>{this.title}</h3>
-                    <p>{this.description}</p>
+        return <div className="sectionFlyRevFrame">
+            <div className="sectionFlyRev">
+                <Topbar highlight={this.highlightTitle} isRev={true} />
+                <div className="sectionFlyRevBody">
+                    <div className="sectionFlyRevBodyText">
+                        <h3>{this.title}</h3>
+                        <p>{this.description}</p>
+                    </div>
                 </div>
             </div>
         </div>
     }
 
+    sectionBrowserChildren() {
+        return <div className="sectionBrowserChildrenRevFrame">
+            {this.browserChildren}
+        </div>
+    }
+
     sectionFoot() {
-        return <FootSection />
+        return <div className="sectionFootRevFrame">
+            <div className="sectionFootRevFrameInside">
+                <FootSection />
+            </div>
+        </div>
     }
 
     sectionFlyMobile() {
@@ -77,7 +90,7 @@ class OfficialPageReverseFrame extends React.Component {
     render() {
         let browserPage = <div className="officialRevPage">
             {this.sectionFly()}
-            {this.browserChildren}
+            {this.sectionBrowserChildren()}
             {this.sectionFoot()}
         </div>
         let mobilePage = <div className="officialRevPageMobile">

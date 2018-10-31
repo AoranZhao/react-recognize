@@ -30,6 +30,7 @@ class OfficialPageFrame extends React.Component {
         this.highlightTitle = props.highlightTitle;
 
         this.sectionFly = this.sectionFly.bind(this);
+        this.sectionBrowserChildren = this.sectionBrowserChildren.bind(this);
         this.sectionFoot = this.sectionFoot.bind(this);
 
         this.sectionFlyMobile = this.sectionFlyMobile.bind(this);
@@ -41,20 +42,32 @@ class OfficialPageFrame extends React.Component {
     }
 
     sectionFly() {
-        return <div className="sectionFly">
-            <Topbar highlight={this.highlightTitle} />
-            <div className="sectionFlyBody">
-                <div className="sectionFlyBodyText">
-                    <h3>Customize artificial intelligence with the human touch</h3>
-                    <p>Learnable optimizes the manual process with our human-centered Artificial Intelligence technologies that can be taught, trusted, and operated by all generation.</p>
+        return <div className="sectionFlyFrame">
+            <div className="sectionFly">
+                <Topbar highlight={this.highlightTitle} />
+                <div className="sectionFlyBody">
+                    <div className="sectionFlyBodyText">
+                        <h3>Customize artificial intelligence with the human touch</h3>
+                        <p>Learnable optimizes the manual process with our human-centered Artificial Intelligence technologies that can be taught, trusted, and operated by all generation.</p>
+                    </div>
+                    <img className="profile" src={profileImage} />
                 </div>
-                <img className="profile" src={profileImage} />
             </div>
         </div>
     }
 
+    sectionBrowserChildren() {
+        return <div className="sectionBrowserChildrenFrame">
+            {this.browserChildren}
+        </div>
+    }
+
     sectionFoot() {
-        return <FootSection />
+        return <div className="sectionFootFrame">
+            <div className="sectionFootFrameInside">
+                <FootSection />
+            </div>
+        </div>
     }
 
     sectionFlyMobile() {
@@ -83,7 +96,7 @@ class OfficialPageFrame extends React.Component {
     render() {
         let browserPage = <div className="officialPage">
             {this.sectionFly()}
-            {this.browserChildren}
+            {this.sectionBrowserChildren()}
             {this.sectionFoot()}
         </div>;
         let mobilePage = <div className="officialPageMobile">
