@@ -93,10 +93,10 @@ class OfficialPageFrame extends React.Component {
         </div>
         return <div className="officialPageFrame">
             <BrowserView>
-                {mobilePage}
+                {browserPage}
             </BrowserView>
             <MobileView>
-                {browserPage}
+                {mobilePage}
             </MobileView>
         </div>
     }
