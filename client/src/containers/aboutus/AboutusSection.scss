@@ -1,15 +1,9 @@
-.sectionSolu {
+@import '../HeadPage.scss';
+
+.sectionAbout {
     width: 100%;
     margin-top: 20px;
     margin-bottom: 20px;
-
-    .title {
-        @extend .title !optional;
-
-        span {
-            width: calc((100% - 180px) / 2);
-        }
-    }
 
     .description {
         @extend .description !optional;
@@ -17,5 +11,6 @@
 
     .images {
         @extend .images !optional;
+        display: table;
     }
 }

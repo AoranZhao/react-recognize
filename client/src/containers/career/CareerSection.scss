@@ -1,0 +1,28 @@
+@import '../HeadPage.scss';
+
+.sectionCareer {
+    width: 100%;
+    margin-top: 20px;
+    margin-bottom: 20px;
+
+    .description {
+        @extend .description !optional;
+    }
+
+    .sectionAboutJob {
+        width: 100%;
+        margin-top: 20px;
+        margin-bottom: 20px;
+    
+        .title {
+            @extend .title !optional;
+            font-size: 20px;
+            text-align: center;
+        }
+    
+        .content {
+            @extend .description !optional;
+            text-align: left;
+        }
+    }
+}

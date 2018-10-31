@@ -14,13 +14,13 @@ import HomePage from './HomePage.jsx';
 
 import HeadPage from './HeadPage.jsx';
 import TechnologyPage from './technology/TechnologyPage.jsx';
-import SolutionPage from './SolutionPage.jsx';
-import AboutPage from './AboutPage.jsx';
-import CareerPage from './CareerPage.jsx';
+// import CareerPage from './CareerPage.jsx';
 import RequestDemoPage from './RequestDemoPage.jsx';
 import EducationPage from './education/EducationPage.jsx';
 import NewretailPage from './newretail/NewretailPage.jsx';
 import ProductsPage from './products/ProductPage.jsx';
+import AboutusPage from './aboutus/AboutusPage.jsx';
+import CareerPage from './career/CareerPage.jsx';
 
 import './App.scss';
 
@@ -33,7 +33,7 @@ const App = () => {
                 <Route path="/products" component={ProductsPage} />
                 <Route path="/education" component={EducationPage} />
                 <Route path="/newretail" component={NewretailPage} />
-                <Route path="/about" component={AboutPage} />
+                <Route path="/about" component={AboutusPage} />
                 <Route path="/career" component={CareerPage} />
                 <Route path="/requestdemo" component={RequestDemoPage} />
                 <Route path="/admin" render={() => (
