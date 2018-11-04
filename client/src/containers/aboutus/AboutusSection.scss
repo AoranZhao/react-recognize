@@ -10,7 +10,14 @@
     }
 
     .images {
-        @extend .images !optional;
-        display: table;
+        // @extend .images !optional;
+        // display: table;
+        width: 60%;
+        margin-left: auto;
+        margin-right: auto;
+
+        img {
+            max-width: 100%;
+        }
     }
 }

@@ -9,6 +9,7 @@ import DavosImage from '../../static/images/media/Davos_small.png';
 import MicrosoftImage from '../../static/images/media/MicrosoftBuild_small.png';
 import NewYorkerImage from '../../static/images/media/NewYorker.jpg';
 import TedImage from '../../static/images/media/TedXBoston_small.png';
+import mileStomeImage from '../../static/images/milestone_small.png';
 
 import './AboutusSection.scss';
 
@@ -37,6 +38,9 @@ class AboutusSection extends React.Component {
                 ))}
             </div>
             <div className="images">
+                <img src={mileStomeImage} />
+            </div>
+            {/* <div className="images">
                 <ImageItem src={BerkleeImage} style={{ width: '33%' }} />
                 <ImageItem src={CESImage} style={{ width: '33%' }} />
                 <ImageItem src={DavosImage} style={{ width: '33%' }} />
@@ -45,7 +49,7 @@ class AboutusSection extends React.Component {
                 <ImageItem src={MicrosoftImage} style={{ width: '33%' }} />
                 <ImageItem src={NewYorkerImage} style={{ width: '33%' }} />
                 <ImageItem src={TedImage} style={{ width: '33%' }} />
-            </div>
+            </div> */}
         </div>
     }
 
