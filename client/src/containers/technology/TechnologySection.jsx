@@ -16,15 +16,26 @@ class TechnologySection extends React.Component {
         this.description = props.description || "";
         this.sectionTech = this.sectionTech.bind(this);
 
+        // this.details = [{
+        //     title: "Deep Reinforcement Learning AI",
+        //     description: "Deep Reinforcement Learning AI can learn complicated tasks through self-training. It helps to achieve global optimal policy at multi-level strategy. It supports multi-agent, multi-reward, partially observable task."
+        // }, {
+        //     title: "Explainable AI Engine",
+        //     description: "Explainable AI Engine lets AI explain its own decision and the reason for its decision. It allows human to train AI through explanations. It is more reliable compared to general “blackbox” AI."
+        // }, {
+        //     title: "Teachable AI Engine",
+        //     description: "Teachable AI Engine allows the general lay population to quickly and easily teach an AI with natural language to learn to do any task. It supports multiple human-computer interaction, i.e., reward and feedback, voice control, end-user programming, etc."
+        // }]
+
         this.details = [{
-            title: "Deep Reinforcement Learning AI",
-            description: "Deep Reinforcement Learning AI can learn complicated tasks through self-training. It helps to achieve global optimal policy at multi-level strategy. It supports multi-agent, multi-reward, partially observable task."
+            title: "Deep Reinforcement Learning",
+            description: "Learn complicated tasks through self-training."
         }, {
-            title: "Explainable AI Engine",
-            description: "Explainable AI Engine lets AI explain its own decision and the reason for its decision. It allows human to train AI through explanations. It is more reliable compared to general “blackbox” AI."
+            title: "eXplainable AI Engine",
+            description: "Open up the black-box of deep learning."
         }, {
             title: "Teachable AI Engine",
-            description: "Teachable AI Engine allows the general lay population to quickly and easily teach an AI with natural language to learn to do any task. It supports multiple human-computer interaction, i.e., reward and feedback, voice control, end-user programming, etc."
+            description: "Teach AI through natural language feedback."
         }]
     }
 

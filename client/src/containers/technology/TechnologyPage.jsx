@@ -28,7 +28,8 @@ class TechnologyPage extends React.Component {
     }
 
     render() {
-        let description = "Our self-developed engines aim to integrate cutting-edge artificial intelligence technologies with traditional industries and existing ecosystems.";
+        // let description = "Our self-developed engines aim to integrate cutting-edge artificial intelligence technologies with traditional industries and existing ecosystems.";
+        let description = "Customize artificial intelligence for industry localization with the human touch.";
         return <OfficialPageReverseFrame title="Technology" description={description} highlightTitle="Technology" browserChildren={[<TechnologyDetailSection key="tech" />]} mobileChildren={[<TechnologyDetailSection key="tech" />]} />
     }
 }

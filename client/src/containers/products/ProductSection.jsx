@@ -16,15 +16,26 @@ class ProductSection extends React.Component {
         this.description = props.description || "";
         this.sectionPro = this.sectionPro.bind(this);
 
+        // this.details = [{
+        //     title: "Education",
+        //     description: "With AI technologies, Learnable launches educational Personalized products and analytics. The products, including AI Educational Accessories (ECR and KIE), Personalized Educational Products (Auto-grading AI and Personalized Intelligence (PI) Tutor), Classroom Video Analytics, optimize the learning and teaching behaviors and realize personalized education experience."
+        // }, {
+        //     title: "New-Retail",
+        //     description: "For New Retail, Learnable launches Personalized policies and analytics. The products, including Personalized Marketing and Pricing Policies and Shopping Mall Video Analytics, build individual customer profile and realize personalized marketing, pricing and retailing policy."
+        // }, {
+        //     title: "Other",
+        //     description: "Learnable makes impacts beyond Education and New Retail. Including Duckie Town and TCM (Traditional Chinese Medicine) Robot, the products promise an AI future that can be operated, taught and trusted."
+        // }]
+
         this.details = [{
             title: "Education",
-            description: "With AI technologies, Learnable launches educational Personalized products and analytics. The products, including AI Educational Accessories (ECR and KIE), Personalized Educational Products (Auto-grading AI and Personalized Intelligence (PI) Tutor), Classroom Video Analytics, optimize the learning and teaching behaviors and realize personalized education experience."
+            description: "AI empowers streamlined teaching & personalized Learning. \nStar Products: Automatic Grading AI, Educational Content Recognition."
         }, {
-            title: "New-Retail",
-            description: "For New Retail, Learnable launches Personalized policies and analytics. The products, including Personalized Marketing and Pricing Policies and Shopping Mall Video Analytics, build individual customer profile and realize personalized marketing, pricing and retailing policy."
+            title: "New Retail",
+            description: "AI unlocks Offline-to-Online solutions. \nStar Products: Intention Recognition, Personalized Recommendation."
         }, {
             title: "Other",
-            description: "Learnable makes impacts beyond Education and New Retail. Including Duckie Town and TCM (Traditional Chinese Medicine) Robot, the products promise an AI future that can be operated, taught and trusted."
+            description: "AI promises a better future for many industries. \nStar Products: Duckietown AI course, TCM Robot."
         }]
     }
 

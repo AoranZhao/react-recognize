@@ -30,6 +30,9 @@
     }
 
     .imageDetailInfoDescription {
-
+        width: 100%;
+        word-wrap: break-word;
+        word-break: normal;
+        white-space: pre-line;
     }
 }

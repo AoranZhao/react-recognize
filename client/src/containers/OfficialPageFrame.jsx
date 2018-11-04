@@ -49,11 +49,15 @@ class OfficialPageFrame extends React.Component {
                     <div className="sectionFlyBodyTextFrame">
                         <div className="sectionFlyBodyDivider"></div>
                         <div className="sectionFlyBodyText">
-                            <h3>Customize artificial intelligence with the human touch</h3>
-                            <p>Learnable optimizes the manual process with our human-centered Artificial Intelligence technologies that can be taught, trusted, and operated by all generation.</p>
+                            {/* <h3>Customize artificial intelligence with the human touch</h3> */}
+                            <h3>For every cherished experience enabled by personalized eXplainable artificial intelligence</h3>
+                            {/* <p>Learnable optimizes the manual process with our human-centered Artificial Intelligence technologies that can be taught, trusted, and operated by all generation.</p> */}
+                            <p>Learnable develops human-centered AI that can streamline production process, maximize business value and optimize user experience.</p>
                         </div>
                     </div>
-                    <img className="profile" src={profileImage} />
+                    <div className="sectionFlyBodyImageFrame">
+                        <img className="profile" src={profileImage} />
+                    </div>
                 </div>
             </div>
         </div>
@@ -78,14 +82,18 @@ class OfficialPageFrame extends React.Component {
             <TopbarMobile highlight={this.highlightTitle} />
             <div className="sectionFlyMobileBodySmall">
                 <div className="sectionFlyMobileBodyText">
-                    <h3>Customize artificial intelligence with the human touch</h3>
-                    <p>Learnable optimizes the manual process with our human-centered Artificial Intelligence technologies that can be taught, trusted, and operated by all generation.</p>
+                    {/* <h3>Customize artificial intelligence with the human touch</h3> */}
+                    <h3>For every cherished experience enabled by personalized eXplainable artificial intelligence</h3>
+                    {/* <p>Learnable optimizes the manual process with our human-centered Artificial Intelligence technologies that can be taught, trusted, and operated by all generation.</p> */}
+                    <p>Learnable develops human-centered AI that can streamline production process, maximize business value and optimize user experience.</p>
                 </div>
             </div>
             <div className="sectionFlyMobileBodyLarge">
                 <div className="sectionFlyMobileBodyText">
-                    <h3>Customize artificial intelligence with the human touch</h3>
-                    <p>Learnable optimizes the manual process with our human-centered Artificial Intelligence technologies that can be taught, trusted, and operated by all generation.</p>
+                    {/* <h3>Customize artificial intelligence with the human touch</h3> */}
+                    <h3>For every cherished experience enabled by personalized eXplainable artificial intelligence</h3>
+                    {/* <p>Learnable optimizes the manual process with our human-centered Artificial Intelligence technologies that can be taught, trusted, and operated by all generation.</p> */}
+                    <p>Learnable develops human-centered AI that can streamline production process, maximize business value and optimize user experience.</p>
                 </div>
                 <img className="profile" src={profileImage} />
             </div>

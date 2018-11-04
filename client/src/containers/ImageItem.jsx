@@ -12,6 +12,7 @@ class ImageItem extends React.Component {
         this.description = props.description || "";
         this.style = props.style || {};
         this.onClick = (typeof props.onClick == 'function') ? props.onClick : () => { };
+        this.onHeightChange = (typeof props.onHeightChange == 'function') ? props.onHeightChange : () => { };
         if (props.width != undefined)
             this.style = Object.assign(this.style, { width: props.width + 'px', height: props.width * 1.5 + "px" });
     }
@@ -27,7 +28,7 @@ class ImageItem extends React.Component {
                 <div></div>
                 : <div className="imageInfo">
                     <p className="imageInfoTitle">{this.title}</p>
-                    <p className="imageInfoTescription">{this.description}</p>
+                    <p className="imageInfoDescription">{this.description}</p>
                 </div>}
         </div>
     }

@@ -21,6 +21,7 @@ import NewretailPage from './newretail/NewretailPage.jsx';
 import ProductsPage from './products/ProductPage.jsx';
 import AboutusPage from './aboutus/AboutusPage.jsx';
 import CareerPage from './career/CareerPage.jsx';
+import PravicyPage from './pravicy/PravicyPage.jsx';
 
 import './App.scss';
 
@@ -36,6 +37,7 @@ const App = () => {
                 <Route path="/about" component={AboutusPage} />
                 <Route path="/career" component={CareerPage} />
                 <Route path="/requestdemo" component={RequestDemoPage} />
+                <Route path="/pravicy" component={PravicyPage} />
                 <Route path="/admin" render={() => (
                     <Redirect to="/dashboard" />
                 )} />

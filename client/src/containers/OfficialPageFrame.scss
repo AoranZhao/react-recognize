@@ -22,6 +22,7 @@
         
             .sectionFlyBody {
                 width: 100%;
+                max-height: 600px;
                 
                 .sectionFlyBodyTextFrame {
                     display: inline-block;
@@ -60,35 +61,44 @@
                     }
                 }
         
-                img.profile {
+                .sectionFlyBodyImageFrame {
                     display: inline-block;
                     vertical-align: bottom;
                     width: 40%;
-                }
-
-                @media only screen and (max-width: 1500px) {
-                    .sectionFlyBodyTextFrame {
-                        vertical-align: bottom;
-                    }
+                    height: 100%;
 
                     img.profile {
-                        vertical-align: bottom;
+                        display: block;
+                        margin-left: auto;
+                        margin-right: auto;
+                        max-height: 600px;
+                        max-width: 100%;
                     }
                 }
 
-                @media only screen and (min-width: 1501px) {
-                    .sectionFlyBodyTextFrame {
-                        vertical-align: top;
+                // @media only screen and (max-width: 1500px) {
+                //     .sectionFlyBodyTextFrame {
+                //         vertical-align: bottom;
+                //     }
 
-                        .sectionFlyBodyDivider {
-                            height: 530px;
-                        }
-                    }
+                //     img.profile {
+                //         vertical-align: bottom;
+                //     }
+                // }
 
-                    img.profile {
-                        vertical-align: top;
-                    }
-                }
+                // @media only screen and (min-width: 1501px) {
+                //     .sectionFlyBodyTextFrame {
+                //         vertical-align: top;
+
+                //         .sectionFlyBodyDivider {
+                //             height: 400px;
+                //         }
+                //     }
+
+                //     img.profile {
+                //         vertical-align: top;
+                //     }
+                // }
             }
         }
     }

@@ -23,7 +23,8 @@ class NewretailPage extends React.Component {
     }
 
     render() {
-        let description = "Personalized policies and analytics from us build individual customer profile and realize personalized marketing, pricing and retailing policy.";
+        // let description = "Personalized policies and analytics from us build individual customer profile and realize personalized marketing, pricing and retailing policy.";
+        let description = "AI unlocks Offline-to-Online solutions";
         return <OfficialPageReverseFrame title="New Retail" description={description} highlightTitle="Products" browserChildren={[<NewretailDetailSection key="retail" />]} mobileChildren={[<NewretailDetailSection key="retail" />]} />
     }
 }

@@ -41,7 +41,7 @@ class FootSection extends React.Component {
                     </div>
                 </div>
                 <div className="declare">
-                    <a href=""><p>Privacy Statement</p></a>
+                    <a href="/pravicy"><p>Privacy Statement</p></a>
                     <p>&copy; 2018 Learnable, Inc. All rights reserved.</p>
                 </div>
             </div>

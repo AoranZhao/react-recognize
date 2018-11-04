@@ -27,7 +27,7 @@ class Topbar extends React.Component {
                     subSelections={[
                         { text: 'Education', to: '/education' },
                         { text: 'New Retail', to: '/newretail' },
-                        { text: 'Other', to: '/products' }
+                        { text: 'Other', to: '#' }
                     ]} />
                 <TopbarBtn text="About" isRev={this.isRev} isHighlight={this.highlightTitle == "About" ? true : false}
                     subSelections={[
