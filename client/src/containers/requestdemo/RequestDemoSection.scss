@@ -1,0 +1,52 @@
+.requestDemoFrame {
+    width: 100%;
+
+    .requestDemoContent {
+        width: 100%;
+    }
+
+    .requestDemoRow {
+        width: 100%;
+
+        label {
+            width: 66px;
+            height: 40px;
+            padding-left: 4px;
+            display: inline-block;
+            vertical-align: top;
+        }
+
+        input[type="input"] {
+            width: calc(100% - 70px - 12px);
+            height: 30px;
+            margin: 2px;
+            padding: 2px;
+            display: inline-block;
+            vertical-align: middle;
+        }
+
+        textarea {
+            width: calc(100% - 70px - 10px);
+            resize: none;
+            margin: 2px;
+            padding: 2px;
+            display: inline-block;
+            vertical-align: top;
+        }
+
+        a {
+            width: 100px;
+            height: 30px;
+            display: block;
+            margin: 10px auto;
+            // margin-left: auto;
+            // margin-right: auto;
+            border: 1px solid white;
+            color: white;
+            text-align: center;
+            text-decoration: none;
+            font-size: 16px;
+            line-height: 30px;
+        }
+    }
+}

@@ -11,7 +11,7 @@ let location = {
 }
 
 gulp.task('dist:server', () => {
-    gulp.src(path.join(location.server, 'index.js'))
+    gulp.src(path.join(location.server, '*.js'))
         .pipe(babel({
             presets: ["es2015"]
         }))
@@ -19,7 +19,7 @@ gulp.task('dist:server', () => {
 })
 
 gulp.task('watch:server', () => {
-    gulp.watch(path.join(location.server, 'index.js'), ['dist:server']);
+    gulp.watch(path.join(location.server, '*.js'), ['dist:server']);
 })
 
 gulp.task('dist:js', () => {

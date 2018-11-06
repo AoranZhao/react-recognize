@@ -14,6 +14,7 @@ class FloatBtn extends React.Component {
         }
         this.style = props.style || {};
         this.text = props.text || "unknown";
+        this.title = props.title || "unknown";
         this.isRev = props.isRev || false;
     }
 
@@ -45,11 +46,16 @@ class FloatBtn extends React.Component {
                 }} style={btnStyle}>{this.text}</a>
             </div>
             <div className="floatContentFrame" style={style}>
-                <a href="" onClick={e => {
-                    e.preventDefault();
-                    this.setState({ isCollapse: true })
-                }}>close</a>
-                <p>content</p>
+                <div className="floatContentFrameTitle">
+                    <a href="" onClick={e => {
+                        e.preventDefault();
+                        this.setState({ isCollapse: true })
+                    }}>>></a>
+                    <p>{this.title}</p>
+                </div>
+                <div className="floatContentFrameContent">
+                    {this.props.children}
+                </div>
             </div>
         </div>
     }
