@@ -4,8 +4,8 @@ import path from 'path';
 import Axios from 'axios';
 
 // const API_ADDRESS = process.env.DEFAULT_AXIOS_ADDRESS || 'http://datalabelapi.learnable.ai';
-// const API_ADDRESS = process.env.DEFAULT_AXIOS_ADDRESS || 'http://52.14.99.43:2978';
-const API_ADDRESS = process.env.DEFAULT_AXIOS_ADDRESS || 'http://localhost:2991';
+const API_ADDRESS = process.env.DEFAULT_AXIOS_ADDRESS || 'http://52.14.99.43:2991';
+// const API_ADDRESS = process.env.DEFAULT_AXIOS_ADDRESS || 'http://localhost:2991';
 // const API_ADDRESS = process.env.DEFAULT_AXIOS_ADDRESS || 'http://47.94.99.252:2978';
 // const API_ADDRESS = process.env.DEFAULT_AXIOS_ADDRESS || 'http://35.163.36.225:2978';
 // const API_ADDRESS = process.env.DEFAULT_AXIOS_ADDRESS || 'http://47.89.186.64:2978';
