@@ -16,6 +16,7 @@ import FootMobileSection from './FootMobileSection.jsx';
 // test Topbar
 import TestTopbar from '../components/topbar/Topbar.jsx';
 import FloatBtn from '../components/floatBtn/FloatBtn.jsx';
+import RequestDemoSection from './requestdemo/RequestDemoSection.jsx';
 // end test
 
 const mapStateToProps = state => ({})
@@ -68,7 +69,9 @@ class OfficialPageReverseFrame extends React.Component {
     }
 
     sectionFly() {
-        let otherBtns = [<FloatBtn key="float1" text="Demo" isRev={true} />];
+        let otherBtns = [<FloatBtn key="float1" text="Demo" title="Request Demo">
+            <RequestDemoSection />
+        </FloatBtn>];
         return <div className="sectionFlyRevFrame">
             <div className="sectionFlyRev">
                 {/* <Topbar highlight={this.highlightTitle} isRev={true} /> */}
