@@ -1,0 +1,37 @@
+$blue-color: rgba(30, 67, 118, 0.83);
+$font-color: white;
+
+.topbarBtnFrame {
+    width: 100%;
+    height: 30px;
+    max-width: 400px;
+    max-height: 200px;
+    // background-color: $blue-color;
+    z-index: 50;
+    text-align: center;
+
+    .topbarBtn {
+        height: calc(100% - 2px);
+        display: inline-block;
+        // width: 90%;
+        
+        a {
+            display: block;
+            margin-left: auto;
+            margin-right: auto;
+            // text-align: center;
+            line-height: 28px;
+            text-decoration: none;
+            color: $font-color;
+
+            &:hover {
+                cursor: pointer;
+                text-decoration: none;
+            }
+
+            &:visited {
+                text-decoration: none;
+            }
+        }
+    }
+}

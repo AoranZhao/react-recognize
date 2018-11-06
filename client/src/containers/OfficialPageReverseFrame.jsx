@@ -13,6 +13,11 @@ import './OfficialPageReverseFrame.scss';
 import FootSection from './FootSection.jsx';
 import FootMobileSection from './FootMobileSection.jsx';
 
+// test Topbar
+import TestTopbar from '../components/topbar/Topbar.jsx';
+import FloatBtn from '../components/floatBtn/FloatBtn.jsx';
+// end test
+
 const mapStateToProps = state => ({})
 
 const mapDispatchToProps = dispatch => ({})
@@ -31,6 +36,31 @@ class OfficialPageReverseFrame extends React.Component {
         this.sectionFoot = this.sectionFoot.bind(this);
         this.sectionFlyMobile = this.sectionFlyMobile.bind(this);
         this.sectionFootMobile = this.sectionFootMobile.bind(this);
+
+        this.subBtns = [{ text: "Home", to: "/" },
+        { text: "Technology", to: "/technology" },
+        {
+            text: "Product", subBtns: [
+                {
+                    text: "Education", to: "/education"
+                },
+                {
+                    text: "New Retail", to: "/newretail"
+                },
+                {
+                    text: "Other", subBtns: [
+                        { text: "Pravicy", to: "/pravicy" },
+                        { text: "Demo", to: "/requestdemo" }
+                    ]
+                }
+            ]
+        },
+        {
+            text: "About", subBtns: [
+                { text: "About Us", to: "/about" },
+                { text: "Join Us", to: "/career" }
+            ]
+        }]
     }
 
     componentWillMount() {
@@ -38,9 +68,11 @@ class OfficialPageReverseFrame extends React.Component {
     }
 
     sectionFly() {
+        let otherBtns = [<FloatBtn key="float1" text="Demo" isRev={true} />];
         return <div className="sectionFlyRevFrame">
             <div className="sectionFlyRev">
-                <Topbar highlight={this.highlightTitle} isRev={true} />
+                {/* <Topbar highlight={this.highlightTitle} isRev={true} /> */}
+                <TestTopbar subBtns={this.subBtns} otherBtns={otherBtns} isRev={true} highlightTitle={this.highlightTitle} />
                 <div className="sectionFlyRevBody">
                     <div className="sectionFlyRevBodyText">
                         <h3>{this.title}</h3>

@@ -52,14 +52,26 @@
     }
 }
 
+.imageInfoSmall {
+    @extend .imageInfo;
+}
+
 @media only screen and (max-width: 1300px) {
     .imageInfo {
         height: 262px;
+    }
+
+    .imageInfoSmall {
+        height: 180px;
     }
 }
 
 @media only screen and (min-width: 1301px) {
     .imageInfo {
+        height: 190px;
+    }
+
+    .imageInfoSmall {
         height: 190px;
     }
 }

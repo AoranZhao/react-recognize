@@ -14,6 +14,12 @@ import profileImage from '../static/images/face_large.png';
 import FootSection from './FootSection.jsx';
 import FootMobileSection from './FootMobileSection.jsx';
 
+
+// test Topbar
+import TestTopbar from '../components/topbar/Topbar.jsx';
+import FloatBtn from '../components/floatBtn/FloatBtn.jsx';
+// end test
+
 const mapStateToProps = state => {
     return {}
 }
@@ -35,6 +41,31 @@ class OfficialPageFrame extends React.Component {
 
         this.sectionFlyMobile = this.sectionFlyMobile.bind(this);
         this.sectionFootMobile = this.sectionFootMobile.bind(this);
+
+        this.subBtns = [{ text: "Home", to: "/" },
+        { text: "Technology", to: "/technology" },
+        {
+            text: "Product", subBtns: [
+                {
+                    text: "Education", to: "/education"
+                },
+                {
+                    text: "New Retail", to: "/newretail"
+                },
+                {
+                    text: "Other", subBtns: [
+                        { text: "Pravicy", to: "/pravicy" },
+                        { text: "Demo", to: "/requestdemo" }
+                    ]
+                }
+            ]
+        },
+        {
+            text: "About", subBtns: [
+                { text: "About Us", to: "/about" },
+                { text: "Join Us", to: "/career" }
+            ]
+        }]
     }
 
     componentWillMount() {
@@ -42,9 +73,11 @@ class OfficialPageFrame extends React.Component {
     }
 
     sectionFly() {
+        let otherBtns = [<FloatBtn key="float1" text="Demo" />];
         return <div className="sectionFlyFrame">
             <div className="sectionFly">
-                <Topbar highlight={this.highlightTitle} />
+                {/* <Topbar highlight={this.highlightTitle} /> */}
+                <TestTopbar subBtns={this.subBtns} otherBtns={otherBtns} highlightTitle={this.highlightTitle} />
                 <div className="sectionFlyBody">
                     <div className="sectionFlyBodyTextFrame">
                         <div className="sectionFlyBodyDivider"></div>

@@ -9,6 +9,20 @@
         @extend .description !optional;
     }
 
+    .descriptionHeader {
+        p {
+            display: inline-block;
+            margin: 0 10px;
+        }
+
+        span {
+            width: calc((100% - 45px) / 2);
+            border-top: 1px solid gray;
+            display: inline-block;
+            margin-bottom: 5px;
+        }
+    }
+
     .sectionAboutJob {
         width: 100%;
         margin-top: 20px;

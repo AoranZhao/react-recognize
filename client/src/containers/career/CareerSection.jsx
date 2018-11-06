@@ -99,15 +99,25 @@ class CareerSection extends React.Component {
     sectionCareer() {
         return <div className="sectionCareer">
             <div className="description">
-                <p style={{ textAlign: 'left' }}>{this.descriptionOne}</p>
+                <div className="descriptionHeader">
+                    <span></span>
+                    <p>&#9733;</p>
+                    <span></span>
+                </div>
+                <p style={{ fontWeight: 'bold' }}><em>{this.descriptionOne}</em></p>
             </div>
             {this.sectionJobs(this.jobsOne, 'jobOne')}
             <div className="description">
-                <p style={{ textAlign: 'left' }}>{this.descriptionTwo}</p>
+                <div className="descriptionHeader">
+                    <span></span>
+                    <p>&#9733;</p>
+                    <span></span>
+                </div>
+                <p style={{ fontWeight: 'bold' }}><em>{this.descriptionTwo}</em></p>
             </div>
             {this.sectionJobs(this.jobsTwo, 'jobTwo')}
             <div className="description">
-                <p>{this.descriptionThree}</p>
+                <p style={{ fontWeight: 'bold' }}><em>{this.descriptionThree}</em></p>
             </div>
         </div>
     }

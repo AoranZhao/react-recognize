@@ -51,8 +51,8 @@ class HeadPage extends React.Component {
         // let proDescription = "Our products and services have demonstrated their huge potentials and impressive values in many traditional industries, including education, new-retail, etc.";
         let proDescription = "Learnable is providing piercing, practical, and personalized solutions depending on your demand. Our advanced AI technologies have been applied to three major domains. Education, Retail, and Others.";
         return <OfficialPageFrame highlightTitle="Home" browserChildren={[
-            <TechnologySection key="tech" title="Technoloies" description={techDescription} />,
-            <ProductsSection key="pro" title="Products" description={proDescription} />
+            <TechnologySection key="tech" title="Technology" description={techDescription} />,
+            <ProductsSection key="pro" title="Product" description={proDescription} />
         ]} mobileChildren={[
             <TechnologyMobileSection key="techMobile" title="Technology" description={techDescription} />,
             <ProductsMobileSection key="proMobile" title="Products" description={proDescription} />

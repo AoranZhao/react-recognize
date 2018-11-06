@@ -24,7 +24,7 @@ class ProductsPage extends React.Component {
 
     render() {
         let description = "Our products and services have demonstrated their huge potentials and impressive values in many traditional industries, including education, new-retail, etc.";
-        return <OfficialPageReverseFrame title="Products" description={description} highlightTitle="Products" browserChildren={[<ProductDetailSection key="pro" />]} mobileChildren={[<ProductDetailSection key="pro" />]} />
+        return <OfficialPageReverseFrame title="Product" description={description} highlightTitle="Product" browserChildren={[<ProductDetailSection key="pro" />]} mobileChildren={[<ProductDetailSection key="pro" />]} />
     }
 }
 

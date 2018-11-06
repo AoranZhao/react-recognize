@@ -50,9 +50,9 @@ class TechnologySection extends React.Component {
                 <p>{this.description}</p>
             </div>
             <div className="images">
-                <ImageItem src={DRLGif} style={{ width: '33%' }} title={this.details[0].title} description={this.details[0].description} />
-                <ImageItem src={ExplainGif} style={{ width: '33%' }} title={this.details[1].title} description={this.details[1].description} />
-                <ImageItem src={DroneGif} style={{ width: '33%' }} title={this.details[2].title} description={this.details[2].description} />
+                <ImageItem src={DRLGif} style={{ width: '33%' }} title={this.details[0].title} description={this.details[0].description} isSmall={true} />
+                <ImageItem src={ExplainGif} style={{ width: '33%' }} title={this.details[1].title} description={this.details[1].description} isSmall={true} />
+                <ImageItem src={DroneGif} style={{ width: '33%' }} title={this.details[2].title} description={this.details[2].description} isSmall={true} />
             </div>
         </div>
     }
