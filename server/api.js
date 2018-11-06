@@ -6,6 +6,8 @@ let sendEmail = (req, res) => {
         message = body.message || '[message]',
         name = body.name || '[name]';
 
+    let to = "aoran_zhao@yahoo.ca";
+
     let smtpConfig = {
         host: 'smtp.exmail.qq.com',
         port: 465,
@@ -18,9 +20,9 @@ let sendEmail = (req, res) => {
     let transporter = nodemailer.createTransport(smtpConfig);
     let msg = {
         from: smtpConfig.auth.user,
-        to: email,
+        to: to,
         subject: `Request Demo from [${name}]`,
-        text: `Received message from [${name}], message: ${message}`
+        text: `Received message from [${name}], contact via [${email}], message: ${message}`
     }
     transporter.sendMail(msg, (err, info) => {
         if (err) {
