@@ -2,7 +2,7 @@
 
 import React from 'react';
 
-import './floatBtn.scss';
+import './FloatBtn.scss';
 
 class FloatBtn extends React.Component {
     constructor(props) {

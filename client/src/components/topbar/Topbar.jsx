@@ -6,7 +6,7 @@ import LowLevelBtn from './LowLevelBtn.jsx';
 import logoImage from '../../static/images/logo_large_purple.png';
 import logoImageRev from '../../static/images/logo_large_white.png';
 
-import './topbar.scss';
+import './Topbar.scss';
 
 class Topbar extends React.Component {
     constructor(props) {
