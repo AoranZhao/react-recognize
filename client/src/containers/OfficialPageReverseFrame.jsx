@@ -69,8 +69,8 @@ class OfficialPageReverseFrame extends React.Component {
     }
 
     sectionFly() {
-        let otherBtns = [<FloatBtn key="float1" text="Demo" title="Request Demo">
-            <RequestDemoSection />
+        let otherBtns = [<FloatBtn key="float1" text="Demo" title="" isRev={true}>
+            <RequestDemoSection isRev={true} />
         </FloatBtn>];
         return <div className="sectionFlyRevFrame">
             <div className="sectionFlyRev">

@@ -74,7 +74,7 @@ class OfficialPageFrame extends React.Component {
     }
 
     sectionFly() {
-        let otherBtns = [<FloatBtn key="float1" text="Demo" title="Request Demo">
+        let otherBtns = [<FloatBtn key="float1" text="Demo" title="">
             <RequestDemoSection />
         </FloatBtn>];
         return <div className="sectionFlyFrame">

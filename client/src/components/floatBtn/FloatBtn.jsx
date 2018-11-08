@@ -14,7 +14,7 @@ class FloatBtn extends React.Component {
         }
         this.style = props.style || {};
         this.text = props.text || "unknown";
-        this.title = props.title || "unknown";
+        this.title = props.title || "";
         this.isRev = props.isRev || false;
     }
 
@@ -34,6 +34,15 @@ class FloatBtn extends React.Component {
             btnStyle['color'] = 'white';
             btnStyle['border'] = '1px solid white';
         }
+
+        let fontStyle = {}, bgStyle = {};
+        if (!this.isRev) {
+            fontStyle = { color: 'rgba(30, 67, 118, 0.83)' };
+            bgStyle = { backgroundColor: 'white' };
+        } else {
+            fontStyle = { color: 'white' };
+            bgStyle = { backgroundColor: 'rgba(30, 67, 118, 0.83)' };
+        }
         return <div className="floatBtnFrame" onMouseEnter={e => {
             this.setState({ isOnHover: true });
         }} onMouseLeave={e => {
@@ -46,14 +55,14 @@ class FloatBtn extends React.Component {
                 }} style={btnStyle}>{this.text}</a>
             </div>
             <div className="floatContentFrame" style={style}>
-                <div className="floatContentFrameTitle">
-                    <a href="" onClick={e => {
+                <div className="floatContentFrameTitle" style={bgStyle}>
+                    <a href="" style={fontStyle} onClick={e => {
                         e.preventDefault();
                         this.setState({ isCollapse: true })
-                    }}>>></a>
+                    }}>close >></a>
                     <p>{this.title}</p>
                 </div>
-                <div className="floatContentFrameContent">
+                <div className="floatContentFrameContent" style={bgStyle}>
                     {this.props.children}
                 </div>
             </div>

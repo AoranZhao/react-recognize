@@ -36,6 +36,7 @@ class RequestDemoSection extends React.Component {
         this.updateBody = this.updateBody.bind(this);
         this.initial = this.initial.bind(this);
         this.submitEmail = this.submitEmail.bind(this);
+        this.isRev = props.isRev || false;
     }
 
     componentWillMount() {
@@ -74,41 +75,55 @@ class RequestDemoSection extends React.Component {
     }
 
     generateDemo() {
+        let fontStyle = {}, inputStyle = {};
+        if (!this.isRev) {
+            fontStyle = { color: 'rgba(30, 67, 118, 0.83)' };
+            inputStyle = { backgroundColor: 'rgba(30, 67, 118, 0.83)', color: 'white' };
+        } else {
+            fontStyle = { color: 'white' };
+            inputStyle = { backgroundColor: 'white', color: 'rgba(30, 67, 118, 0.83)' };
+        }
         return <div className="requestDemoFrame">
             {/* <div>
                 <p>Request Demo</p>
             </div> */}
             <div className="requestDemoContent">
                 <div className="requestDemoRow">
-                    <label>Name</label>
-                    <input type="input" value={typeof this.props.email.body !== 'undefined' ? this.props.email.body.name : ""} onChange={e => {
+                    <label style={fontStyle}>Name:</label>
+                </div>
+                <div className="requestDemoRow">
+                    <input type="input" style={inputStyle} value={typeof this.props.email.body !== 'undefined' ? this.props.email.body.name : ""} onChange={e => {
                         this.updateBody('name', e.target.value);
                     }} />
                 </div>
                 <div className="requestDemoRow">
-                    <label>Email</label>
-                    <input type="input" value={typeof this.props.email.body !== 'undefined' ? this.props.email.body.email : ""} onChange={e => {
+                    <label style={fontStyle}>Email:</label>
+                </div>
+                <div className="requestDemoRow">
+                    <input type="input" style={inputStyle} value={typeof this.props.email.body !== 'undefined' ? this.props.email.body.email : ""} onChange={e => {
                         this.updateBody('email', e.target.value);
                     }} />
                 </div>
                 <div className="requestDemoRow">
-                    <label>Message</label>
-                    <textarea defaultValue={typeof this.props.email.body !== 'undefined' ? this.props.email.body.message : ""} rows="10" onChange={e => {
+                    <label style={fontStyle}>Message:</label>
+                </div>
+                <div className="requestDemoRow">
+                    <textarea style={inputStyle} defaultValue={typeof this.props.email.body !== 'undefined' ? this.props.email.body.message : ""} rows="7" onChange={e => {
                         this.updateBody('message', e.target.value);
                     }}>
                         {/* {typeof this.props.email.body !== 'undefined' ? this.props.email.body.message : ""} */}
                     </textarea>
                 </div>
                 {typeof this.props.email !== 'undefined' && this.props.email.status == 'ing' ? <div className="requestDemoRow">
-                    <p>sending</p>
+                    <p style={fontStyle}>sending</p>
                 </div> : typeof this.props.email !== 'undefined' && this.props.email.status == 'err' ? <div className="requestDemoRow">
-                    <p>{this.props.email.message}</p>
+                    <p style={fontStyle}>{this.props.email.message}</p>
                 </div> : <div></div>}
                 <div className="requestDemoRow">
-                    <a href="" onClick={e => {
+                    <a href="" style={inputStyle} onClick={e => {
                         e.preventDefault();
                         this.submitEmail();
-                    }}>Submit</a>
+                    }}>Send Request</a>
                 </div>
             </div>
         </div>
