@@ -26,7 +26,8 @@ class ProductSection extends React.Component {
             textTo: "/newretail"
         }, {
             title: "Other",
-            description: "AI promises a better future for many industries. \nStar Products: Duckietown AI course, TCM Robot."
+            description: "AI promises a better future for many industries. \nStar Products: Duckietown AI course, TCM Robot.",
+            textTo: "#"
         }]
     }
 
@@ -43,7 +44,7 @@ class ProductSection extends React.Component {
             <div className="images">
                 <ImageItem src={LightBulbImage} style={{ width: '33%' }} title={this.details[0].title} description={this.details[0].description} textTo={this.details[0].textTo} />
                 <ImageItem src={NewRetailImage} style={{ width: '33%' }} title={this.details[1].title} description={this.details[1].description} textTo={this.details[1].textTo} />
-                <ImageItem src={BrainImage} style={{ width: '33%' }} title={this.details[2].title} description={this.details[2].description} />
+                <ImageItem src={BrainImage} style={{ width: '33%' }} title={this.details[2].title} description={this.details[2].description} textTo={this.details[2].textTo} />
             </div>
         </div>
     }
