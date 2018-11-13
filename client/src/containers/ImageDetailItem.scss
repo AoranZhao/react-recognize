@@ -25,6 +25,14 @@
     display: inline-block;
     vertical-align: top;
 
+    a {
+        text-decoration: none;
+
+        &:hover {
+            text-decoration: underline;
+        }
+    }
+
     .imageDetailInfoTitle {
         height: 30px;
     }

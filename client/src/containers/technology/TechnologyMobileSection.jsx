@@ -34,7 +34,7 @@ class TechnologyMobileSection extends React.Component {
         // }]
         this.details = [{
             title: "Deep Reinforcement Learning",
-            description: "Learn complicated tasks through self-training."
+            description: "Learn complicated tasks through self-training.",
         }, {
             title: "eXplainable AI Engine",
             description: "Open up the black-box of deep learning."

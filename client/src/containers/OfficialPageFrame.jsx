@@ -48,16 +48,17 @@ class OfficialPageFrame extends React.Component {
         {
             text: "Product", subBtns: [
                 {
-                    text: "Education", to: "/education"
+                    text: "Education", to: "/education", subBtns: [{
+                        text: "Accessories", to: "/aieducationalaccessories"
+                    }, {
+                        text: "Classroom", to: "/classroom"
+                    }]
                 },
                 {
                     text: "New Retail", to: "/newretail"
                 },
                 {
-                    text: "Other", subBtns: [
-                        { text: "Pravicy", to: "/pravicy" },
-                        { text: "Demo", to: "/requestdemo" }
-                    ]
+                    text: "Other", to: "#"
                 }
             ]
         },

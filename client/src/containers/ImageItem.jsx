@@ -14,6 +14,7 @@ class ImageItem extends React.Component {
         this.onClick = (typeof props.onClick == 'function') ? props.onClick : () => { };
         this.onHeightChange = (typeof props.onHeightChange == 'function') ? props.onHeightChange : () => { };
         this.isSmall = props.isSmall || false;
+        this.textTo = props.textTo;
         if (props.width != undefined)
             this.style = Object.assign(this.style, { width: props.width + 'px', height: props.width * 1.5 + "px" });
     }
@@ -28,8 +29,17 @@ class ImageItem extends React.Component {
             {(!this.title && !this.description) ?
                 <div></div>
                 : <div className={this.isSmall ? "imageInfoSmall" : "imageInfo"}>
-                    <p className="imageInfoTitle">{this.title}</p>
-                    <p className="imageInfoDescription">{this.description}</p>
+                    {
+                        (typeof this.textTo !== 'undefined') ?
+                            <a href={this.textTo}>
+                                <p className="imageInfoTitle">{this.title}</p>
+                                <p className="imageInfoDescription">{this.description}</p>
+                            </a> : <div>
+                                <p className="imageInfoTitle">{this.title}</p>
+                                <p className="imageInfoDescription">{this.description}</p>
+                            </div>
+                    }
+
                 </div>}
         </div>
     }

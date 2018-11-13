@@ -11,6 +11,7 @@ class ImageDetailItem extends React.Component {
         this.title = props.title || "";
         this.description = props.description || "";
         this.style = props.style || {};
+        this.textTo = props.textTo;
 
         this.generateImageDetailItem = this.generateImageDetailItem.bind(this);
     }
@@ -22,10 +23,20 @@ class ImageDetailItem extends React.Component {
             </div>
             <div className="imageDetailInfo">
                 <div className="imageDetailInfoTitle">
-                    <h3>{this.title}</h3>
+                    {
+                        (typeof this.textTo !== 'undefined') ?
+                            <a href={this.textTo}>
+                                <h3>{this.title}</h3>
+                            </a> : <h3>{this.title}</h3>
+                    }
                 </div>
                 <div className="imageDetailInfoDescription">
-                    <p>{this.description}</p>
+                    {
+                        (typeof this.textTo !== 'undefined') ?
+                            <a href={this.textTo}>
+                                <p>{this.description}</p>
+                            </a> : <p>{this.description}</p>
+                    }
                 </div>
             </div>
         </div>

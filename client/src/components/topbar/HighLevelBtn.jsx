@@ -47,7 +47,8 @@ class HighLevelBtn extends React.Component {
             this.setState({ isCollapse: true, isOnHover: false });
         }}>
             <div className="highLevelBtnFrame">
-                {Array.isArray(this.subBtns) && this.subBtns.length > 0 ? <a href="" style={highlightStyle}>{this.text}</a> : <a href={this.to} style={highlightStyle}>{this.text}</a>}
+                {/* {Array.isArray(this.subBtns) && this.subBtns.length > 0 ? <a href="" style={highlightStyle}>{this.text}</a> : <a href={this.to} style={highlightStyle}>{this.text}</a>} */}
+                <a href={this.to} style={highlightStyle}>{this.text}</a>
             </div>
             {(!this.state.isCollapse && Array.isArray(this.subBtns) && this.subBtns.length > 0) ? <div className="highLevelSubBtnsFrame" style={style}>
                 {this.subBtns.map((subBtn, index) => {

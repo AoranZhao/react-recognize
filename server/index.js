@@ -23,6 +23,7 @@ const REDIS_PASSWORD = process.env.REDIS_PASSWORD || 'Gelenk0408',
 const EXPIRE_TIME = 60 * 60 * 24;
 
 app.use(express.static(path.join(__dirname, '../../client/dist')));
+app.use('/video', express.static(path.join(__dirname, '../static')));
 app.use('/icon', express.static(path.join(__dirname, '../../client')));
 app.use(bodyParser.json({
     type: 'application/json'

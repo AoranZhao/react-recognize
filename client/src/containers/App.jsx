@@ -21,7 +21,9 @@ import NewretailPage from './newretail/NewretailPage.jsx';
 import ProductsPage from './products/ProductPage.jsx';
 import AboutusPage from './aboutus/AboutusPage.jsx';
 import CareerPage from './career/CareerPage.jsx';
-import PravicyPage from './pravicy/PravicyPage.jsx';
+import PrivacyPage from './privacy/PrivacyPage.jsx';
+import AIEduAccPage from './aIEducationalAccessories/AIEduAccPage.jsx';
+import ClassroomPage from './classroomAnalysis/ClassroomPage.jsx';
 
 import './App.scss';
 
@@ -32,12 +34,14 @@ const App = () => {
                 <Route exact path="/" component={HeadPage} />
                 <Route path="/technology" component={TechnologyPage} />
                 <Route path="/products" component={ProductsPage} />
+                <Route path="/aieducationalaccessories" component={AIEduAccPage} />
+                <Route path="/classroom" component={ClassroomPage} />
                 <Route path="/education" component={EducationPage} />
                 <Route path="/newretail" component={NewretailPage} />
                 <Route path="/about" component={AboutusPage} />
                 <Route path="/career" component={CareerPage} />
                 <Route path="/requestdemo" component={RequestDemoPage} />
-                <Route path="/pravicy" component={PravicyPage} />
+                <Route path="/privacy" component={PrivacyPage} />
                 <Route path="/admin" render={() => (
                     <Redirect to="/dashboard" />
                 )} />

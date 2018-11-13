@@ -20,7 +20,7 @@ class FootSection extends React.Component {
         return <div className="sectionFoot">
             <div className="sectionFootInfo">
                 <div className="contact">
-                    <p>contact@learnable.ai</p>
+                    <a href="mailto:contact@learnable.ai"><p>contact@learnable.ai</p></a>
                     <p>59 Brainerd Rd., Allston, MA 02134</p>
                     {/* <p>(+1)401-837-0759</p> */}
                     {/* <p>(+86)18616763883</p> */}
@@ -41,7 +41,7 @@ class FootSection extends React.Component {
                     </div>
                 </div>
                 <div className="declare">
-                    <a href="/pravicy"><p>Privacy Statement</p></a>
+                    <a href="/privacy"><p>Privacy Statement</p></a>
                     <p>&copy; 2018 Learnable, Inc. All rights reserved.</p>
                 </div>
             </div>

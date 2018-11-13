@@ -29,13 +29,16 @@ class TechnologySection extends React.Component {
 
         this.details = [{
             title: "Deep Reinforcement Learning",
-            description: "Learn complicated tasks through self-training."
+            description: "Learn complicated tasks through self-training.",
+            textTo: "/technology"
         }, {
             title: "eXplainable AI Engine",
-            description: "Open up the black-box of deep learning."
+            description: "Open up the black-box of deep learning.",
+            textTo: "/technology"
         }, {
             title: "Teachable AI Engine",
-            description: "Teach AI through natural language feedback."
+            description: "Teach AI through natural language feedback.",
+            textTo: "/technology"
         }]
     }
 
@@ -50,9 +53,9 @@ class TechnologySection extends React.Component {
                 <p>{this.description}</p>
             </div>
             <div className="images">
-                <ImageItem src={DRLGif} style={{ width: '33%' }} title={this.details[0].title} description={this.details[0].description} isSmall={true} />
-                <ImageItem src={ExplainGif} style={{ width: '33%' }} title={this.details[1].title} description={this.details[1].description} isSmall={true} />
-                <ImageItem src={DroneGif} style={{ width: '33%' }} title={this.details[2].title} description={this.details[2].description} isSmall={true} />
+                <ImageItem src={DRLGif} style={{ width: '33%' }} title={this.details[0].title} description={this.details[0].description} isSmall={true} textTo={this.details[0].textTo} />
+                <ImageItem src={ExplainGif} style={{ width: '33%' }} title={this.details[1].title} description={this.details[1].description} isSmall={true} textTo={this.details[0].textTo} />
+                <ImageItem src={DroneGif} style={{ width: '33%' }} title={this.details[2].title} description={this.details[2].description} isSmall={true} textTo={this.details[0].textTo} />
             </div>
         </div>
     }
