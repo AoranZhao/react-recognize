@@ -7,6 +7,7 @@ import OfficialPageReverseFrame from '../OfficialPageReverseFrame.jsx';
 import NewretailSection from './NewretailSection.jsx';
 import NewretailMobileSection from './NewretailMobileSection.jsx';
 import NewretailDetailSection from './NewretailDetailSection.jsx';
+import NewretailDetailMobileSection from './NewretailDetailMobileSection.jsx';
 
 import { } from '../../actions';
 
@@ -25,7 +26,7 @@ class NewretailPage extends React.Component {
     render() {
         // let description = "Personalized policies and analytics from us build individual customer profile and realize personalized marketing, pricing and retailing policy.";
         let description = "AI unlocks Offline-to-Online solutions";
-        return <OfficialPageReverseFrame title="New Retail" description={description} highlightTitle="Product" browserChildren={[<NewretailDetailSection key="retail" />]} mobileChildren={[<NewretailDetailSection key="retail" />]} />
+        return <OfficialPageReverseFrame title="New Retail" description={description} highlightTitle="Product" browserChildren={[<NewretailDetailSection key="retail" />]} mobileChildren={[<NewretailDetailMobileSection key="retail" />]} />
     }
 }
 

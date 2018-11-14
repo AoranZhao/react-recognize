@@ -3,12 +3,14 @@
 import React from 'react';
 
 import ImageDetailItem from '../ImageDetailItem.jsx';
+import ImageDetailItemMobile from '../ImageDetailItemMobile.jsx';
+
 import DRLGif from '../../static/images/DRL.gif';
 import DroneGif from '../../static/images/Drone.gif';
 import ExplainGif from '../../static/images/Explain.gif';
 import './TechnologyDetailSection.scss';
 
-class TechnologyDetailSection extends React.Component {
+class TechnologyDetailMobileSection extends React.Component {
     constructor(props) {
         super(props);
 
@@ -27,10 +29,10 @@ class TechnologyDetailSection extends React.Component {
     }
 
     sectionTech() {
-        return <div className="technologyDetailSection">
-            <ImageDetailItem src={DRLGif} title={this.details[0].title} description={this.details[0].description} />
-            <ImageDetailItem src={ExplainGif} title={this.details[1].title} description={this.details[1].description} />
-            <ImageDetailItem src={DroneGif} title={this.details[2].title} description={this.details[2].description} />
+        return <div className="technologyDetailMobileSection">
+            <ImageDetailItemMobile src={DRLGif} title={this.details[0].title} description={this.details[0].description} />
+            <ImageDetailItemMobile src={ExplainGif} title={this.details[1].title} description={this.details[1].description} />
+            <ImageDetailItemMobile src={DroneGif} title={this.details[2].title} description={this.details[2].description} />
         </div>
     }
 
@@ -39,5 +41,5 @@ class TechnologyDetailSection extends React.Component {
     }
 }
 
-export default TechnologyDetailSection;
+export default TechnologyDetailMobileSection;
 

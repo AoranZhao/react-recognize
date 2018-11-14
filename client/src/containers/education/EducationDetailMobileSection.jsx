@@ -3,12 +3,14 @@
 import React from 'react';
 
 import ImageDetailItem from '../ImageDetailItem.jsx';
+import ImageDetailItemMobile from '../ImageDetailItemMobile.jsx';
+
 import ScannerImage from '../../static/images/scanner_large.png';
 import HandImage from '../../static/images/hand_large.png';
 import ClassroomImage from '../../static/images/classroom_large.png';
-import './EducationDetailSection.scss';
+import './EducationDetailMobileSection.scss';
 
-class EducationDetailSection extends React.Component {
+class EducationDetailMobileSection extends React.Component {
     constructor(props) {
         super(props);
 
@@ -29,10 +31,10 @@ class EducationDetailSection extends React.Component {
     }
 
     sectionEdu() {
-        return <div className="educationDetailSection">
-            <ImageDetailItem src={ScannerImage} title={this.details[0].title} description={this.details[0].description} textTo={this.details[0].textTo} />
-            <ImageDetailItem src={HandImage} title={this.details[1].title} description={this.details[1].description} />
-            <ImageDetailItem src={ClassroomImage} title={this.details[2].title} description={this.details[2].description} textTo={this.details[2].textTo} />
+        return <div className="educationDetailMobileSection">
+            <ImageDetailItemMobile src={ScannerImage} title={this.details[0].title} description={this.details[0].description} textTo={this.details[0].textTo} />
+            <ImageDetailItemMobile src={HandImage} title={this.details[1].title} description={this.details[1].description} />
+            <ImageDetailItemMobile src={ClassroomImage} title={this.details[2].title} description={this.details[2].description} textTo={this.details[2].textTo} />
         </div>
     }
 
@@ -41,5 +43,5 @@ class EducationDetailSection extends React.Component {
     }
 }
 
-export default EducationDetailSection;
+export default EducationDetailMobileSection;
 

@@ -1,0 +1,97 @@
+.imageDetailItemMobile {
+    margin-left: auto;
+    margin-right: auto;
+    margin-bottom: 20px;
+}
+
+.imageDetailItemMobileSmall {
+    width: 100%;
+
+    .imageDetailMobileImage {
+        width: 100%;
+
+        img {
+            width: 100%;
+            margin-left: auto;
+            margin-right: auto;
+        }
+    }
+
+    .imageDetailMobileInfo {
+        width: 100%;
+
+        .imageDetailMobileInfoTitle {
+            height: 30px;
+            width: 100%;
+        }
+
+        .imageDetailMobileInfoDescription {
+            width: 100%;
+            word-wrap: break-word;
+            word-break: normal;
+            white-space: pre-line;
+        }
+    }
+}
+
+.imageDetailItemMobileLarge {
+    width: 100%;
+
+    .imageDetailMobileImage {
+        width: 40%;
+        display: inline-block;
+        vertical-align: top;
+    
+        img {
+            width: 90%;
+            margin-left: auto;
+            margin-right: auto;
+            margin-top: 20px;
+        }
+    }
+    
+    .imageDetailMobileInfo {
+        width: 55%;
+        display: inline-block;
+        vertical-align: top;
+    
+        .imageDetailMobileInfoTitle {
+            height: 30px;
+        }
+    
+        .imageDetailMobileInfoDescription {
+            width: 100%;
+            word-wrap: break-word;
+            word-break: normal;
+            white-space: pre-line;
+        }
+    }
+}
+
+@media only screen and (max-width: 760px) {
+    .imageDetailItemMobile {
+        width: calc(100% - 70px);
+
+        .imageDetailItemMobileSmall {
+            display: block;
+        }
+
+        .imageDetailItemMobileLarge {
+            display: none;
+        }
+    }
+}
+
+@media only screen and (min-width: 761px) {
+    .imageDetailItemMobile {
+        width: calc(85% - 70px);
+
+        .imageDetailItemMobileSmall {
+            display: none;
+        }
+
+        .imageDetailItemMobileLarge {
+            display: block;
+        }
+    }
+}

@@ -7,6 +7,7 @@ import OfficialPageReverseFrame from '../OfficialPageReverseFrame.jsx';
 import TechnologySection from './TechnologySection.jsx';
 import TechnologyMobileSection from './TechnologyMobileSection.jsx';
 import TechnologyDetailSection from './TechnologyDetailSection.jsx';
+import TechnologyDetailMobileSection from './TechnologyDetailMobileSection.jsx';
 
 import { } from '../../actions';
 
@@ -30,7 +31,7 @@ class TechnologyPage extends React.Component {
     render() {
         // let description = "Our self-developed engines aim to integrate cutting-edge artificial intelligence technologies with traditional industries and existing ecosystems.";
         let description = "Customize artificial intelligence for industry localization with the human touch.";
-        return <OfficialPageReverseFrame title="Technology" description={description} highlightTitle="Technology" browserChildren={[<TechnologyDetailSection key="tech" />]} mobileChildren={[<TechnologyDetailSection key="tech" />]} />
+        return <OfficialPageReverseFrame title="Technology" description={description} highlightTitle="Technology" browserChildren={[<TechnologyDetailSection key="tech" />]} mobileChildren={[<TechnologyDetailMobileSection key="tech" />]} />
     }
 }
 

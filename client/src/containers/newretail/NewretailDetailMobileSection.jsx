@@ -3,11 +3,13 @@
 import React from 'react';
 
 import ImageDetailItem from '../ImageDetailItem.jsx';
+import ImageDetailItemMobile from '../ImageDetailItemMobile.jsx';
+
 import QrcodeImage from '../../static/images/qr_code.png';
 import MallImage from '../../static/images/mall_large.png';
-import './NewretailDetailSection.scss';
+import './NewretailDetailMobileSection.scss';
 
-class NewretailDetailSection extends React.Component {
+class NewretailDetailMobileSection extends React.Component {
     constructor(props) {
         super(props);
 
@@ -23,9 +25,9 @@ class NewretailDetailSection extends React.Component {
     }
 
     sectionRetail() {
-        return <div className="newretailDetailSection">
-            <ImageDetailItem src={QrcodeImage} title={this.details[0].title} description={this.details[0].description} />
-            <ImageDetailItem src={MallImage} title={this.details[1].title} description={this.details[1].description} />
+        return <div className="newretailDetailMobileSection">
+            <ImageDetailItemMobile src={QrcodeImage} title={this.details[0].title} description={this.details[0].description} />
+            <ImageDetailItemMobile src={MallImage} title={this.details[1].title} description={this.details[1].description} />
         </div>
     }
 
@@ -34,5 +36,5 @@ class NewretailDetailSection extends React.Component {
     }
 }
 
-export default NewretailDetailSection;
+export default NewretailDetailMobileSection;
 

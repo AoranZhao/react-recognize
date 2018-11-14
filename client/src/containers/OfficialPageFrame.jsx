@@ -3,8 +3,6 @@
 import React from 'react';
 import { connect } from 'react-redux';
 import { BrowserView, MobileView, isBrowser, isMobile } from 'react-device-detect';
-import Topbar from './Topbar.jsx';
-import TopbarMobile from './TopbarMobile.jsx';
 
 import { } from '../actions';
 
@@ -16,7 +14,8 @@ import FootMobileSection from './FootMobileSection.jsx';
 
 
 // test Topbar
-import TestTopbar from '../components/topbar/Topbar.jsx';
+import Topbar from '../components/topbar/Topbar.jsx';
+import TopbarMobile from '../components/topbar/TopbarMobile.jsx';
 import FloatBtn from '../components/floatBtn/FloatBtn.jsx';
 import RequestDemoSection from './requestdemo/RequestDemoSection.jsx';
 // end test
@@ -81,7 +80,7 @@ class OfficialPageFrame extends React.Component {
         return <div className="sectionFlyFrame">
             <div className="sectionFly">
                 {/* <Topbar highlight={this.highlightTitle} /> */}
-                <TestTopbar subBtns={this.subBtns} otherBtns={otherBtns} highlightTitle={this.highlightTitle} />
+                <Topbar subBtns={this.subBtns} otherBtns={otherBtns} highlightTitle={this.highlightTitle} />
                 <div className="sectionFlyBody">
                     <div className="sectionFlyBodyTextFrame">
                         <div className="sectionFlyBodyDivider"></div>
@@ -116,7 +115,8 @@ class OfficialPageFrame extends React.Component {
 
     sectionFlyMobile() {
         return <div className="sectionFlyMobile">
-            <TopbarMobile highlight={this.highlightTitle} />
+            {/* <TopbarMobile highlight={this.highlightTitle} /> */}
+            <TopbarMobile />
             <div className="sectionFlyMobileBodySmall">
                 <div className="sectionFlyMobileBodyText">
                     {/* <h3>Customize artificial intelligence with the human touch</h3> */}

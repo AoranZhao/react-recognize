@@ -3,8 +3,6 @@
 import React from 'react';
 import { connect } from 'react-redux';
 import { BrowserView, MobileView, isBrowser, isMobile } from 'react-device-detect';
-import Topbar from './Topbar.jsx';
-import TopbarMobile from './TopbarMobile.jsx';
 
 import { } from '../actions';
 
@@ -14,7 +12,8 @@ import FootSection from './FootSection.jsx';
 import FootMobileSection from './FootMobileSection.jsx';
 
 // test Topbar
-import TestTopbar from '../components/topbar/Topbar.jsx';
+import Topbar from '../components/topbar/Topbar.jsx';
+import TopbarMobile from '../components/topbar/TopbarMobile.jsx';
 import FloatBtn from '../components/floatBtn/FloatBtn.jsx';
 import RequestDemoSection from './requestdemo/RequestDemoSection.jsx';
 // end test
@@ -76,7 +75,7 @@ class OfficialPageReverseFrame extends React.Component {
         return <div className="sectionFlyRevFrame">
             <div className="sectionFlyRev">
                 {/* <Topbar highlight={this.highlightTitle} isRev={true} /> */}
-                <TestTopbar subBtns={this.subBtns} otherBtns={otherBtns} isRev={true} highlightTitle={this.highlightTitle} />
+                <Topbar subBtns={this.subBtns} otherBtns={otherBtns} isRev={true} highlightTitle={this.highlightTitle} />
                 <div className="sectionFlyRevBody">
                     <div className="sectionFlyRevBodyText">
                         <h3>{this.title}</h3>
