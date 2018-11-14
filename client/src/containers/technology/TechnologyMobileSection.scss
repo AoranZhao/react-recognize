@@ -9,11 +9,13 @@
         width: calc(70% - 10px);
         margin-right: auto;
         margin-left: auto;
+        text-align: center;
 
         span {
             display: inline-block;
             vertical-align: middle;
             border-top: 1px solid #747474;
+            width: calc((100% - 215px) / 2);
         }
 
         h3 {
@@ -22,10 +24,6 @@
             margin-right: 50px;
             margin-left: 50px;
             margin-bottom: 20px;
-        }
-        
-        span {
-            width: calc((100% - 205px) / 2);
         }
     }
 

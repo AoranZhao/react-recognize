@@ -7,9 +7,10 @@
 
     .title {
         @extend .title !optional;
-        
+        text-align: center;
+
         span {
-            width: calc((100% - 179px) / 2);
+            width: calc((100% - 189px) / 2);
         }
     }
 
