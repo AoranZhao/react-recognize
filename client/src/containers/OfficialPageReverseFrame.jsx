@@ -18,6 +18,14 @@ import FloatBtn from '../components/floatBtn/FloatBtn.jsx';
 import RequestDemoSection from './requestdemo/RequestDemoSection.jsx';
 // end test
 
+// banner animation
+import BannerAnim, { Element } from 'rc-banner-anim';
+import TweenOne from 'rc-tween-one';
+import '../assets/rc-banner-anim/assets/index.css';
+const BgElement = Element.BgElement;
+// topbar animation
+import ScrollParallax from 'rc-scroll-anim/lib/ScrollParallax';
+
 const mapStateToProps = state => ({})
 
 const mapDispatchToProps = dispatch => ({})
@@ -36,6 +44,11 @@ class OfficialPageReverseFrame extends React.Component {
         this.sectionFoot = this.sectionFoot.bind(this);
         this.sectionFlyMobile = this.sectionFlyMobile.bind(this);
         this.sectionFootMobile = this.sectionFootMobile.bind(this);
+
+        this.state = {
+            fixNav: false,
+            loadBanner: false
+        }
 
         this.subBtns = [{ text: "Home", to: "/" },
         { text: "Technology", to: "/technology" },
@@ -65,7 +78,13 @@ class OfficialPageReverseFrame extends React.Component {
     }
 
     componentWillMount() {
+        window.addEventListener('scroll', (e) => {
+            this.setState({ fixNav: document.documentElement.scrollTop > 120 });
+        })
+    }
 
+    componentDidMount() {
+        this.setState({ loadBanner: true });
     }
 
     sectionFly() {
@@ -75,12 +94,34 @@ class OfficialPageReverseFrame extends React.Component {
         return <div className="sectionFlyRevFrame">
             <div className="sectionFlyRev">
                 {/* <Topbar highlight={this.highlightTitle} isRev={true} /> */}
-                <Topbar subBtns={this.subBtns} otherBtns={otherBtns} isRev={true} highlightTitle={this.highlightTitle} />
+                <div style={this.state.fixNav ? { position: 'fixed', top: 0, width: '100vw', backgroundColor: 'rgb(30, 67, 118)', boxShadow: '0 0 5px black', zIndex: 50 } : { paddingTop: '50px', backgroundColor: 'rgba(30, 67, 118, 0.83)' }}>
+                    <Topbar subBtns={this.subBtns} otherBtns={otherBtns} isRev={true} highlightTitle={this.highlightTitle} />
+                </div>
                 <div className="sectionFlyRevBody">
-                    <div className="sectionFlyRevBodyText">
+                    <BannerAnim prefixCls='banner-user' style={this.state.loadBanner ? { height: '300px', transitionDuration: '0.5s' } : { height: '0' }}>
+                        <Element
+                            prefixCls="banner-user-elem"
+                            key="0"
+                        >
+                            <BgElement
+                                key="bg"
+                                className="bg"
+                                style={{
+                                    background: 'rgba(30, 67, 118, 0.83)'
+                                }}
+                            />
+                            <TweenOne className="banner-user-title" animation={{ y: 30, opacity: 0, type: 'from', delay: 500, duration: 800 }}>
+                                {this.title}
+                            </TweenOne>
+                            <TweenOne className="banner-user-text" animation={{ y: 30, opacity: 0, type: 'from', delay: 600, duration: 800 }}>
+                                {this.description}
+                            </TweenOne>
+                        </Element>
+                    </BannerAnim>
+                    {/* <div className="sectionFlyRevBodyText">
                         <h3>{this.title}</h3>
                         <p>{this.description}</p>
-                    </div>
+                    </div> */}
                 </div>
             </div>
         </div>

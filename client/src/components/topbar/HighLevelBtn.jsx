@@ -20,7 +20,7 @@ class HighLevelBtn extends React.Component {
         this.highlightTitle = props.highlightTitle || "[unknown]";
         this.isRev = props.isRev || false;
         this.isHighlighted = typeof props.isHighlighted == 'function' ? props.isHighlighted : (bool) => { console.log('highlight'); };
-        this.zIndex = props.zIndex || 20;
+        this.zIndex = props.zIndex || 100;
 
         this.expandDirection = props.expandDirection || 'right';
         this.style = this.style || {};

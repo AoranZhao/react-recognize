@@ -16,12 +16,14 @@
 
         .sectionFlyRev {
             width: 100%;
-            background-color: $blue-color;
+            // background-color: $blue-color;
             color: white;
     
             .sectionFlyRevBody {
                 width: 100%;
-                margin-top: 100px;
+                height: 300px;
+                // padding-top: 100px;
+                // padding-bottom: 20px;
     
                 .sectionFlyRevBodyText {
                     display: inline-block;
@@ -151,6 +153,34 @@
             }
         }
     }
+}
+
+.banner-user {
+    height: 300px;
+}
+
+.banner-user-elem {
+    text-align: center;
+    position: relative;
+    overflow: hidden;
+}
+
+.banner-user-elem .banner-user-title {
+    font-size: 32px;
+    top: 40%;
+}
+
+.banner-user-elem .banner-user-text {
+    top: 45%;
+}
+
+.banner-anim-elem .bg{
+    width: 100%;
+    height: 100%;
+    position: absolute;
+    top: 0;
+    left: 0;
+    overflow: hidden;
 }
 
 @media only screen and (max-width: 760px) {

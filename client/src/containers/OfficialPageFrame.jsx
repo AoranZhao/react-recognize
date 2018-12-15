@@ -80,7 +80,9 @@ class OfficialPageFrame extends React.Component {
         return <div className="sectionFlyFrame">
             <div className="sectionFly">
                 {/* <Topbar highlight={this.highlightTitle} /> */}
-                <Topbar subBtns={this.subBtns} otherBtns={otherBtns} highlightTitle={this.highlightTitle} />
+                <div style={{ paddingTop: '50px' }}>
+                    <Topbar subBtns={this.subBtns} otherBtns={otherBtns} highlightTitle={this.highlightTitle} />
+                </div>
                 <div className="sectionFlyBody">
                     <div className="sectionFlyBodyTextFrame">
                         <div className="sectionFlyBodyDivider"></div>
